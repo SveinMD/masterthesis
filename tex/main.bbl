@@ -1,0 +1,254 @@
+\begin{thebibliography}{38}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Aarnes et~al.(2007)Aarnes, Gimse, and Lie]{aarnes_introduction_2007}
+J.~E. Aarnes, T.~Gimse, and K.-A. Lie.
+\newblock An introduction to the numerics of flow in porous media using matlab.
+\newblock \emph{Geometrical Modeling, Numerical Simulation, and Optimization:
+  Industrial Mathematics at {SINTEF}}, pages 265--306, 2007.
+\newblock URL \url{http://folk.uio.no/kalie/papers/ResSimMatlab.pdf}.
+
+\bibitem[Aziz and Settari(1979)]{aziz_petroleium_1979}
+Khalid Aziz and Antonin Settari.
+\newblock \emph{Petroleium Reservoir Simulation}.
+\newblock Applied Science Publishers, Essex, {UK}, 1979.
+
+\bibitem[Bear(1972)]{bear_dynamics_1972}
+Jacob Bear.
+\newblock \emph{Dynamics of Fluids in Porous Media}.
+\newblock Dover Publications, 1972.
+
+\bibitem[Binmore(1977)]{binmore_mathematical_1977}
+K.~G. Binmore.
+\newblock \emph{Mathematical Analysis: A Straightforward Approach}.
+\newblock Cambridge University Press, Cambridge, England, 1977.
+\newblock ISBN {ISBN} 0 521 29167 4.
+
+\bibitem[Brent(1973)]{brent_algorithms_1973}
+R.P. Brent.
+\newblock \emph{Algorithms for Minimization without Derivatives}.
+\newblock Prentice-Hall, Englewood Cliffs, {NJ}, 1973.
+
+\bibitem[Buckley and Leverett(1942)]{buckley_mechanism_1942}
+S.E. Buckley and M.C. Leverett.
+\newblock Mechanism of fluid displacement in sands.
+\newblock \emph{Transactions of the AIME}, 146\penalty0 (01):\penalty0
+  107--116, 1942.
+
+\bibitem[Chavent and Jaffre(1982)]{chavent_mathematical_1982}
+Guy Chavent and Jerome Jaffre.
+\newblock \emph{Mathematical Models and Finite Elements for Reservoir
+  Simulation}, volume~17 of \emph{Studies in Mathematics and Its Applications}.
+\newblock North Holland, 1982.
+
+\bibitem[Coats(2000)]{coats_note_2000}
+K.H. Coats.
+\newblock A note on impes and some impes-based simulation models.
+\newblock \emph{{SPE} Journal}, 5\penalty0 (03):\penalty0 245--251, 2000.
+
+\bibitem[Courant et~al.(1928)Courant, Friedrichs, and Lewy]{courant_uber_1928}
+R.~Courant, K.~Friedrichs, and H.~Lewy.
+\newblock {\"U}ber die partiellen differenzengleichungen der mathematischen
+  physik.
+\newblock \emph{Mathematische Annalen}, 100\penalty0 (1):\penalty0 32--74,
+  1928.
+
+\bibitem[Dake(1978)]{dake_fundamentals_1978}
+L.~P. Dake.
+\newblock \emph{Fundamentals of Reservoir Engineering}, volume~8 of
+  \emph{Developments in Petroleum Science}.
+\newblock Elsevier, The Hague, Netherlands, 17 edition, 1978.
+\newblock ISBN 0-444-41830-X.
+
+\bibitem[Darcy(1856)]{darcy_les_1856}
+H.~Darcy.
+\newblock \emph{Les Fontaines Publiques de la Ville de Dijon}.
+\newblock Dalmont, Paris, 1856.
+
+\bibitem[Dekker(1969)]{dekker_finding_1969}
+T.J. Dekker.
+\newblock Finding a zero by means of successive linear interpolation.
+\newblock In Bruno Dejon and Peter Henrici, editors, \emph{Constructive Aspects
+  of the Fundamental Theorem of Algebra}, pages 37--48. Wiley-Interscience,
+  1969.
+
+\bibitem[Dowell and Jarratt(1972)]{dowell_the_1972}
+M~Dowell and P~Jarratt.
+\newblock The pegasus method for computing the root of an equation.
+\newblock \emph{BIT Numerical Mathematics}, 12\penalty0 (4):\penalty0 503--508,
+  1972.
+
+\bibitem[Eymard et~al.(2003)Eymard, Gallou{\"e}t, and
+  Herbin]{eymard_finite_2000}
+Robert Eymard, Thierry Gallou{\"e}t, and Rapha{\`e}le Herbin.
+\newblock \emph{Finite Volume Methods}, volume~7 of \emph{Handbook of Numerical
+  Analysis}.
+\newblock North Holland, 2003.
+
+\bibitem[Fagin(1966)]{fagin_a-new_1966}
+R.G. Fagin.
+\newblock A new approach to the two-dimensional multiphase reservoir simulator.
+\newblock \emph{{SPE} Journal}, 6\penalty0 (02):\penalty0 175--182, 1966.
+
+\bibitem[Green and Willhite(2003)]{green_enhanced_2003}
+{D.W.} Green and {G.P.} Willhite.
+\newblock \emph{Enhanced Oil Recovery}, volume~6 of \emph{SPE Textbook Series}.
+\newblock Society of Petroleum Engineers, Richardson, Texas, USA, 2003.
+
+\bibitem[Jain(2013)]{jain_ch._2013}
+Sreepat Jain.
+\newblock Ch. 9 - hydrological property of rocks.
+\newblock In \emph{Fundamentals of Physical Geology}, pages 215--218. Springer
+  India, New Delhi, Delhi, India, 2013.
+\newblock ISBN 978-81-322-1539-4.
+\newblock \doi{10.1007/978-81-322-1539-4}.
+
+\bibitem[Jenny et~al.(2009)Jenny, Tchelepi, and
+  Lee]{jenny_unconditionally_2009}
+P.~Jenny, H.~A. Tchelepi, and S.~Lee.
+\newblock Unconditionally convergent nonlinear solver for hyperbolic
+  conservation laws with s-shaped flux functions.
+\newblock \emph{Journal of Computational Physics}, 228\penalty0 (20):\penalty0
+  7497--7512, January 2009.
+\newblock \doi{10.1016/j.jcp.2009.06.032}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0021999109003301}.
+
+\bibitem[Kincaid and Cheney(2002)]{kincaid_ch._2002}
+D.~Kincaid and W.~Cheney.
+\newblock Ch. 3 - solution of nonlinear equations.
+\newblock In \emph{Numerical Analysis - Mathematics of Scientific Computing},
+  pages 74--138. Brooks Cole, Pacific Grove, California, 3 edition, 2002.
+\newblock ISBN 978-0-8218-4788-6.
+
+\bibitem[Kwok and Tchelepi(2007)]{kwok_potential-based_2007}
+Felix Kwok and Hamdi~A. Tchelepi.
+\newblock Potential-based reduced newton algortihm for nonlinear multiphase
+  flow in porous media.
+\newblock \emph{Journal of Computational Physics}, 227:\penalty0 706--727,
+  2007.
+
+\bibitem[Lie and Mallison(2013)]{lie_mathematical_2013}
+K.-A. Lie and B.~T. Mallison.
+\newblock Mathematical models for oil reservoir simulation.
+\newblock \emph{Encyclopedia of Applied and Computational Mathematics}, 2013.
+\newblock \doi{10.1007/978-3-540-70529-1}.
+\newblock URL \url{http://folk.uio.no/kalie/papers/eacm-ressim.pdf}.
+
+\bibitem[Lie et~al.(2013)Lie, Nilsen, Rasmussen, and Raynaud]{lie_fast_2013}
+Knut-Andreas Lie, H.~M. Nilsen, A.~F. Rasmussen, and Xavier Raynaud.
+\newblock Fast simulation of polymer injection in heavy-oil reservoirs based on
+  topological sorting and sequential splitting.
+\newblock The Woodlands, Texas, {USA}, February 2013.
+
+\bibitem[MacDonald(1970)]{macdonald_methods_1970}
+R.C. MacDonald.
+\newblock Methods for numerical simulation of water and gas coning.
+\newblock \emph{{SPE} Journal}, 10\penalty0 (04):\penalty0 425--436, 1970.
+
+\bibitem[Molenaar(1995)]{molenaar_multigrid_1995}
+J.~Molenaar.
+\newblock Multigrid methods for fully implicit oil reservoir simulation.
+\newblock Proceedings Copper Mountain Conference on Multigrid Methods, 1995.
+
+\bibitem[Morris(1983)]{morris_computational_1983}
+J.L. Morris.
+\newblock \emph{Computational Methods in Elementary Numerical Analysis}.
+\newblock Wiley, New York, 1983.
+
+\bibitem[Natvig and Lie(2008)]{natvig_fast_2008}
+J.~R. Natvig and Knut-Andreas Lie.
+\newblock Fast computation of multiphase flow in porous media by implicit
+  discontinuous galerkin schemes with optimal ordering of elements.
+\newblock \emph{Journal of Computational Physics}, 227\penalty0 (24):\penalty0
+  10108--10124, 2008.
+
+\bibitem[Natvig et~al.(2006)Natvig, Lie, and Eikemo]{natvig_fast_2006}
+J.~R. Natvig, Knut-Andreas Lie, and Birgitte Eikemo.
+\newblock Fast solvers for flow in porous media based on discontinuous galerkin
+  methods and optimal reordering.
+\newblock Copenhagen, Denmark, June 2006. Eds., {P.J.} Binning et al.
+
+\bibitem[{Norsk Regnesentral}(2003)]{saigup_2003}
+{Norsk Regnesentral}.
+\newblock {SAIGUP} {S}tudy, 2003.
+\newblock URL \url{http://www.nr.no/en/SAIGUP}.
+
+\bibitem[{OPM}(2014)]{opm_2014}
+{OPM}.
+\newblock The open porous media initiative, June 2014.
+\newblock URL \url{http://www.OPM-project.org/}.
+
+\bibitem[Patankar(1980)]{patankar_numerical_1980}
+Suhas~V. Patankar.
+\newblock \emph{Numerical Heat Transfer and Fluid Flow}.
+\newblock Series in Computational Methods in Mechanics and Thermal Sciences.
+  McGraw-Hill, january 1980.
+
+\bibitem[Ridders(1979)]{ridders_new_1979}
+C.~Ridders.
+\newblock A new algorithm for computing a single root of a real continuous
+  function.
+\newblock \emph{{IEEE} Transactions on Circuits and Systems}, 26\penalty0
+  (11):\penalty0 979--980, November 1979.
+\newblock ISSN 0098-4094.
+\newblock \doi{10.1109/TCS.1979.1084580}.
+
+\bibitem[SPE10(2000)]{spe10_2000}
+SPE10.
+\newblock {SPE} comparative solution project, 2000.
+\newblock URL \url{http://www.spe.org/web/csp/datasets/set02.htm}.
+
+\bibitem[Spillette et~al.(1973)Spillette, Hillestad, and
+  Stone]{spillette_a-high-stability_1973}
+A.G. Spillette, J.G. Hillestad, and H.L. Stone.
+\newblock A high-stability sequential solution approach to reservoir
+  simulation.
+\newblock In \emph{Fall Meeting of the Society of Petroleum Engineers of AIME},
+  Dallas, Texas, USA, 1973. Society of Petroleum Engineers, Society of
+  Petroleum Engineers.
+
+\bibitem[Tzimas et~al.(2005)Tzimas, Georgakaki, Garcia, and
+  {S.D.}]{tzimas_enhanced_2005}
+E.~Tzimas, A.~Georgakaki, {C.B.} Garcia, and Peteves {S.D.}
+\newblock Enhanced oil recovery using carbon dioxide in the european energy
+  system.
+\newblock \emph{European Comission - Joint Research Centre}, 2005.
+
+\bibitem[Wang and Tchelepi(2013)]{wang_trust-region_2013}
+X.~Wang and H.~A. Tchelepi.
+\newblock Trust-region based solver for nonlinear transport in heterogeneous
+  porous media.
+\newblock \emph{Journal of Computational Physics}, 253:\penalty0 114--137,
+  October 2013.
+\newblock \doi{10.1016/j.jcp.2013.06.041}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0021999113004725}.
+
+\bibitem[Weber and Arfekn(2003)]{weber_essential_2003}
+Hans-J{\"u}rgen Weber and George~Brown Arfekn.
+\newblock \emph{Essential Mathematical Methods for Physicists}.
+\newblock Academic Press, San Diego, USA, august 2003.
+
+\bibitem[Younis(2011)]{younis_modern_2011}
+R.~M. Younis.
+\newblock \emph{Modern Advances in Software and Solution Algorithms for
+  Reservoir Simulation}.
+\newblock PhD thesis, Stanford University, Stanford, {CA}, August 2011.
+\newblock URL
+  \url{https://pangea.stanford.edu/ERE/db/pereports/record_detail.php?filename=Younis2011.pdf}.
+
+\bibitem[Younis et~al.(2010)Younis, Tchelepi, and Aziz]{younis_adaptively_2010}
+R.~M. Younis, H.~A. Tchelepi, and Khalid Aziz.
+\newblock Adaptively localized continuation-newton; reservoir simulation
+  nonlinear solvers that converge all the time.
+\newblock \emph{{SPE} Journal}, 15\penalty0 (2):\penalty0 526--544, June 2010.
+\newblock \doi{10.2118/119147-PA}.
+\newblock URL
+  \url{http://www.onepetro.org/mslib/servlet/onepetropreview?id=SPE-119147-PA}.
+
+\end{thebibliography}

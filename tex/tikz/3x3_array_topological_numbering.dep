@@ -1,0 +1,2 @@
+tikz/3x3_array_topological_numbering.pdf: datafiles/sparsity_pattern_topological_upwind.data
+tikz/3x3_array_topological_numbering.pdf: datafiles/sparsity_pattern_topological_downwind.data

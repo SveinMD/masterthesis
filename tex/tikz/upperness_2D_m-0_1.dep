@@ -1,0 +1,6 @@
+tikz/upperness_2D_m-0_1.pdf: datafiles/spe10-cputvsdt-s-r-T-30-m-1-10-dim-60-60-10-60-220-1-perm-i-36-0-0-i-50.data
+tikz/upperness_2D_m-0_1.pdf: datafiles/spe10-cputvsdt-s-t-T-30-m-1-10-dim-60-60-10-60-220-1-perm-i-36-0-0-i-50.data
+tikz/upperness_2D_m-0_1.pdf: datafiles/spe10-cputvsdt-s-a-T-30-m-1-10-dim-60-60-10-60-220-1-perm-i-36-0-0-i-50.data
+tikz/upperness_2D_m-0_1.pdf: datafiles/spe10-cputvsdt-s-b-T-30-m-1-10-dim-60-60-10-60-220-1-perm-i-36-0-0-i-50.data
+tikz/upperness_2D_m-0_1.pdf: datafiles/spe10-cputvsdt-s-i-T-30-m-1-10-dim-60-60-10-60-220-1-perm-i-36-0-0-i-50.data
+tikz/upperness_2D_m-0_1.pdf: datafiles/spe10-cputvsdt-s-g-T-30-m-1-10-dim-60-60-10-60-220-1-perm-i-36-0-0-i-50.data

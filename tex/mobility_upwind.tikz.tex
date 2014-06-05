@@ -1,0 +1,17 @@
+\begin{tikzpicture}%
+     \draw [step=2.0,very thick] (0,0) grid (2,6);
+     \node at (1,3) (V) {V};
+     \node at (1,1) (L) {L} edge[->,bend right] (V.south east) edge[<-,bend left] (V.south west);
+     \node at (1,5) (K) {K} edge[->,bend right] (V.north west) edge[<-,bend left] (V.north east);
+     
+      \draw [thick, ->] (2.3,4.3) -- (2.3,3.7);
+      \node [right] at (2.3,4) {$F_{s_t}^g \geq 0$};
+      
+      \draw [thick, ->] (2.3,2.3) -- (2.3,1.7);
+      \node [right] at (2.3,2) {$F_{s_b}^g < 0$};
+      
+      \node at (0.3,2.3) {$w$};
+      \node at (1.7,1.7) {$o$};
+      \node at (0.3,4.3) {$w$};
+      \node at (1.7,3.7) {$o$};
+\end{tikzpicture}%

@@ -1,0 +1,32 @@
+\tikzsetnextfilename{caseB_iterations}
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.45\textwidth,
+    ybar,
+    enlargelimits=0.3,
+    legend style={at={(0.5,-0.15)},
+      anchor=north,legend columns=-1},
+    ylabel={\#iterations},
+    symbolic x coords={M=0.1,M=1,M=10},
+    xtick=data,
+    nodes near coords,
+    every node near coord/.append style={
+    	font=\scriptsize,
+	/pgf/number format/precision=3},
+    point meta=y *10^-5
+    ]
+\addplot coordinates {(M=10,218818) (M=1,315318) (M=0.1,531531)};
+\addplot coordinates {(M=10,348724) (M=1,444101) (M=0.1,681144)};
+\addplot coordinates {(M=10,239669) (M=1,336078) (M=0.1,514705)};
+\addplot coordinates {(M=10,83663) (M=1,132662) (M=0.1,258193)};
+\addplot coordinates {(M=10,365579) (M=1,384826) (M=0.1,409835)};
+\addplot coordinates {(M=10,293725) (M=1,403569) (M=0.1,406730)};
+\legend{RF,B,R,JTR,JTR*,GN}
+\end{axis}
+\end{tikzpicture}
+\caption{Number of iterations spent for six different root finders when solving Case B, see Section \ref{section:caseA}, with viscosity ratio $M = \frac{\mu_w}{\mu_o}$. Root finders: RF (Regula Falsi), B (Brent), R (Ridders), JTR (Jenny Trust Region), JTR* (Approximate Jenny Trust Region), and GN (Globalized Newton).}
+\label{fig:caseB_iterations}
+\end{figure}

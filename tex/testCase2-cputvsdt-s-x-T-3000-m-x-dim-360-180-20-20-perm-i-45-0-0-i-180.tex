@@ -1,0 +1,67 @@
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.8\textwidth}
+\tikzsetnextfilename{cputvsdt-s-x-T-3000-m-1-10-dim-360-180-20-20-perm-i-45-0-0-i-180}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.26\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-r-T-3000-m-1-10-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-t-T-3000-m-1-10-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-ta-T-3000-m-1-10-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-b-T-3000-m-1-10-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-i-T-3000-m-1-10-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+       \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\caption{Viscosity ratio 0.1} \label{fig:q5_inhomperm_viscrat_0_1}
+\end{subfigure}%
+\vspace{0.3cm}
+\begin{subfigure}[b]{0.8\textwidth}
+\tikzsetnextfilename{cputvsdt-s-x-T-3000-m-1-1-dim-360-180-20-20-perm-i-45-0-0-i-180}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.26\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-r-T-3000-m-1-1-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-t-T-3000-m-1-1-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-ta-T-3000-m-1-1-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-b-T-3000-m-1-1-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-i-T-3000-m-1-1-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\caption{Viscosity ratio 1} \label{fig:q5_homperm_viscrat_1}
+\end{subfigure}%
+\vspace{0.3cm}
+\begin{subfigure}[b]{0.8\textwidth}
+\tikzsetnextfilename{cputvsdt-s-x-T-3000-m-10-1-dim-360-180-20-20-perm-i-45-0-0-i-180}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.26\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-r-T-3000-m-10-1-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-t-T-3000-m-10-1-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-ta-T-3000-m-10-1-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-b-T-3000-m-10-1-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/testCase2-cputvsdt-s-i-T-3000-m-10-1-dim-360-180-20-20-perm-i-45-0-0-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\caption{Viscosity ratio 10} \label{fig:q5_homperm_viscrat_10}
+\end{subfigure}%
+\label{fig:q5_inhomperm}
+\caption{CPU time versus time step. Inhomogeneous permeability. 120 x 120 m region at position (0,0), 20 by 20 grid cells.}
+\end{figure}

@@ -1,0 +1,101 @@
+%%%%%%%%%%%%%%%%  NUMERICAL RESULTS %%%%%%%%%%%%%%%%%%%%%
+\chapter{Numerical Results} \thispagestyle{chapterpage}
+\label{chapter:numerical_results}
+
+\todoinline{Comment and document the new code!}
+\todoinline{Run tests with lower tolerance. Might favor Newton/JTR}
+\todoinline{Further tests on GN}
+\todoinline{Redo all tests with "lowest runtime counts"-strategy}
+Reservoir simulation packages are large and complex programs since input of well specifications, grid parameters, fluid definitions, etc., must be supported by the code base, along with all kinds of utility functions. In order to test the numerical methods described in Chapter \ref{chapter:numerical_methods} we use the open source simulator supplied by the Open Porous Media initiative, or \opm, see \citet{opm_2014}. Section \ref{section:opm_package} starts this chapter with a brief overview of the \opm transport solver classes used as a basis for the new root finder implementations (see Section \ref{section:root_finders}). Section \ref{section:test_cases} presents a number of tests cases and the corresponding numerical results from running the cases with the root finders from Section \ref{section:root_finders}.
+
+%%%%%%%%%%%%%%%%  THE OPM PACKAGE %%%%%%%%%%%%%%%%%%%%%
+\section{The OPM Package}
+\label{section:opm_package}
+\todoinline{Fix the over/underfull lines}
+The \opm package provides a range of modules for grid handling, polymer injection, upscaling methods, and more. The \code{opm-core} module contains basic grid and well handling, and IO utilities, along with pressure and transport solvers for solving the porous media fluid flow problems described in Section \ref{section:fluid_models}. In fact, the \opm package implements the exact numerical methods described in Section \ref{section:seq_splitting_method} through the \code{Opm::IncompTpfa} pressure solver and the \code{Opm::TransportSolverTwophaseReorder} transport solver classes using the Regula Falsi, see Section \ref{section:regula_falsi}, for the single cell problems resulting from  reordering as described in Section \ref{section:reordering}. The class \code{Opm::TransportSolverTwophaseReorder} implements the functionality needed to solve the residual equations in Equation (\ref{eq:residual_two_phase_transport}) and (\ref{eq:residual_two_phase_transport_gravity}). The class is instantiated with the static properties of the simulation, such as a grid specification and a fluid model. At each iteration of the sequential splitting method, as outlined in Algorithm \ref{algorithm:sequential_splitting}, a new saturation field is computed by calling the method \code{solve(\dots)} on a persistent \code{Opm::TransportSolverTwophaseReorder} object. The arguments to the solve method includes the time step $\Delta t$, and an instance of the class \code{TwophaseState} containing the saturation, flux, and other state information for every cell $V \in \mathcal{T}$. The \code{solve} method proceeds to computes the ordering of the flux graph based on the flux values obtained by solving the pressure equation. This ordering leads to a set of pseudo cells consisting of one or more regular cells, as described in Section \ref{section:reordering}. The new saturation field is finally obtained by iterating over all the pseudo cells and solving each subproblem by either the single cell root finders or the multi cell solver depending on the number of grid cells in each pseudo cell. The single cell root finders are the main focus of this work. The transport equation residuals are implemented by two structs, Equation (\ref{eq:residual_two_phase_transport}) in the struct \code{Residual} and Equation (\ref{eq:residual_two_phase_transport_gravity}) in the struct \code{GravityResidual}. These structs are supplied with an ()-operator taking the update saturation $S_V^{n+1}$ as an argument and returning the residual value. The following section walks through a simple reservoir simulation setup using the \opm library.
+
+%%%%%%%%%%%%  TEST CASES  %%%%%%%%%%
+\section{Test Cases}
+\label{section:test_cases}
+
+%%%%%%%%%%%%  TEST PROCEDURE  %%%%%%%%%%
+\subsection{Test Procedure}
+\label{section:test_procedure}
+In order to test the efficiency of the single cell solvers the \opm library was installed on a server with Intel\textregistered{}  Xeon\textregistered{}  X7542 CPUs running at \unit[2.67]{GHz} with a \unit[18432]{kB} cache size. The server has \unit[252]{GB} of available ram. All 2D test have been run using the C++ driver program included in Listing \ref{listing:test_driver_2D} Appendix \ref{appendix:test_driver}. For the 3D tests the code in Listing \ref{listing:test_driver_3D} was used. Further, all test cases are are checked against the reference Regula Falsi solver, see Section \ref{section:regula_falsi}, to ensure that the same solution is found. The iteration count for each solver is also recorded along with the solution updates to determine the  convergence speed versus iteration for each method. Finally, the CPU time averaged over the number of cells in the grid is reported to check the overall performance of each root finder.
+
+\input{spe10_perm}
+\input{sat_hist_hom}
+
+%%%%%%%%%%%%  QUARTER FIVE SPOT %%%%%%%%%%
+\subsection{Case A: Q5}
+\label{section:caseA}
+The \emph{quarter five spot}, abbreviated Q5, is a quadratic 2D domain with a source in one corner and a sink in the opposite corner along the diagonal. Here the domain has side lengths of 10 meters. The fluid density is set to $\unitfrac[1000]{kg}{m^3}$, porosity $\unit[0.5]{}$ and the formation has homogeneous permeability $\unit[10]{mD}$. The simulation is run with a 20 by 20 grid with a source in cell 1 and a sink in cell 400. The viscosity is varied through three cases; $\mu_w = \unit[1]{cP}$ and $\mu_o= \unit[1]{cP}$, $\mu_w = \unit[1]{cP}$ and $\mu_o= \unit[10]{cP}$, and $\mu_w = \unit[10]{cP}$ and $\mu_o= \unit[1]{cP}$. Figure \ref{fig:sat_hist_hom} shows an example of an advancing saturation profile from a simulation of the homogeneous Q5 problem. Because of the uniform permeability and the quadratic geometry the saturation profile is completely symmetric.
+
+\input{caseA_iterations}
+\input{testCase2-cputvsdt-s-x-T-3000-m-x-dim-120-120-20-20-perm-h-10-i-180}
+
+\todoinline{Comment the results from hom. Q5}
+
+\clearpage
+%%%%%%%%%%%%%%  TARBERT 2D  %%%%%%%%%%%%%%%%%%%
+\subsection{Case B: Tarbert 2D}
+\label{section:caseB}
+The Q5 problem is used again but with a more realistic inhomogeneous permeability distribution taken from the second SPE10 data set \citep{spe10_2000}. The residuals resulting from such permeability distributions typically have different characteristics than the ``homogeneous residuals'' some of which might favor different root finders. The second SPE10 data set consists of scalar permeabilities in the $x$-, $y$- and $z$-directions on a three dimensional grid with $60\times 220\times 85$ cells, with the top 35 layers being part of the Tarbert formation and the bottom 50 the Upper Ness formation.The fine scale permeability grid cells are $\unit[20]{ft}\times \unit[10]{ft}\times \unit[2]{ft}$ in size. Figure \ref{fig:spe10_perm} shows the logarithm of the x-direction permeabilities for the entire domain, from which the $\unit[120]{m}\times \unit[120]{m}$ region starting at $(x,y) = (0,0)$ in the first layer of the Tarbert formation is chosen for the numerical tests.
+
+\input{sat_perm_tarbert_2D}
+\input{caseB_iterations}
+\input{spe10-cputvsdt-s-x-T-30-m-x-dim-60-60-10-60-220-1-perm-i-0-0-0-i-50}
+
+\todoinline{Comment the results from Tarbert 2D}
+
+\clearpage
+%%%%%%%%%%%%%%%%  UPPER NESS 2D %%%%%%%%%%%%%%%%%%%
+\subsection{Case C: Upper Ness 2D}
+\label{section:caseC}
+Figure \ref{fig:spe10_perm} indicates that the Upper Ness formation has more severe local permeability variations compared to the Tarbert formation. These large local variations appear as \todo{show the effects of large local perm. gradients on the residual.}. Again we want to investigate how the various root finders perform on this special case, choosing the $\unit[360]{m}\times \unit[180]{m}$ region starting at $(x,y) = (0,0)$ in layer 45 of the SPE10 data set for the permeabilities.
+
+\input{sat_perm_upperness_2D}
+\input{caseC_iterations}
+\input{spe10-cputvsdt-s-x-T-30-m-x-dim-60-60-10-60-220-1-perm-i-36-0-0-i-50}
+
+\todoinline{Comment the results from Upper Ness 2D}
+
+\clearpage
+%%%%%%%%%%%%%%%% TARBERT - 3D %%%%%%%%%%%%%%%%%%%
+\subsection{Case D: Tarbert 3D}
+\label{section:caseD}
+
+\todoinline{Permeability/saturation plot for Tarbert 3D}
+\todoinline{Run Tarbert 3D with gravity - cputime}
+\todoinline{Run Tarbert 3D with gravity - iterations}
+
+\clearpage
+%%%%%%%%%%%%%%%%  UPPER NESS - 3D %%%%%%%%%%%%%%%%%%%
+\subsection{Case E: Upper Ness 3D}
+\label{section:caseE}
+
+\todoinline{Permeability/saturation plot for Upper Ness 3D}
+\todoinline{Run Upper Ness 3D with gravity - cputime}
+\todoinline{Run Upper Ness 3D with gravity - iterations}
+
+\clearpage
+%%%%%%%%%%%%%%%% CONVERGENCE TESTS %%%%%%%%%%%%%%%%%%
+\section{Convergence Tests}
+\label{section:numerical_results_convergence_tests}
+The efficiency of the numerical methods in terms of convergence speed can highlight the properties of the numerical procedures. We again \todo{Comment briefly on the properties of the viscosity residual when it is introduced.} observe that the form of the viscosity dominated residual from Equation (\ref{eq:residual_two_phase_transport}) is determined by five parameters; the initial saturation in the cell, $S_V^{n}$, the time step to pore volume ratio $\tau = \frac{\Delta t}{m(V)\phi_V}$, the flux out of the cell $q_o$, the flux into the cell $q_i$, and finally the viscosity ratio $M$ as defined in Equation (\ref{eq:viscosity_ratio}), held constant at $M = 1$. Note that the cell saturation from the previous time step is used as initial guess for the root finders. Figures \ref{fig:conv_res_in_0_05_out_0_05} through \ref{fig:conv_res_in_0_5_out_0_8} shows a number of different convergence and residual plots obtained by varying these parameters. 
+
+Figure \ref{fig:conv_res_in_0_05_out_0_05} is obtained with incoming flux at $\unitfrac[0.05]{m^3}{s}$ and outgoing flux at $\unitfrac[0.05]{m^3}{s}$. Note that $\tau = \unitfrac[6]{s}{m^3}$. Under the circumstances the residuals are fairly linear, and the initial guess $S_0$ is close to the root. The number of iterations for all tested root finders decreases when $S_0$ is increased. We also note that the Newton-like methods converge faster than the other methods. This plot indicates that for small flux values the initial guess strongly influences the residual bringing the root close to $S_0$. with a stronger effect for larger $S_0$. 
+
+Setting the incoming flux to $\unitfrac[0.35]{m^3}{s}$ and the outgoing flux to $\unitfrac[0.35]{m^3}{s}$ we obtain Figure \ref{fig:conv_res_in_0_35_out_0_35}. The residual plots shown a stronger non-linear influence, a fact reflected in the increased iteration count. $S_0$ still influences the residual, but to a lesser extent. Again we observe that large initial guesses generally leads to a lower iteration count. The Newton-like method are, together with Ridders, the best performers.
+
+Moving on the even larger flux values, we set the incoming flux to $\unitfrac[0.5]{m^3}{s}$ and the outgoing flux to $\unitfrac[0.8]{m^3}{s}$. Figure \ref{fig:conv_res_in_0_5_out_0_8} shows the resulting plots. The trend from the previous plots continues, in that the initial guess has less influence on the performance of the root finders, on average. Interesting exceptions are the Newton-like methods. They perform significantly better in terms of iteration count when the initial guess is close, in contrast with the other methods. We also note that the initial has very little influence on the position of the root.
+
+\input{convergence2-s-x-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-x}
+\input{convergence2-s-x-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-x}
+\input{convergence2-s-x-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-x}
+
+\clearpage
+%%%%%%%%%%%%%%%% GRAVITY TESTS %%%%%%%%%%%%%%%%%%
+\section{Gravity Tests}
+\todoinline{Turn off source/sink and run tests with only gravity effects?}
+%\input{gravres-cell-x}

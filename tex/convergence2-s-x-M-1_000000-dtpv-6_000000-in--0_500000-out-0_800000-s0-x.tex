@@ -1,0 +1,127 @@
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.49\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={\#steps},
+            ylabel={error},
+            grid=major,
+            legend pos=south west
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-t-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-a-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-b-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-i-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-g-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R,GN}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\caption{$S_0 = 0.1$}
+\label{fig:convergence_in_0_5_out_0_8_s0_0_1}
+\end{subfigure}%
+\begin{subfigure}[b]{0.49\textwidth}
+\begin{tikzpicture}
+    \begin{axis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={S},
+            ylabel={$R(S)$},
+            grid=major,
+            legend pos=north west,
+            ]
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=Rs] {datafilestestcase/residual-convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=dRs] {datafilestestcase/residual-convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+            \legend{$R(S)$,$\partial_S R(S)$}
+    \end{axis}
+\end{tikzpicture}%
+\caption{$S_0 = 0.1$}
+\label{fig:residual_in_0_5_out_0_8_s0_0_1}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.49\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={\#steps},
+            ylabel={error},
+            grid=major,
+            legend pos=south west
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-t-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-a-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-b-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-i-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-g-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R,GN}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\caption{$S_0 = 0.5$}
+\label{fig:convergence_in_0_5_out_0_8_s0_0_5}
+\end{subfigure}%
+\begin{subfigure}[b]{0.49\textwidth}
+\begin{tikzpicture}
+    \begin{axis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={S},
+            ylabel={$R(S)$},
+            grid=major,
+            legend pos=north west,
+            ]
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=Rs] {datafilestestcase/residual-convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=dRs] {datafilestestcase/residual-convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+            \legend{$R(S)$,$\partial_S R(S)$}
+    \end{axis}
+\end{tikzpicture}%
+\caption{$S_0 = 0.5$}
+\label{fig:residual_in_0_5_out_0_8_s0_0_5}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.49\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={\#steps},
+            ylabel={error},
+            grid=major,
+            legend pos=south west
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-t-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-a-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-b-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-i-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-g-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R,GN}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\caption{$S_0 = 0.9$}
+\label{fig:convergence_in_0_5_out_0_8_s0_0_9}
+\end{subfigure}%
+\begin{subfigure}[b]{0.49\textwidth}
+\begin{tikzpicture}
+    \begin{axis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={S},
+            ylabel={$R(S)$},
+            grid=major,
+            legend pos=north west,
+            ]
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=Rs] {datafilestestcase/residual-convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=dRs] {datafilestestcase/residual-convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+            \legend{$R(S)$,$\partial_S R(S)$}
+    \end{axis}
+\end{tikzpicture}%
+\caption{$S_0 = 0.9$}
+\label{fig:residual_in_0_5_out_0_8_s0_0_9}
+\end{subfigure}%
+\caption{M = 1, dtpv = 6, influx = -0.5, outflux = 0.8}
+\label{fig:conv_res_in_0_5_out_0_8}
+\end{figure}

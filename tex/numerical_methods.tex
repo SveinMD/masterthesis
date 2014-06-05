@@ -1,0 +1,1072 @@
+%%%%%%%%%%%%%%%%  NUMERICAL METHODS %%%%%%%%%%%%%%%%%%%%%
+\chapter{Numerical Methods} \thispagestyle{chapterpage}
+\label{chapter:numerical_methods}
+In practice we want to use the black oil model equations from Section \ref{section:fluid_models}  to predict fluid flow in the reservoirs. Closed form algebraic solutions are only available for the simplest problems, e.g. the Buckley-Leverett problem \citep{buckley_mechanism_1942}. For real life reservoirs we need to use \emph{numerical methods} to solve the system of equations. Different solution procedures have been proposed, and seen extensive use, throughout the years. Examples include, but are not limited to, the \emph{simultaneous solution method} \citep{aziz_petroleium_1979,molenaar_multigrid_1995}, the \emph{IMPES method} \citep{fagin_a-new_1966,coats_note_2000,aziz_petroleium_1979}, and the \emph{sequential implicit method}, also called the \emph{sequential splitting method} or the \emph{sequential solution method} \citep[chap. 5]{macdonald_methods_1970,spillette_a-high-stability_1973,aziz_petroleium_1979,aarnes_introduction_2007}. The latter method will be presented and used here.
+
+The \emph{sequential splitting method} is presented in Section \ref{section:seq_splitting_method} before we introduce the \emph{finite volume method} in Section \ref{section:fvm} which we use to develop discrete fluid flow equations for the pressure in Section \ref{section:pressure_solver} and transport in Section \ref{section:transport_solver}. We conclude the chapter by presenting a number of numerical root finders used to solved the residual transport equations resulting from the discretization of the transport equation from Section \ref{section:transport_solver}.
+
+%%%%%%%%%%%%%%%%  SEQUENTIAL SPLITTING %%%%%%%%%%%%%%%%
+\section{Sequential Splitting}
+\label{section:seq_splitting_method}
+The black oil equations, Equation (\ref{eq:black_oil_model}), are coupled through the saturation constraint, Equation (\ref{eq:saturation_constraint}). In order to solve this coupled set of equations we want to rewrite the system to a form with a single unknown. To this end we introduce two tools; a per-phase version of \emph{Darcy's law}, 
+\begin{equation} \label{eq:darcy}
+\vec{u}_l = -\vec{K}\lambda_l(\nabla p_l - \rho_l\vec{g}),
+\end{equation}
+and the \emph{capillary pressure}
+\begin{equation} \label{eq:capillary_pressure_definition}
+p_{cow} = p_o - p_w.
+\end{equation}
+Darcy's law, first described by \citet{darcy_les_1856}, is a semi-empirical law relating pressure, gravity effects, and flow velocity of fluids in a porous medium. In this formulation we follow the velocity $\vec{u}_l$ and pressure $p_l$ of phase $l$. In Darcy's law, $\vec{K}$ is the absolute permeability tensor, and $\lambda_l$ the \emph{mobility}, defined by  $\lambda_l = \frac{ k_{rl} }{ \mu_{l} }$. $k_{rl}$ is the \emph{relative permeability} for phase $l$. $k_{rl}$ is modeled heuristically  according to the properties of the components in the reservoir. In the following $k_{rl} = S_l^2$ will be used. We also define the total mobility $\lambda = \sum_l \lambda_l$. The absolute and relative permeability defines the parameter $k_l = \vec{K}k_{rl}$, the permeability of phase $l$. This number quantifies the ease with which each phase moves through the rock formation. Here we will limit the discussion to a two phase immiscible incompressible black oil model. Thus we drop the gas equation and the $R_{\text{so}}$ part of the oil equation in Equation (\ref{eq:black_oil_model}).
+
+Together with boundary conditions the multi phase continuity equation and Darcy's law model the dynamics of the fluids in a reservoir through a coupled system of partial differential equations. Additional effects like compressibility can be accounted for within this framework, see e.g. \citep{aziz_petroleium_1979}. The sequential splitting method works by decoupling the system of equations into a pressure equation and a saturation equation, also called the transport equation. The decoupling is done by using the saturation constraint from Equation (\ref{eq:saturation_constraint}) together with the Darcy law in Equation (\ref{eq:darcy}) and the capillary pressure defined in Equation (\ref{eq:capillary_pressure_definition}). These relations allow us to eliminate the oil variables $S_o$ and $p_o$ from the continuity equation and Darcy's law, giving two non-linear PDEs with the water saturation $S_w$ and water pressure $p_w$ as primary variables. Having obtained separate equations for the pressure and transport we can solve the two equations sequentially with separate implicit methods suited for each type of problem. We start out with an initial saturation in the reservoir, which is fed into the implicit pressure solver. This produces an updated velocity field $\vec{u}$. The transport solver uses this updated $\vec{u}$ to compute new saturations, after which the process is restarted. At each invocation of the transport solver (resp. pressure solver) the flux field (resp. saturation field) is assumed known. That is, the values are evaluated at the previous time step, making them explicit in nature. The primary unknowns in the equations are evaluated at the current time step, making them implicit. This makes the sequential splitting method semi-implicit. Algorithm \ref{algorithm:sequential_splitting} shows pseudo code for the sequential splitting method. One assumes that this splitting introduces only small errors for incompressible reservoir simulations \citep[chap. 5.6]{aziz_petroleium_1979}. In the next two sections we develop the pressure and transport equations in more detail.
+\begin{algorithm}[ht]
+ \SetAlgoLined
+ \KwData{$s_0$, $t_{end}$, $\Delta t$, reservoir grid and parameters}
+ \KwResult{s}
+ \CommentSty{Initialize saturation field}\;
+ $s = s_0$\;
+\CommentSty{Solve for initial pressure}\; 
+ $p$ = PRESSURE-SOLVER($s_0$)\;
+ $t = 0$\;
+ \While{time $t$ is less than $t_{end}$}{
+ 	\CommentSty{Solve transport equation with pressure assumed constant}\;
+ 	$s$ = TRANSPORT-SOLVER($s$,$p$,$\Delta t$)\;
+	\CommentSty{Solve pressure equation with saturation assumed constant}\;
+	$p$ = PRESSURE-SOLVER($s$)\;
+	\CommentSty{Advance time step}\;
+	$t = t + \Delta t$\;
+ }
+ \caption{Pseudo code implementing the sequential splitting scheme, see Section \ref{section:seq_splitting_method}}
+ \label{algorithm:sequential_splitting}
+\end{algorithm}
+
+%%%%%%%%%%%%%%%%  THE PRESSURE EQUATION %%%%%%%%%%%%%%%%
+\subsection{The Pressure Equation}
+\label{section:pressure_equation}
+The derivation of the pressure equation loosely follows the notation and procedure from \citet{aarnes_introduction_2007} and \citet{lie_mathematical_2013}, and starts by assuming that the porosity $\varphi$ and density $\rho$ are constant in time, that is, incompressibility of rock formations and fluids. Now, by Equation (\ref{eq:mass_conservation_equation_porosity}), we obtain
+\begin{equation*}
+\nabla \cdot (\rho_l\vec{u}_l) = q_l,
+\end{equation*}
+since the temporal derivative vanishes. The flux is defined to be a mass flux such that $\vec{f}_l = \rho_l \vec{u}_l$, with $\vec{u}_l$ being the velocity of the fluid. Note that the equation is taken to be per phase $l \in \{w,o\}$. Dividing by the density and substituting the velocity using the Darcy law in Equation (\ref{eq:darcy}) yields the pressure equation for a single phase:
+\begin{equation*}
+\nabla \cdot ( -\vec{K}\lambda_l(\nabla p_l - \rho_l\vec{g}) ) = \frac{q_l}{\rho_l}.
+\end{equation*}
+Now we define the global velocity $\vec{u} = \vec{u}_w + \vec{u}_o$, giving an equation relating the water and oil pressure:
+\begin{equation} \label{eq:pressure_water_oil}
+\nabla \cdot \vec{u} = - \nabla \cdot ( \vec{K}\left[ \lambda_w(\nabla p_w - \rho_w\vec{g}) + \lambda_o(\nabla p_o - \rho_o\vec{g}) \right] ) = q',
+\end{equation}
+with a modified source term
+\begin{equation*}
+q' = \frac{q_w\rho_o + q_o\rho_w}{\rho_w\rho_o}.
+\end{equation*}
+We still have both the oil and water pressure as unknowns. Following \citet{chavent_mathematical_1982} we define a saturation dependent complementary pressure $p_c$ by
+\begin{equation} \label{eq:complementary_pressure}
+p_c(s_w) = \int\limits_{s_\text{wc}}^{s_w} f_w(s) \frac{\partial p_\text{cow}}{\partial s_w}(s) \differential{s}.
+\end{equation}
+Here, $s_\text{wc}$ denotes the irreducible water saturation discussed in Section \ref{section:introduction_petroleum_reservoirs} and we have defined the \emph{fractional flow function} for phase $l$ by
+\begin{equation} \label{eq:fractional_flow_function}
+f_l = \frac{\lambda_l}{\lambda}.
+\end{equation}
+We note that in the two phase case the fractional flow function becomes 
+\begin{equation} \label{eq:fractional_flow_function_expanded}
+f_l = \frac{k_{rl}}{k_{rl} + M k_{rn}},
+\end{equation}
+where $n$ indicates the second phase and the \emph{viscosity ratio} $M$ is defined by
+\begin{equation} \label{eq:viscosity_ratio}
+M = \frac{\mu_l}{\mu_n}.
+\end{equation}
+The complementary pressure equation in Equation (\ref{eq:complementary_pressure}) takes care of the saturation dependency of the capillary pressure, giving a looser coupling between the pressure and transport equation \citep{aarnes_introduction_2007}. Taking the gradient of $p_c$ yields
+\begin{align} \label{eq:complementary_pressure_gradient}
+\nabla p_c = \nabla \int\limits_{s_\text{wc}}^{s_w} f_w(s) \frac{\partial p_\text{cow}}{\partial s_w}(s) \differential{s} &= \left[ f_w\frac{\partial p_\text{cow}}{\partial s_w} \right](s_w) - \left[ f_w\frac{\partial p_\text{cow}}{\partial s_w} \right](s_\text{wc}) \nonumber \\
+	&= \left[ f_w\frac{\partial p_\text{cow}}{\partial s_w} \right](s_w) = f_w\nabla p_\text{cow},
+\end{align}
+by the fundamental theorem of calculus and the fact that $f_w(s_\text{wc}) = 0$. The purpose of $p_c$ is to define a \emph{global pressure} $p$ by
+\begin{equation} \label{eq:global_pressure_definition}
+p = p_o - p_c
+\end{equation}
+in order to rewrite the pressure equation to be dependent on the global pressure and saturation only. Gathering the gradient pressure terms in Equation (\ref{eq:pressure_water_oil}), and since $p_\text{cow} = p_o - p_w$, we get
+\begin{equation*}
+\lambda_w \nabla p_w + \lambda_o \nabla p_o = \lambda_w (\nabla p_o - \nabla p_\text{cow}) + \lambda_o \nabla p_o = \lambda \nabla p_o - \lambda_w p_\text{cow}.
+\end{equation*}
+Using the relation from Equation (\ref{eq:complementary_pressure_gradient}) and the global pressure definition in Equation (\ref{eq:global_pressure_definition}) we are able to express the gradients in terms of the global pressure only:
+\begin{equation*}
+\lambda_w \nabla p_w + \lambda_o \nabla p_o = \lambda \nabla p_o - \lambda_w p_\text{cow} = \lambda \nabla p_o - \lambda_w \frac{\nabla p_c}{f_w} = \lambda (\nabla p_o - \nabla p_c) = \nabla p.
+\end{equation*}
+Inserting this relation into Equation (\ref{eq:pressure_water_oil}) gives the global pressure equation, an \emph{elliptic} equation for the global pressure $p$:
+\begin{equation} \label{eq:pressure_equation}
+- \nabla \cdot ( \vec{K}\left[ \lambda\nabla p - (\lambda_w \rho_w + \lambda_o\rho_o)\vec{g} \right] ) = q'.
+\end{equation}
+%%%%%%%%%%%%%%%%  THE TRANSPORT EQUATION %%%%%%%%%%%%%%%%
+\subsection{The Transport Equation}
+\label{section:transport_equation}
+Having found a pressure equation we need to complete the model by introducing the transport equation. We start out with the phase continuity equations in the black oil model as stated in Equation (\ref{eq:black_oil_model}), but drop the gas terms. These equations already contain the time derivative of the saturation, but we have a flow velocity term which we need to remove in order to have a single unknown. We do this by using Darcy's law from Equation (\ref{eq:darcy}) and the capillary pressure defined in Equation (\ref{eq:capillary_pressure_definition}), as in \citet{aarnes_introduction_2007}, to obtain
+\begin{equation*}
+\vec{K} \nabla p_{cow} = \vec{K}( \nabla p_o - \nabla p_w) =  (\vec{K}\rho_o\vec{g} - \frac{\vec{u}_o}{\lambda_o}) - (\vec{K}\rho_w\vec{g} - \frac{\vec{u}_w}{\lambda_w})
+\end{equation*}
+Inserting the total velocity $\vec{u} = \vec{u}_w + \vec{u}_o$ for $\vec{u}_o$ and multiplying by the mobilities, we get
+\begin{equation*}
+\lambda_o \lambda_w \vec{K} \nabla p_{cow} =  (\vec{K}\lambda_o \lambda_w\rho_o\vec{g} - \lambda_w \vec{u} + \lambda_w \vec{u}_w) - (\vec{K}\lambda_o \lambda_w \rho_w\vec{g} - \lambda_o\vec{u}_w).
+\end{equation*}
+Gathering terms and dividing by the total mobility $\lambda$ yields the following expression for the water velocity vector $\vec{u}_w$:
+\begin{equation*}
+\vec{u}_w = f_w \vec{u} + \vec{K} \lambda_o f_w \nabla p_{cow} + \vec{K} \lambda_o f_w \vec{g} (\rho_w - \rho_o).
+\end{equation*}
+Here we have used the fractional flow function $f_w$, see Equation (\ref{eq:fractional_flow_function}). Inserting this relation into the continuity equation, Equation (\ref{eq:continuity_phase}), and assuming constant porosity and density gives the following equation for the water saturation, and in extension the oil saturation (by the saturation constraint in Equation  (\ref{eq:saturation_constraint})):
+\begin{equation} \label{eq:two_phase_transport}
+\phi \frac{\partial S_w}{\partial t} + \nabla \cdot \left(f_w [ \vec{u} + \vec{K} \lambda_o \nabla p_{cow} + \vec{K}\lambda_o \vec{g} (\rho_w - \rho_o) ] \right) = \frac{q_w}{\rho_w}.
+\end{equation}
+This equation has both hyperbolic and parabolic properties \citep{aziz_petroleium_1979}. The coupled pressure and transport equations are solved using the procedure outlined in Algorithm \ref{algorithm:sequential_splitting}.
+
+%%%%%%%%%%%%%%%% MATHEMATICAL MODEL %%%%%%%%%%%%%%%%
+\subsection{Mathematical Model}
+The black oil model, and in extension the pressure and transport equations, describes the spatial and temporal variation of the properties of the fluids in the reservoir. We solve these equations on the spatial domain $\Omega \subset \mathbb{R}^d$, where $d \in \{2,3\}$, from time $t=0$ to the final time $t=T$, giving the domain $\Omega^+ \coloneqq \Omega \times [0,T]$ for the partial differential equations, as sketched in Figure \ref{fig:spatial_temporal_domain}. The boundaries of this domain is denoted by $\partial \Omega^+ \coloneqq \partial \Omega \times [0,T]$. 
+\tikzsetnextfilename{spatial_temporal_domain}
+\input{spatial_temporal_domain}
+In order to have a well posed problem, we need \emph{initial} and \emph{boundary conditions}. That is, we have to know the initial value at time $t = 0$ of all variables and how the equations behave at the boundaries $\partial \Omega^+$ of the domain $\Omega^+$. The initial condition $S_w(\vec{x},0) = S_w^0(\vec{x})$, $S_0\colon \Omega \to [0,1]$, allows us to compute the corresponding initial pressure field $p(\vec{x},0)$ by the pressure equation in Equation (\ref{eq:pressure_equation}), giving a complete initial condition. Common boundary conditions for reservoir simulations includes flow rate (Neumann type) and pressure (Dirichlet type) conditions. The Dirichlet and Neumann part of the boundary is denoted by $\partial \Omega_D$ and $\partial \Omega_N$, respectively. Note that $\partial \Omega_D \cap \partial \Omega_N = \emptyset$. The pressure boundary condition becomes
+\begin{equation*} %\label{eq:transport_dirichlet_condition}
+p(\vec{x}) = p_D(\vec{x}),~\forall \vec{x} \in \partial \Omega_D
+\end{equation*}
+where $\partial \Omega_D \subset \partial \Omega$ and $p_D\colon\partial \Omega_D \to \mathbb{R}_+$ is some scalar pressure function . Rate conditions can be specified as
+\begin{equation*} %\label{eq:transport_neumann_condition}
+\vec{v}\cdot \vec{\nu} = [-\vec{K}\lambda(\nabla p - \rho \vec{g})](\vec{x}) \cdot \vec{\nu}= Q_{\partial \Omega_N}(\vec{x}),~\forall ~\vec{x} \in \partial \Omega_N,
+\end{equation*}
+using the unit surface normal $\vec{\nu}$ of $\partial \Omega$ and Darcy's law, see Equation (\ref{eq:darcy}). The magnitude of the rate at the Neumann part of the boundary, $\partial \Omega_N \subset \partial \Omega$, is defined by the function $Q_{\partial \Omega_N}\colon\partial \Omega_N\to \mathbb{R}$. The default rate boundary condition is a \emph{no-flow} condition, i.e. $\vec{v}\cdot \vec{\nu} = Q_{\partial \Omega_N} = 0$, indicating that no fluid particles will cross the domain boundary.
+
+The transport and pressure equation over the domain $\Omega^+$, along with boundary conditions, combines to the following problem:
+%\begin{subequations}
+%\label{eq:transport_pressure_boundary_system}
+\begin{align*}
+\phi S_w(\vec{x},t)_t + \nabla \cdot \left(f_w \alpha(\vec{x},t) \right) &= q_w(\vec{x},t)\rho_w^{-1},~~(\vec{x},t) \in \Omega^+, \\
+- \nabla \cdot ( \vec{K}(\vec{x})\left[ \lambda\nabla p(\vec{x},t) - (\lambda_w \rho_w + \lambda_o\rho_o)\vec{g} \right] ) &= q(\vec{x},t),~~(\vec{x},t) \in \Omega^+, \\
+S_w(\vec{x},0) &= S_0(\vec{x}),~~\vec{x} \in \Omega, \\
+[-\vec{K}\lambda(\nabla p - \rho \vec{g})](\vec{x},t) \cdot \vec{\nu} &= Q(\vec{x},t),~~(\vec{x},t) \in \partial \Omega^+,
+\end{align*}
+%\end{subequations}
+where $\alpha(\vec{x},t) = [ \vec{u}(\vec{x},t) + \vec{K}(\vec{x}) ( \lambda_o \nabla p_{cow} + \lambda_o \vec{g} (\rho_w - \rho_o)) ]$ and we have used Neumann boundary conditions. In order to solve these equations we will use the \emph{finite volume method}, or FVM, as presented in the following section.
+
+%%%%%%%%%%%%%%%% FVM %%%%%%%%%%%%%%%%
+\section{The Finite Volume Method}
+\label{section:fvm}
+The finite volume method is a discretization technique for solving differential equations. It is well suited for elliptic, parabolic, and hyperbolic equations, and is a natural choice for conservation laws because of the control volume formulation of the method and the the fact that it lends itself to implementation on a wide range of grid types, including unstructured grids. The idea behind the method is to express a balance over each control volume, making the FVM \emph{conservative} in the sense that the numerical flux is conserved between neighboring control volumes. In other words, the conservation of quantities over any group of control volumes is exact \citep{patankar_numerical_1980}.
+Another strength is the natural and intuitive formulation of the method.
+
+The finite volume method is defined over discrete control volumes of the domain. We proceed by using the domain $\Omega$ from Figure \ref{fig:spatial_temporal_domain}. We let $\mathcal{T}$ be a mesh on $\Omega$ such that $\bigcup_{V \in \mathcal{T}} V = \Omega$, where $V$ is a control volume. The finite volume method expresses an integral flux balance for each such control volume $V$. In general the control volumes can be of any shape, but a usual choice is to let every $V$ be a polygonal convex subset of $\Omega$ such that $V \cap K = \emptyset, ~\forall (V,K) \in \mathcal{T}\times\mathcal{T}, V \neq K$ \citep{eymard_finite_2000}. The collection of sides $s$ of the polygon $V$ is denoted $E_V$. Note that the term "polygonal" is is used for both polygonal two-dimensional control volumes with $d=2$ and polyhedral three-dimensional control volumes with $d=3$. Figure \ref{fig:spatial_domain_mesh} shows an example of a polygonal mesh on the two dimensional domain $\Omega$. Notice that the mesh coverage of the domain is only partial due to the straight edges of the grid cells. The error introduced by this discrepancy is assumed to be negligible in the theoretical setup. In practice the domain, i.e. the reservoir, consists of grid cells taken from the geological model of the rock formations. Such a grid is typically of a polyhedral type, removing the partial coverage problem altogether. The precise formulation of the FVM is introduced by applying it to the pressure and transport equations.
+\tikzsetnextfilename{spatial_domain_grid}
+\input{spatial_domain_grid}
+
+%%%%%%%%%%%%%%%%  PRESSURE SOLVER. %%%%%%%%%%%%%%%%
+\section{Pressure Solver}
+\label{section:pressure_solver}
+The pressure equation in (\ref{eq:pressure_equation}) is solved by the FVM method. We start by integrating over a grid cell $V$:
+\begin{equation*}
+\int\limits_V - \nabla \cdot ( \vec{K}\left[ \lambda\nabla p - (\lambda_w \rho_w + \lambda_o\rho_o)\vec{g} \right] ) \differential{V} = \int\limits_V q' \differential{V}.
+\end{equation*}
+The left hand side integral is split into two parts, allowing us to isolate the pressure. Using the divergence theorem, and assuming that $\vec{K}\lambda\nabla p$ is smooth, we obtain
+\begin{equation} \label{eq:pressure_integral_conservation_form}
+-\int\limits_{\partial V} ( \vec{K}\lambda\nabla p ) \cdot \vec{\nu} \differential{v}  = \int\limits_{\partial V} (\vec{K}(\lambda_w \rho_w + \lambda_o\rho_o)\vec{g}) \cdot \vec{\nu} \differential{v} + q' \differential{V}.
+\end{equation}
+Exploiting the polygonal geometry of the grid cells we can write
+\begin{equation*}
+-\int\limits_{\partial V} ( \vec{K}\lambda\nabla p ) \cdot \vec{\nu} \differential{v} = -\sum\limits_{s \in E_V} \int\limits_{s} ( \vec{K}\lambda\nabla p ) \cdot \vec{\nu}_s \differential{v}.
+\end{equation*}
+Thus, our task reduces to approximating the integral $\int_{s} ( \lambda\vec{K}\nabla p ) \cdot \vec{\nu}_s \differential{v}$ on each edge $s$ of the cell. To this end we introduce a one-sided transmissibility $t_V^s$ defined by
+\begin{equation*}
+t_V^s = \frac{\vec{\nu}_s \vec{K}_V \Delta \vec{c}_V^s}{\lVert \Delta \vec{c}_V^s \rVert^2},
+\end{equation*}
+where $\vec{\nu}_s$ is the surface normal of $s$ with magnitude equal to $m(s)$, $\vec{K}_V$ is the permeability tensor for the current cell, and $\Delta\vec{c}_V^s = \vec{c}_s - \vec{c}_V$ is the face-to-cell centroid difference vector. Here $\vec{c}_V$ is the \emph{centroid} of cell $V$ while $\vec{c}_s$ is the centroid of face $s$. Further, the function $m\colon\mathcal{T}\to\mathbb{R}_+$ is the $d$-dimensional \emph{Lebesgue-measure}, which computes the ``size'' of the control volume, see e.g. \citep{eymard_finite_2000}. When $d=2$ this function gives the \emph{area} of the control volume $V$, while $d=3$ gives the \emph{volume}. We will also use the function $m\colon E\to \mathbb{R}_+$, the $d-1$-dimensional Lebesgue measure to be used on edges $s$ of $V$. No confusion should arise from this double definition of $m$ since the correct version should be apparent from the context. Now we can express the integral on the edge $s$ connecting $V$ and $K$ using the \emph{two-point flux approximation} scheme, the TPFA scheme, expressed as
+\begin{equation*}
+\int\limits_s (\vec{K}\nabla p_s) \cdot \vec{\nu} \differential{v} = (p_V - p_K)\left(\frac{1}{t_V^s} + \frac{1}{t_K^s}\right)^{-1} = \frac{t_V^s t_K^s}{t_V^s + t_K^s} (p_V - p_K).
+\end{equation*}
+A mobility weighted version becomes 
+\begin{equation*}
+\int\limits_s (\lambda\vec{K}\nabla p_s) \cdot \vec{\nu}\differential{v} = (p_V - p_K)\left(\frac{1}{\lambda_V t_V^s} + \frac{1}{\lambda_K t_K^s}\right)^{-1},
+\end{equation*}
+where $\lambda_V$ is the total mobility in $V$. This result is inserted into Equation (\ref{eq:pressure_integral_conservation_form}), such that we obtain
+\begin{equation*}
+-\sum\limits_{s \in E_V} (p_V - p_K)\left(\frac{1}{\lambda_V t_V^s} + \frac{1}{\lambda_K t_K^s}\right)^{-1} = \int\limits_{\partial V} (\vec{K}(\lambda_w \rho_w + \lambda_o\rho_o)\vec{g}) \cdot \vec{\nu} \differential{v} + \int\limits_V q' \differential{V}.
+\end{equation*}
+The right hand side of Equation (\ref{eq:pressure_integral_conservation_form}) is approximated in a similar manner. The integral of the gravity term over the boundary is approximated by the following relation:
+\begin{equation*}
+\int\limits_{\partial V} (\vec{K}(\lambda_w \rho_w + \lambda_o\rho_o)\vec{g}) \cdot \vec{\nu} \differential{v} = \sum\limits_{s \in E_V}  \vec{g} [\Delta \vec{c}_V^s \omega_V + \Delta \vec{c}_K^s \omega_K] \left(\frac{1}{\lambda_V t_V^s} + \frac{1}{\lambda_K t_K^s}\right)^{-1},
+\end{equation*}
+where $\omega_V = \frac{\lambda_{wV}\rho_w + \lambda_{oV}\rho_o}{\lambda_V}$. The source term $q'$ is simply integrated over the control volume and expressed as a discrete value $q_V'$ for each $V$. 
+This results in the following linear system to be solved for the pressure in each control volume $V$:
+\begin{equation*}
+-\sum\limits_{s \in E_V} (p_V - p_K) T_s = \vec{g} [\Delta \vec{c}_V^s \omega_V + \Delta \vec{c}_K^s \omega_K] T_s + q_V',~\forall V \in \mathcal{T},
+\end{equation*}
+Here we have defined the \emph{mobility weighted transmissibility} $T_s$ by
+\begin{equation*}
+T_s = \left(\frac{1}{\lambda_V t_V^s} + \frac{1}{\lambda_K t_K^s}\right)^{-1},
+\end{equation*}
+where $K$ is the unique neighbor cell to $V$ such that $\partial V \cap \partial K = s$.
+
+The next section introduces the finite volume method applied to the transport solver. Since the method essentially expresses a balance equation over the control volume at hand we will need to know the fluid fluxes across the boundary $\partial V$. One of the assumptions of the sequential splitting method is that these face fluxes can be computed based on the pressure field from the current iteration. The face fluxes $F_s$ for face $s$ are computed by
+\begin{equation} \label{eq:pressure_face_fluxes}
+F_s = T_s(p_V-p_K+F_s^g),~\forall s \in E, (V,K) \in \mathcal{T}\times\mathcal{T} : \partial V \cap \partial K = s,
+\end{equation}
+where the gravity flux $F_s^g$ is defined as
+\begin{equation*}
+F_s^g = (\Delta \vec{c}_V^s + \Delta \vec{c}_K^s)\vec{g}.
+\end{equation*}
+
+%%%%%%%%%%%%%%%%  TRANSPORT SOLVER %%%%%%%%%%%%%%%%
+\section{Transport Solver}
+\label{section:transport_solver}
+The \opm code assumes that the transport problem can be solved in two steps by splitting Equation (\ref{eq:two_phase_transport}) into a buoyant and a viscous-capillary equation. That is, first
+\begin{equation} \label{eq:two_phase_transport_visc_pc}
+\phi \partial_t S_w + \nabla \cdot \left(f_w [ \vec{u} + \lambda_o \vec{K} \nabla p_{cow} ] \right) = q_w(\vec{x},t)\rho_w^{-1},~~(\vec{x},t) \in \Omega^+
+\end{equation}
+is solved for the saturation influenced by viscous and capillary forces, and sources before 
+\begin{equation} \label{eq:two_phase_transport_gravity}
+\phi \partial_t S_w + \nabla \cdot \left( f_w \lambda_o \vec{K} \vec{g} (\rho_w - \rho_o)  \right) = 0,~~(\vec{x},t) \in \Omega^+
+\end{equation}
+is solved for the gravity influenced saturation. The variables $\vec{x}$ and $t$ are dropped for brevity. We start by integrating the viscous-capillary transport equation from Equation (\ref{eq:two_phase_transport_visc_pc}) over each control volume $V \in \mathcal{T}$:
+\begin{equation*}
+\int\limits_V \phi \partial_t S_w(\vec{x},t)+ \nabla \cdot \left(f_w [ \vec{u} + \lambda_o \vec{K} \nabla p_{cow} ] \right) - \frac{q_w(\vec{x},t)}{\rho_w} \differential{V} = 0,~\forall V \in \mathcal{T}.
+\end{equation*}
+This gives
+\begin{equation} \label{eq:transport_eq_fvm_raw}
+\phi_V \frac{\partial }{\partial t} \int\limits_V S_w \differential{V} + \int\limits_{\partial V} \left(f_w [ \vec{u} + \lambda_o \vec{K} \nabla p_{cow} ] \right) \cdot \vec{\nu} \differential{v} - \int\limits_{V} \frac{q_w}{\rho_w } \differential{V} = 0,~\forall V \in \mathcal{T}
+\end{equation}
+by the divergence theorem and under the assumptions that $S_w$ is sufficiently smooth and that the porosity $\phi$ is a given constant $\phi_{V}$ for each grid cell. We now express the cell averaged water saturation $S_V$ for cell $V$ as
+\begin{equation} \label{eq:cell_saturation_definition}
+S_V = \frac{1}{m(V)} \int\limits_V S_w \differential{V}.
+\end{equation}
+$S_V$ will be used as a representation of the saturation in the cell and is one of the primary variables in the final system of equations. Now the source term is integrated over $V$, giving a discrete source
+\begin{equation} \label{eq:cell_production_definition}
+q_V = \int\limits_{V} q_w \differential{V}.
+\end{equation}
+This leaves only the treatment of the boundary integral term. Letting $s \in E_V$ be the edges of $V$ and $\vec{\nu}_s$ be the outward facing unit normal of the edge $s$, we can express the boundary integral as
+\begin{equation*}
+\int\limits_{\partial V} \left(f_w [ \vec{u} + \lambda_o \vec{K} \nabla p_{cow} ] \right) \cdot \vec{\nu} \differential{v} = \sum\limits_{s \in E_V} \left[ \int\limits_s \left(f_w [ \vec{u} + \lambda_o \vec{K} \nabla p_{cow} ] \right) \cdot \vec{\nu}_s \differential{v} \right],
+\end{equation*}
+since $\partial V = \bigcup_{s \in E_V} \bar{s}$.  $\bar{s}$ is the \emph{closure} of side $s$. The pressure solver handles each edge integral, see Section \ref{section:pressure_solver}, but a few comments are in order here regardless. The \emph{upwind method} will be used to compute the interface fluxes. That is, on each edge $s$ shared by two control volumes, say $V$ and $K$, a scalar approximation $F_s$ of the flux is chosen such that the information is gathered in the cell the flow is coming from. This flux was calculated by the pressure solver, and is shown in Equation (\ref{eq:pressure_face_fluxes}). The fluxes over $\partial V$ can be categorized as either incoming or outgoing fluxes. The set of edges with incoming fluxes for cell $V$ is denoted $E_V^+$, while the set of edges with outgoing fluxes is denoted $E_V^-$. The fractional flow value for the incoming fluxes are independent of the local cell saturation $S_V$ and distinct for each edge, and will be denoted by $f_s$. This allows us to denote the incoming flow as 
+\begin{equation*}
+Q_V^+ = \sum\limits_{s \in E_V^+} f_s F_s
+\end{equation*}
+and the outgoing flow as
+\begin{equation*}
+Q_V^- = \sum\limits_{s \in E_V^-} f_w(S_V) F_s = f_w(S_V) \sum\limits_{s \in E_V^-} F_s = f_w(S_V) F_V^-,
+\end{equation*}
+where $F_V^-$ is the total outgoing flux. Note that because of the upwind method only the flow out of cell $V$ is influenced by the local saturation $S_V$. Summing the flow terms over all edges of $V$ yields
+\begin{equation*}
+\sum\limits_{s \in E_V} \left[ \int\limits_s \left(f_w [ \vec{u} + \lambda_o \vec{K} \nabla p_{cow} ] \right) \cdot \vec{\nu}_s \differential{v} \right] = f_w(S_V)F_V^- + Q_V^+.
+\end{equation*}
+Inserting this into Equation (\ref{eq:transport_eq_fvm_raw}), using (\ref{eq:cell_saturation_definition}) and (\ref{eq:cell_production_definition}) and dividing by the cell "volume" $m(V)$ and the porosity $\phi_{V}$ we obtain
+\begin{equation} \label{eq:transport_equation_semi_discrete}
+\frac{\partial S_V}{\partial t} + \frac{1}{m(V)\phi_V} \left[ f_w(S_V)F_V^- + Q_V^+ \right] - \frac{q_V}{\rho_w \phi_V} = 0,~\forall V \in \mathcal{T}
+\end{equation}
+By averaging values over the control volume and using the upwind method we have arrived at a semi-discretized version of the transport equation. Now we must choose a technique for resolving the time derivative in the first term of the Equation (\ref{eq:transport_equation_semi_discrete}). We approximate the derivative by
+\[ \frac{\partial S_V}{\partial t} = \frac{S_V^{n+1} - S_V^n}{\Delta t} + \mathcal{O}(\Delta t), \]
+where the superscript $n$ denotes the current \emph{time level} corresponding to the chosen \emph{time step} $\Delta t$. That is, the current time is $t = n\Delta t,$ where $n \in [0,1,2,\dots,n_{\text{max}}]$ and $n_{\text{max}} = \ceil{\frac{T}{\Delta t}}$. Now we can choose between an \emph{explicit} and an \emph{implicit} scheme by setting the time level of the other terms in the equation. Explicit difference schemes put severe restrictions on the time step $\Delta t$, e.g. through a CFL condition, as first described in \citet{courant_uber_1928}, and becomes unstable for time steps exceeding this limit. Implicit schemes are much more robust and are known to give unconditional stability, see e.g. \citep{aziz_petroleium_1979}. We want to exploit the extra stability of the implicit scheme, and thus choose to evaluate the other $S_V$-dependent terms at the new time level, that is, $f_w = f_w(S_V^{n+1})$.
+
+One remark is in order here. In writing out Equation (\ref{eq:transport_equation_semi_discrete}) we have made a few shortcuts by skipping the dependent variables of the various terms. The cell saturation is obviously time dependent, but the interface fluxes $F_s$ also have a saturation dependency. In a pure implicit approach these saturation values should also be taken at the new time level $n+1$, but the assumption of known interface fluxes implies $F_s = F_s(S_V^n)$, that is, the fluxes are evaluated at the current time level. This is an explicit approach. This mixing of implicit and explicit terms gives rise to the semi-implicit nature of the sequential splitting method (a similar approach is used in the IMPES method). Inserting the time derivative approximation and using the implicit scheme we arrive at the residual form of the discrete viscous-capillary transport equation, plotted for a single cell $V$ as a function of $\Delta t$ and $S_V^{n+1}$ in Figure \ref{fig:residual_two_phase_transport}:
+\begin{align} \label{eq:residual_two_phase_transport}
+R(S_i^{n+1};S_i^n, \Delta t) &\coloneqq S_V^{n+1} - S_V^n - \frac{\Delta t}{m(V)\phi_V} \left[ f_w(S_V^{n+1})F_V^- + Q_V^+ \right] - \frac{q_V \Delta t}{\rho_w \phi_V} \nonumber \\
+&= 0,~\forall V \in \mathcal{T}.
+\end{align}
+\tikzsetnextfilename{residual}
+\begin{figure}
+\centering
+\input{residual.tikz}
+\caption{The residual from Equation (\ref{eq:residual_two_phase_transport}) as a function of $\Delta t$ and $S^{n+1}$. }
+\label{fig:residual_two_phase_transport}
+\end{figure}
+
+A similar approach is used on Equation (\ref{eq:two_phase_transport_gravity}), the gravity transport equation. The \opm code assumes that the grid for this problem is aligned in vertical columns, which holds for the stratigraphical grids often used in reservoir simulation packages, as discussed in Section \ref{section:introduction_petroleum_reservoirs}. Further it assumes that the gravity effects are only influencing the saturation in cells above or below a cell, allowing solution of the transport equations on a per column basis. The gravity terms on the interface to neighboring cells are approximated using the transmissibility and a centroid difference, as was the case for the viscous-capillary equation. These boundary fluxes are gathered in an edge flux variable, say $F_s^g$ for each edge $s \in E_V$, and are constant throughout a simulation since they only depend on permeabilities, constant densities, and the grid configuration. Note that the flux on edges in the $x$-$z$ and $y$-$z$ planes are zero, since the cells are assumed to be vertically aligned and the gravitational influence only works in the vertical direction. The FVM requires the mobilities $\lambda_l$ to be evaluated on each interface edge $s$, a task again accomplished by the upwind method. Since gravity causes the lightest phase to move upwards the mobility for this phase must be taken from the cell below the current edge. Likewise the mobility for the heavy phase is gathered from the cell above the current edge. Figure \ref{fig:mobility_upwind} illustrates this for a heavy water phase and a light oil phase. 
+\tikzsetnextfilename{mobility_upwind}%
+\begin{figure}[ht]%
+\centering
+\input{mobility_upwind.tikz}%
+\caption{The flow of a light oil phase $o$ and a heavy water phase $w$ in a grid with vertically aligned cells  $K,V,L$ and interface edges $s_t,s_b$. The gravitational force is directed downwards in the figure.}%
+\label{fig:mobility_upwind}%
+\end{figure}%
+Denoting the top face of cell $V$ as $s_t$ and the bottom face as $s_b$, we arrive at the following residual equation to be solved:
+\begin{align} \label{eq:residual_two_phase_transport_gravity}
+R_g(S_i^{n+1}) &\coloneqq S_V^{n+1} - S_V^n  \nonumber \\
+&- \frac{\Delta t}{m(V)\phi_V} \left[ \frac{\lambda_w(S_K^{n})\lambda_o(S_V^{n+1})}{\lambda_w(S_K^{n})+\lambda_o(S_V^{n+1})} F_{s_t}^g + \frac{\lambda_w(S_V^{n+1})\lambda_o(S_L^{n})}{\lambda_w(S_V^{n+1})+\lambda_o(S_L^{n})} F_{s_b}^g \right] \nonumber \\
+&= 0,~(K,L) \in \mathcal{T}\times \mathcal{T} : K\cap V = s_t, L\cap V = s_b, ~\forall V \in \mathcal{T}.
+\end{align}
+Here the phase mobilities $\lambda_l$ are evaluated explicitly in the neighboring cells using the cell saturation $S_K^{n}$ and $S_L^{n}$ according to the configuration in Figure \ref{fig:mobility_upwind}. That is, $\lambda_w(S_K^n)$ and $\lambda_o(S_L^n)$ are known a priori when solving Equation \ref{eq:residual_two_phase_transport_gravity}. The single cell gravity residual is shown in Figure \ref{fig:residual_two_phase_transport_gravity}
+\tikzsetnextfilename{residual_gravity}
+\begin{figure}[ht]
+\centering
+\input{residual_grav.tikz}
+\caption{The gravity residual from Equation (\ref{eq:residual_two_phase_transport_gravity}) as a function of $\Delta t$ and $S^{n+1}$. Here $s_0 = 0.5$, $\mu_w = \mu_o = \unit[1]{mD}$, $F_{s_t}^g = \unitfrac[10^{-5}]{m^3}{s}$, $F_{s_t}^g = \unitfrac[-10^{-5}]{m^3}{s}$, $m(V)\phi_V = \unit[500]{m^3}$, $\lambda_w(S_K^n) = \unit[500]{m^{-2}}$, and $\lambda_o(S_L^n) = \unit[150]{m^{-2}}$.}
+\label{fig:residual_two_phase_transport_gravity}
+\end{figure}
+
+We now want to solve Equations (\ref{eq:residual_two_phase_transport}) and (\ref{eq:residual_two_phase_transport_gravity}) by finding roots of the residuals $R(S_V^{n+1})$ and $R_g(S_V^{n+1})$. Existence of solutions of these residual equations is hard to prove with rigor. Despite this a solution is assumed to exist for well-posed reservoir simulation residuals for every time step $\Delta t$ \citep{younis_adaptively_2010}. Further, if brackets $[a,b]_R$ and $[c,d]_{R_g}$ can be found according to Definition \ref{definition:bracket} we know that a solution exists by Theorem \ref{theorem:ivt} and the continuity of the residuals.
+
+%%%%%%%%%%%%%%%%  REORDERING %%%%%%%%%%%%%%%%
+\subsection{Reordering}
+\label{section:reordering}
+The upwind method is used for the discretization of the flow equations. This choice of discretization ensures that the state of a cell $i$ is only affected by the state in the upwind neighboring cells $U(i)$, creating a well defined domain of dependence for each cell. The upwind direction is based on the fluid flux on the border between neighboring cells. An example of a discretization with interface flux directions is shown in Figure \ref{fig:discretization_velocity_natural_numbering_sparsity_pattern} along with the sparsity pattern resulting from a standard numbering of the cells in the grid. The system of equations calls for a full matrix solve since the resultant matrix is in a non-triangular form even after using the upwind method, i.e. after removing all downwind cells from the matrix. This can be amended by \emph{reordering} the cells in the domain according to the flow direction.
+
+The approach can be motivated by viewing the domain as a directed graph with the cells as nodes and the interface fluxes determining the edge directions between nodes. In computer science, a topological sort is an algorithm designed to order the nodes in a directed graph according to the direction of the interconnecting edges. The sorting algorithm provides a list of nodes such that all edges from every node points to nodes with a higher ordering in the list. In fluid flow terms this approach provides an ordering of the cells according to the domain of influence for each cell. A cell early in the ordering is independent of the subsequent cells in the list, allowing the state of each cell in the ordering to be computed sequentially.  
+In other words, the new numbering gives a lower triangular matrix which indicates that the system of equations for the cell saturations can be solved sequentially by a forward substitution. Figure \ref{fig:discretization_velocity_topological_numbering_sparsity_pattern} shows the cell numbering and sparsity pattern resulting from a topological sort of the cells from the example domain in Figure \ref{fig:discretization_velocity_natural_numbering_sparsity_pattern}. Note the lower triangular structure of the matrix after removing all downwind cells.
+\begin{figure}[ht]
+\centering
+\tikzsetnextfilename{3x3_grid_natural_numbering}
+\begin{subfigure}[b]{0.43\textwidth}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/3_by_3_grid.png}};
+    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+        \draw [ultra thick, ->] (0.28,0.16) -- (0.38,0.16);
+        \draw [ultra thick, ->] (0.62,0.16) -- (0.72,0.16);
+        
+        \draw [ultra thick, ->] (0.16,0.3) -- (0.16,0.4);
+        \draw [ultra thick, ->] (0.5,0.3) -- (0.5,0.4);
+        \draw [ultra thick, ->] (0.83,0.3) -- (0.83,0.4);
+        
+        \draw [ultra thick, ->] (0.38,0.49) -- (0.28,0.49);
+        \draw [ultra thick, ->] (0.62,0.49) -- (0.72,0.49);
+        
+        \draw [ultra thick, ->] (0.16,0.63) -- (0.16,0.73);
+        \draw [ultra thick, ->] (0.5,0.63) -- (0.5,0.73);
+        \draw [ultra thick, ->] (0.83,0.63) -- (0.83,0.73);
+        
+        \draw [ultra thick, ->] (0.38,0.82) -- (0.28,0.82);
+        \draw [ultra thick, ->] (0.72,0.82) -- (0.62,0.82);
+        
+        \node at (0.16,0.16)  (normal) {1};
+        \node at (0.5,0.16)  (normal) {2};
+        \node  at (0.83,0.16)  (normal) {3};
+        
+        \node at (0.16,0.49)  (normal) {4};
+        \node  at (0.5,0.49)  (normal) {5};
+        \node  at (0.83,0.49)  (normal) {6};
+        
+        \node  at (0.16,0.82)  (normal) {7};
+        \node  at (0.5,0.82)  (normal) {8};
+        \node  at (0.83,0.82)  (normal) {9};
+    \end{scope}
+\end{tikzpicture}
+\caption{Cell numbering and fluid flow direction.}
+\label{fig:discretization_velocity_natural_numbering}
+\end{subfigure}%
+~
+\tikzsetnextfilename{3x3_array_natural_numbering}
+\begin{subfigure}[b]{0.5\textwidth}
+\centering
+\begin{tikzpicture}
+	\begin{axis}[%
+	width=\textwidth,%
+	height=\textwidth,%
+	y dir=reverse,%
+	xtick=data,%
+	ytick=data]%
+	\addplot[mark options={blue},only marks]%
+	table[col sep=comma, trim cells=true,x=x, y=y] {datafiles/sparsity_pattern_normal_upwind.data};%
+	\addplot[mark options={red},only marks]%
+	table[col sep=comma, trim cells=true,x=x, y=y] {datafiles/sparsity_pattern_normal_downwind.data};%
+	\end{axis}
+\end{tikzpicture}
+\caption{Sparsity pattern. Downwind cells are shown using red markers.}
+\label{fig:sparsity_pattern_natural_numbering}
+\end{subfigure}%
+\caption{Domain with natural numbering}
+\label{fig:discretization_velocity_natural_numbering_sparsity_pattern}
+\end{figure}
+
+The topological ordering can always be generated provided that the graph is cycle free. That is, after leaving a node along an edge that node will never be revisited. This node structure results from a circulation free flux field $\vec{v}$ \citep{natvig_fast_2006,lie_fast_2013}. For incompressible flow, see \citet{natvig_fast_2006}, and cases with negligible or no gravity and capillary forces, see \citet{kwok_potential-based_2007,lie_fast_2013}, zero circulation is typical, at least with careful choice of numerical methods \citep{natvig_fast_2006,lie_fast_2013}. When introducing significant gravity and capillary effects, see \citet{kwok_potential-based_2007}, or compressible flow, see \citet{lie_fast_2013}, circulation can occur in the velocity field. On the discrete domain circulation appear as cycles or \emph{strongly connected components} in the graph. A strongly connected component is a group of nodes such that every node is reachable from every other node. These types of problems are not unusual in practice and as such is a big problem for the reordering approach since these groups represents irreducible blocks in the system of equations. One possible solution is to redefine the strongly connected component as a single pseudo node in the topological ordering, and solving this region as a separate problem using e.g. a modified Newton method or Gauss-Seidel iterations. Cycles can be found in linear time $\mathcal{O}(n)$ by either Tarjan's algorithm or by using a double depth first search, where $n$ is the number of cells in the discretization \citep{natvig_fast_2008}. Algorithm \ref{algorithm:reordering} outlines the reordering procedure used to solve the transport equation, see Equation (\ref{eq:two_phase_transport}).
+\begin{figure}[ht]
+\centering
+\tikzsetnextfilename{3x3_grid_topological_numbering}
+\begin{subfigure}[b]{0.43\textwidth}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/3_by_3_grid.png}};
+    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+        \draw [ultra thick, ->] (0.28,0.16) -- (0.38,0.16);
+        \draw [ultra thick, ->] (0.62,0.16) -- (0.72,0.16);
+        
+        \draw [ultra thick, ->] (0.16,0.3) -- (0.16,0.4);
+        \draw [ultra thick, ->] (0.5,0.3) -- (0.5,0.4);
+        \draw [ultra thick, ->] (0.83,0.3) -- (0.83,0.4);
+        
+        \draw [ultra thick, ->] (0.38,0.49) -- (0.28,0.49);
+        \draw [ultra thick, ->] (0.62,0.49) -- (0.72,0.49);
+        
+        \draw [ultra thick, ->] (0.16,0.63) -- (0.16,0.73);
+        \draw [ultra thick, ->] (0.5,0.63) -- (0.5,0.73);
+        \draw [ultra thick, ->] (0.83,0.63) -- (0.83,0.73);
+        
+        \draw [ultra thick, ->] (0.38,0.82) -- (0.28,0.82);
+        \draw [ultra thick, ->] (0.72,0.82) -- (0.62,0.82);
+        
+         \node at (0.16,0.16)  (normal) {1};
+        \node at (0.5,0.16)  (normal) {2};
+        \node  at (0.83,0.16)  (normal) {5};
+        
+        \node at (0.16,0.49)  (normal) {4};
+        \node  at (0.5,0.49)  (normal) {3};
+        \node  at (0.83,0.49)  (normal) {6};
+        
+        \node  at (0.16,0.82)  (normal) {9};
+        \node  at (0.5,0.82)  (normal) {8};
+        \node  at (0.83,0.82)  (normal) {7};
+    \end{scope}
+\end{tikzpicture}
+\caption{Cell numbering and fluid flow direction.}
+\label{fig:discretization_velocity_topological_numbering}
+\end{subfigure}%
+~
+\tikzsetnextfilename{3x3_array_topological_numbering}
+\begin{subfigure}[b]{0.5\textwidth}
+\centering
+\begin{tikzpicture}
+	\begin{axis}[%
+	width=\textwidth,%
+	height=\textwidth,%
+	y dir=reverse,%
+	xtick=data,%
+	ytick=data]%
+	\addplot[mark options={blue},only marks]%
+	table[col sep=comma, trim cells=true,x=x, y=y] {datafiles/sparsity_pattern_topological_upwind.data};%
+	\addplot[mark options={red},only marks]%
+	table[col sep=comma, trim cells=true,x=x, y=y] {datafiles/sparsity_pattern_topological_downwind.data};%
+	\end{axis}
+\end{tikzpicture}
+\caption{Sparsity pattern. Downwind cells are shown using red markers.}
+\label{fig:sparsity_pattern_topological_numbering}
+\end{subfigure}%
+\caption{Domain with topological numbering}
+\label{fig:discretization_velocity_topological_numbering_sparsity_pattern}
+\end{figure}
+
+\begin{algorithm}[ht]
+ \SetAlgoLined
+ \SetKw{In}{in}
+ \KwData{Saturations $S_V$ in all cells $V$, fluxes $F_s$ on all faces $s$.}
+ \KwResult{Updated saturations $S_V$}
+ generate a topological ordering $\mathcal{T}_{\text{order}}$ of (pseudo) cells $V_{\text{order}}$ based on the face fluxes $F_s$\;
+ \ForEach{(pseudo) cell $V_{\text{order}}$ \In $\mathcal{T}_{\text{order}}$}{
+     \uIf{$V_{\text{order}}$ contains multiple cells $V$ from $\mathcal{T}$}{
+     	solve the non-linear system for $S_V$ using a vector procedure, e.g. Gauss-Seidel iterations\;
+     }
+     \Else {
+     	solve the single cell problem for $S_V$ using a scalar root finder, e.g. Regula Falsi\;
+     }
+ }
+ \Return updated cell saturations $S_V$
+ \caption{Pseudo code showing the reordering procedure for solving a transport problem, as in Equation (\ref{eq:two_phase_transport})}
+\label{algorithm:reordering}
+\end{algorithm}
+
+%\begin{comment} % Comment for reordering cycle notes
+%Directedness:
+%\begin{quote}
+%To see this, we rewrite (7) as $S_i^{k+1} = S_i^k + Q_i(S_i^{k+1})-F_i^{+}(S_i^{k+1})+F_i^{-}(S_j^{k+1};j\in U(i))$, where $F_i^+$ and $F_i^-$ are terms representing ßow out of and into cell $G_i$ and $U(i) = \{j | v_{ij} < 0\}$ denotes the indexes of the neighboring cells on the upstream side of $G_i$. In a cell $G_i$ penetrated by an injection well, $U(i) = empty$ and the saturation can thus be computed by solving (7) locally using a Newton method.
+%Having found $S_i^{k+1}$, we can immediately update the saturation in all cells having $G_i$ as their only Òinßow
+%neighborÓ (i.e., in all $G_j$ for which $U(j) ? \{i\}$) and so on. This process can be continued if we are able
+%to Þnd a sequence of cells $p = (p_1, . . . , p_n)$ such that if $G_{pi}$ is on the upstream side of $G_{pj}$, then $p_i < p_j$.
+%\citep{aarnes_fast_2006}
+%\end{quote}
+%
+%\begin{quote}
+%In the absence of gravity and capillary forces, all phases will be flowing in the same direction, ...
+%\citep{kwok_potential-based_2007}
+%\end{quote}
+%
+%No saturation or pressure dependencies, a simple topological potential ordering can be used.
+%
+%\begin{quote}
+%In the presence of gravity, buoyancy forces can cause different phases to flow in opposite directions. The upstream direction for each phase $p$ is determined by the sign of $\Phi_{p,i}-\Phi_{p,l}$, where $\Phi_{p,i} = p_i-\gamma_pz_i$.
+%\citep{kwok_potential-based_2007}
+%\end{quote}
+%
+%This can introduce pressure dependencies on downstream equations/variables. Two different orderings are needed for three phase case. Can order on only water potential in two phase case.
+%
+%\begin{quote}
+%So far, in the absence of capillary effects, the saturation dependence in each equation is purely upstream; thus, for a given phase, saturations downstream from cell $i$ do not appear in equation $i$. In contrast, equation $i$ involves phase pressure from all neighboring cells, be they upstream or downstream from cell $i$. Since we can only choose one phase pressure as a primary variable, the other phase pressures must be expressed as $p_q = p_p +P_{cpq}(S),$ where $p_p$ is the primary pressure and $p_q$ is the pressure of another phase.
+%\citep{kwok_potential-based_2007}
+%\end{quote}
+%
+%This can introduce saturation dependencies on downstream equations/variables. Must choose $p_w$ as primary pressure variable. No valid ordering for the gas equations when present.
+%
+%\begin{quote}
+%The fact that viscous flow is unidirectional along streamlines will be the key property ...
+%\citep{natvig_fast_2008}
+%\end{quote}
+%
+%\begin{quote}
+%In the absence of gravity, most flow models are unidirectional in the sense that $f > 0$ for scalar equations or that the Jacobian of $f$ has distinct, positive eigenvalues.
+%\citep{natvig_fast_2008}
+%\end{quote}
+%
+%\begin{quote}
+%By using a discontinuous Galerkin scheme combined with an upwind flux approximation on cell interfaces, the directedness of (1) is preserved in the discrete system in the sense that the solution in an element only depends on the solutions in its immediate neighbors on the upwind side.
+%\citep{natvig_fast_2008}
+%\end{quote}
+%
+%\begin{quote}
+%For incompressible flow, the exact velocity field has zero circulation. A simple argument shows that the same is true for an approximate velocity field computed by a two-point pressure solver. A mixed finite-element solution, on the other hand, may give a velocity field with nonzero circulation. In compressible flow, we may also get nonzero circulation. In our experience, cycles that appear in velocity fields computed by the mixed finite-element method are small and sparse for incompressible and weakly compressible flows.
+%\citep{natvig_fast_2006}
+%\end{quote}
+%
+%\begin{quote}
+%Cycles correspond to groups of elements that are made mutually dependent by a nonzero circulation in the velocity field $\vec{v}.$
+%\citep{natvig_fast_2006}
+%\end{quote}
+%
+%\begin{quote}
+%The dynamics of the transport problem is generally determined by the balance between viscous and gravity forces. For heavy-oil systems, however, gravity segregation is typically a weak effect compared to viscous flow because of large injection rates and small differences in the densities of the oil and water phases. This means that the transport will mainly be co-current, giving a unidirectional flow property that can be exploited to develop efficient transport solvers.
+%\citep{lie_fast_2013}
+%\end{quote}
+%
+%\begin{quote}
+%If gravity is neglected and a monotone method like the standard two-point flux-approximation scheme is used to discretize the pressure equation, the velocity field $\vec{v}$ has no loops.
+%\citep{lie_fast_2013}
+%\end{quote}
+%\end{comment} % Comment for reordering cycle notes
+
+%%%%%%%%%%%% ROOT FINDERS %%%%%%%%%%%%%%%%%%%%
+\subsection{Root Finders}
+\label{section:root_finders}
+The reordering approach breaks the large system of equations into smaller subproblems. The single cell problems involves solving a univariate equation for the saturation in each cell $V$, namely Equation (\ref{eq:residual_two_phase_transport}). That is, we want to find the \emph{root} of the residual $R$. In more general terms, given a function $f\colon\mathbb{R}\to\mathbb{R}$ we want to find the numbers $x$ such that $f(x) = 0$. The literature contains a long list of numerical root finding algorithms for such problems, a few of which will be tested here for the single cell solver. 
+
+%%%%%%%%%%%%%%% BISECTION %%%%%%%%%%%%%%%%%
+\subsubsection{The Bisection Method}
+\label{section:bisection_method}
+The bisection method is a simple and robust \emph{bracketing method}. That is, the method works over a \emph{bracket} of the function $f$ on the real line, using the following definition
+\begin{definition} \label{definition:bracket}
+A bracket $[a,b]_f$ for $f: \mathbb{R} \rightarrow \mathbb{R}$ is a closed subset of $\mathbb{R}$, say $[a,b] = \{x \in \mathbb{R} : a \leq x \leq b, a < b, f(a)f(b) < 0 \}$.
+\end{definition}
+Now we state the \emph{intermediate value theorem}, which will help guarantee the existence of a root in a given bracket:
+\begin{theorem} \label{theorem:ivt} \textbf{Intermediate Value Theorem:}
+Let $f\colon[a,b] \rightarrow \mathbb{R}$ be a continuous function on the closed interval $[a,b] = \{x \in \mathbb{R} : a \leq x \leq b \}$. Then for every value $y$, $f(a) < y < f(b)$, there exists a number $c \in (a,b)$ such that $f(c) = y$.
+\end{theorem}
+The proof of this theorem can be found in e.g \citep{binmore_mathematical_1977}. Using a bracket $[a,b]_f$ in Theorem \ref{theorem:ivt} quickly leads to the following corollary:
+\begin{corollary} \label{corollary:root_existence}
+Let $f\colon\mathbb{R} \rightarrow \mathbb{R}$ be a continuous function with a \emph{bracket} $[a,b]$. Then by Theorem \ref{theorem:ivt} there exists at least one number $r \in (a,b)$ such that $f(r) = 0$.
+\end{corollary}
+The corollary follows since the end points of the bracket are such that $f(a) < 0, f(b) > 0$ or, conversely, $f(a) > 0, f(b) < 0$, thereby bracketing the value $y = 0$ from the statement of Theorem \ref{theorem:ivt}.
+
+Now, starting with a bracket $[a,c]_f$ the next iterate $b$ is found by halving the interval (hence the name of the method):
+\begin{equation*}
+b = \frac{a+c}{2}.
+\end{equation*}
+A new starting bracket is chosen from the points $a,b,c$ according to Definition \ref{definition:bracket}. The new bracket is named $[a,c]_f$ and the process is restarted. This iteration continues until a precise root is found, or the bracket becomes smaller than some tolerance $\epsilon$. By Corollary \ref{corollary:root_existence}, and the fact that the size of the bracket always decreases, the bisection method is guaranteed to converge. This is true in general for bracketing methods, although the convergence speed will vary. A more formal convergence theorem with proof can be found in \citet{kincaid_ch._2002}.
+
+%%%%%%%%%%%%%%% REGULA FALSI %%%%%%%%%%%%%%%%%
+\subsubsection{Regula Falsi}
+\label{section:regula_falsi}
+Another bracketing method is the \emph{regula falsi}, also called the \emph{false position method}. Again we start with a bracket $[a,c]_f$. The method computes a secant line between the two end points of the bracket, as illustrated in Figure \ref{fig:regula_falsi_secant}, using the following equation:
+\begin{equation*}
+y(x) = \frac{f(c) - f(a)}{c-a}(x-a) + f(a).
+\end{equation*}
+In the following we will use the notation $f_x \coloneqq f(x)$ to simplify the equations. Since the secant line $y(x)$ is a continuous function the bracket $[a,b]_f$ can be used as a bracket for $y$ as well, giving $[a,b]_y$. This implies, by Corollary \ref{corollary:root_existence}, that $\exists b \in (a,b) : y(b) = 0$. $b$ is found by
+\begin{equation} \label{eq:regula_falsi_update}
+b = a - f_a\frac{c-a}{f_c - f_a},
+\end{equation}
+the \emph{regula falsi step}. Now $b$ is used to update the bracket $[a,c]_f$ according to Definition \ref{definition:bracket}. This iteration is continued until a root is found or the bracket size falls below some tolerance $\epsilon$. Note that efficient implementations of the regula falsi requires only one function evaluation every iteration, since only one new point in the bracket is computed. Algorithm \ref{algorithm:regula_falsi} shows pseudo code for the \opm implementation of Regula Falsi.
+\tikzsetnextfilename{regula_falsi_secant}
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.6\textwidth]{figures/regula_falsi_secant.pdf}};
+    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+        \node [right] at (0.6,0.4) {$f(x)$};
+        \node [right] at (0.45,0.54) {$y(x)$};
+        \node [right] at (0.8,0.73) {$f(c)$};
+        \node [right] at (0.807,0.127) {$c$};
+        \node [right] at (0.1,0.03) {$f(a)$};
+        \node [right] at (0.092,0.127) {$a$};
+        \node [right] at (0.16,0.188) {$b$};
+    \end{scope}
+\end{tikzpicture}
+\caption{The secant line $y(x)$ is computed from the function $f(x)$ and a bracket $[a,c]_f$. $y(x) = 0$ is solved for the new update $b$ and used in the regula falsi method.}
+\label{fig:regula_falsi_secant}
+\end{figure}
+\begin{algorithm}[ht]
+ \SetAlgoLined
+ \SetKw{And}{and}
+ \KwData{Initial guess $x_i$, a bracket $[x_0,x_1]_f$ for the function $f(x)$, a tolerance $\epsilon$, and the iteration limit $n_{\text{max}}$}
+ \KwResult{An approximate root of $f(x)$}
+ $f_0 \coloneqq f(x_0)$\;
+  $f_1 \coloneqq f(x_1)$\;
+ \lIf{$x_i$ is a root}{\Return $x_0$}
+ \lElse{Form a new bracket $[x_0,x_1]_f$ from $x_0$,$x_1$,$x_i$}
+ \While{not converged \And iterations less than $n_{\text{max}}$}{
+        \lIf{$[x_0,x_1]$ does not bracket the root}{handle the bracket error}
+	$x_{n} \coloneqq \frac{x_1 f_0 - x_0 f_1}{f_0 - f_1}$\;
+	$f_n \coloneqq f(x_n)$\;
+	\lIf{$|f_n| < \epsilon$}{\Return $x_n$}
+	\uIf{$f_n*f_0 < 0$}{
+		$x_0 \coloneqq x_1$\;
+		$f_0 \coloneqq f_1$\;
+	}
+	\Else{
+	         $\gamma \coloneqq \frac{f_1}{f_1+f_n}$\;
+	         $f_0 \coloneqq \gamma f_0$\;
+	}
+	$x_1 = x_n$\;
+	$f_1 = f_n$\;
+ }
+ \Return the root approximation $\frac{x_0+x_1}{2}$
+ \caption{Pseudo code implementing the Regula Falsi root finder, see Section \ref{section:regula_falsi}. The algorithm is modified with the \emph{Pegasus method}, due to \citet{dowell_the_1972}.}
+\label{algorithm:regula_falsi}
+\end{algorithm}
+%%%%%%%%%%%%%%% RIDDER'S %%%%%%%%%%%%%%%%%
+\subsubsection{Ridders' Method}
+\label{section:ridders_method}
+Ridders' method is another bracketing scheme, introduced by \citet{ridders_new_1979}. Again a bracket $[a,c]_f$ is chosen. A function $h(x)$ is defined by
+\begin{equation*}
+h(x) = f(x)\exp{\alpha x}.
+\end{equation*}
+Computing the midpoint $b$ of the bracket we want to find an $\alpha \in \mathbb{R}$ such that
+\begin{equation*}
+h(c) - 2h(b) + h(a) = 0.
+\end{equation*}
+Inserting $h(x)$ gives the following equation in $\alpha$:
+\begin{equation*}
+\exp{\alpha c}f_c - 2\exp{\alpha b}f_b + \exp{\alpha a}f_a = 0.
+\end{equation*}
+Multiplying this equation by $\exp{-\alpha a}$ gives
+\begin{equation*}
+\exp{\alpha (c-a)}f_c - 2\exp{\alpha (b-a)}f_b + \exp{\alpha (a-a)}f_a = \exp{\alpha 2\delta}f_c - 2\exp{\alpha \delta}f_b + f_a = 0,
+\end{equation*}
+since $c-a = 2(b-a)$ and $\delta \coloneqq b - a$. Thus we get a second order equation in $\exp{\alpha \delta}$. The solution of this equation can be found by 
+\begin{equation} \label{eq:ridders_exp_sol}
+\exp{\alpha \delta} = \frac{f_b \pm \sqrt{f_b^2 -  f_cf_a}}{f_c}.
+\end{equation}
+We now need to know under which restrictions this equation has a solution. Since $\exp{x} \geq 1,~\forall x \in \mathbb{R}$, we need the right hand side positive in order for the equation to have a solution. Definition \ref{definition:bracket} implies that $f_b^2 - f_cf_a \geq f_b^2 \geq 0$ and thus the square root always yields a real number. Since the square root is a monotonic and increasing function, this implies that $\sqrt{f_b^2 -  f_cf_a} \geq \vert f_b \vert$. Thus,
+\begin{align*}
+f_b + \sqrt{f_b^2 -  f_cf_a} &\geq 0, \nonumber \\
+f_b - \sqrt{f_b^2 -  f_cf_a} &\leq 0 \nonumber,
+\end{align*}
+implying that the sign of the right hand side of Equation (\ref{eq:ridders_exp_sol}) is completely controlled by $\sgn{f_c}$. The solution $\exp{\alpha \delta}$ is then found by
+\begin{equation} \label{eq:ridders_exp_sol_sgn}
+\exp{\alpha \delta} = \frac{f_b + \sgn{f_c} \sqrt{f_b^2 -  f_cf_a}}{f_c} \coloneqq \sigma_{\alpha}.
+\end{equation}
+Now we find $\alpha$ by
+\begin{equation*}
+\alpha = \frac{\ln{\sigma_{\alpha}}}{\delta}.
+\end{equation*}
+Ridder's method proceeds by applying the Regula Falsi to $h(x)$ on the bracket $[b,c]_h$, using the regula falsi step in Equation (\ref{eq:regula_falsi_update}). This computes a new point $d$ by 
+\begin{equation*}
+d = b - h(b)\frac{c-b}{h(c) - h(b)}.
+\end{equation*}
+Inserting the definition for $h(x)$ gives
+\begin{equation*}
+d = b - \exp{\alpha b}f_b \frac{c-b}{\exp{\alpha c} f_c - \exp{\alpha b} f_b} = b - \frac{\delta f_b}{\exp{\alpha{c-b}}f_c - f_b}.
+\end{equation*}
+By Equation (\ref{eq:ridders_exp_sol_sgn}) $\exp{\alpha \delta}f_c$ is given by
+\begin{equation*}
+\exp{\alpha \delta}f_c = f_b + \sgn{f_c} \sqrt{f_b^2 -  f_cf_a},
+\end{equation*}
+and because $\delta = c-b$, we get
+\begin{equation*}
+d = b - \frac{\delta f_b}{f_b + \sgn{f_c} \sqrt{f_b^2 -  f_cf_a} - f_b} = b - \frac{\delta f_b}{\sgn{f_c} \sqrt{f_b^2 -  f_cf_a}}.
+\end{equation*}
+Now, by Definition \ref{definition:bracket}, $\sgn{f_c} = -\sgn{f_a}$. Using $\sgn{x} \coloneqq \frac{x}{\sqrt{{x}^2}}$ we arrive at Ridders' method:
+\begin{equation} \label{eq:ridders_method}
+d = b + \frac{\delta f_b}{\frac{f_a}{f_a^2} \sqrt{f_b^2 -  f_cf_a}} = b + \frac{ \delta \frac{f_b}{f_a}}{\sqrt{\left(\frac{f_b}{f_a}\right)^2 -  \frac{f_c}{f_a}}}.
+\end{equation}
+The final step involves selecting the smallest new starting bracket $[a,c]_f$ from the points $\{a,b,c\}$ in combination with point $d$, keeping with Definition \ref{definition:bracket}. Now the process is restarted, and continues until a root is found, or the size of the bracket falls below a tolerance $\epsilon$. Algorithm \ref{algorithm:ridders} shows the \opm implementation of Ridders' method.
+\begin{algorithm}[ht]
+ \SetAlgoLined
+ \SetKw{And}{and}
+ \KwData{Initial guess $x_i$, a highly unlikely answer $x_{\text{invalid}}$, a bracket $[x_0,x_1]_f$ for the function $f(x)$, a tolerance $\epsilon$, and the iteration limit $n_{\text{max}}$}
+ \KwResult{An approximate root of $f(x)$}
+ \lIf{$x_0$,$x_1$, or $x_i$ is a root}{\Return the root}
+ \lElse{Form a new bracket $[x_0,x_1]_f$ from $x_0$,$x_1$,$x_i$}
+  $f_0 \coloneqq f(x_0)$\;
+  $f_1 \coloneqq f(x_1)$\;
+  $x_r \coloneqq x_{\text{invalid}}$\;
+ \While{not converged \And iterations less than $n_{\text{max}}$}{
+        $x_m \coloneqq \frac{x_0+x_1}{2}$\;
+        $f_m \coloneqq f(x_m)$\;
+        $s \coloneqq \sqrt{f_m^2-f_0*f_1}$\;
+        \lIf{$s$ is zero}{\Return $x_r$}
+        \uIf{$f_0 \geq f_1$}{
+        		$x_r \coloneqq x_m + (x_m-x_0)\frac{f_m}{s}$\;
+        }
+        \Else{
+		$x_r \coloneqq x_m - (x_m-x_0)\frac{f_m}{s}$\;
+        }
+        \lIf{$x_r$ is converged under $\epsilon$}{\Return $x_r$}
+        Form a new bracket $[x_0,x_1]_f$ from $x_0$, $x_1$, $x_m$, and $x_r$\;
+ }
+Error: The iteration limit $n_{\text{max}}$ is exceeded\;
+ \caption{Pseudo code implementing Ridders' method, see Section \ref{section:ridders_method}.}
+\label{algorithm:ridders}
+\end{algorithm}
+%\begin{figure}[ht]
+%\begin{subfigure}[b]{0.49\textwidth}
+%\centering
+%\begin{tikzpicture}
+%    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\textwidth]{figures/bisection.pdf}};
+%    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+%        \node [right] at (0.08,0.1) {\scriptsize $a_0$};
+%        \node [right] at (0.46,0.32) {\scriptsize $a_1 = b_0$};
+%	\node [right] at (0.87,0.8) {\scriptsize $c_0$};
+%
+%        \node [right] at (0.66,0.69) {\scriptsize $c_2 = b_1$};
+%        
+%        \node [right] at (0.56,0.5) {\scriptsize $c_3 = b_2$};
+%        
+%        \node [right] at (0.52,0.42) {\scriptsize $c_4 = b_3$};
+%        
+%        \node [left] at (0.49,0.41) {\scriptsize $a_5 = b_4$};
+%    \end{scope}
+%\end{tikzpicture}
+%\caption{Bisection} \label{fig:bisection}
+%\end{subfigure}
+%\begin{subfigure}[b]{0.49\textwidth}
+%\centering
+%\begin{tikzpicture}
+%    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\textwidth]{figures/regula_falsi.pdf}};
+%    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+%        \node [right] at (0.08,0.1) {\scriptsize $a_0$};
+%        \node [right] at (0.36,0.25) {\scriptsize $a_1 = b_0$};
+%	\node [right] at (0.87,0.8) {\scriptsize $c_0$};
+%
+%        \node [right] at (0.47,0.35) {\scriptsize $a_2 = b_1$};
+%    \end{scope}
+%\end{tikzpicture}
+%\caption{Regula falsi}
+%\label{fig:regula_falsi}
+%\end{subfigure}
+%\caption{Regula falsi and the bisection method solving $f(x) = -x^4 + 3x^3 - 2 = 0$.}
+%\end{figure}
+
+%\begin{figure}[ht]
+%\begin{subfigure}[b]{0.49\textwidth}
+%\centering
+%\begin{tikzpicture}
+%    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\textwidth]{figures/ridders_first_iteration.pdf}};
+%    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+%        \node [right] at (0.07,0.06) {\scriptsize $a_0$};
+%        \node [right] at (0.453,0.31) {\scriptsize $b_0$};
+%        \node [right] at (0.505,0.34) {\scriptsize $d_0$};
+%        \node [right] at (0.85,0.8) {\scriptsize $c_0$};
+%    \end{scope}
+%\end{tikzpicture}
+%\caption{First iteration} \label{fig:ridders_first_iteration}
+%\end{subfigure}
+%\begin{subfigure}[b]{0.49\textwidth}
+%\centering
+%\begin{tikzpicture}
+%    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\textwidth]{figures/ridders_second_iteration_zoom.pdf}};
+%    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+%        \node [right] at (0.22,0.08) {\scriptsize $a_1$};
+%        \node [right] at (0.47,0.45) {\scriptsize $b_1$};
+%        \node [right] at (0.53,0.53) {\scriptsize $d_1$};
+%        \node [right] at (0.75,0.7) {\scriptsize $c_1$};
+%    \end{scope}
+%\end{tikzpicture}
+%\caption{Second iteration, enlarged} \label{fig:ridders_second_iteration}
+%\end{subfigure}
+%\caption{Two iterations of Ridder's method solving $f(x) = -x^4 + 3x^3 - 2 = 0$. The initial bracket is $[-0.75,2.5]$. The midpoint $b_0$ and the root $d_0$ of the dashed $h(x)$ secant line  is chosen as bracket for the new iteration, i.e. $[a_1,c_1]  \coloneqq [b_0,d_0]$.} \label{fig:ridders}
+%\end{figure}
+
+%%%%%%%%%%%%%% BRENT'S METHOD %%%%%%%%%%%%%%%%%%
+\subsubsection{Brent's Method} 
+\label{section:brents_method}
+Brent's method, due to \citet{brent_algorithms_1973}, combines the bisection method, see Section \ref{section:bisection_method}, the secant method, see Section \ref{section:secant_method} and \emph{inverse quadratic interpolation} and switches between the methods using a suitable heuristic. Brent's method is inspired by the older Dekker's method, see \citep{dekker_finding_1969}. We begin with a short presentation of inverse quadratic interpolation. 
+
+Linear interpolation is used in for example the secant method (Section \ref{section:secant_method}) to approximate the function $f'(x)$ at two points $a,b$. Quadratic interpolation approximates $f(x)$ as a quadratic function, based on \emph{three} points $a,b,c$, possibly leading to complex roots. Similarly, inverse quadratic interpolation approximates $f^{-1}(y)$ by three points $f(a),f(b),f(c)$, that is
+\begin{equation}
+\label{eq:inverse_quadratic_interpolation}
+f_*^{-1}(y) = \sum\limits_{i = 1}^3 f^{-1}(f_i) \prod\limits_{ \substack{j = 1 \\ j \neq i}}^3 \frac{y - f_j}{f_i - f_j}.
+\end{equation}
+Here $f_*^{-1}(y)$ denotes the interpolated function. Note that $f_i \coloneqq f(x_i)$, where $\ (x_1,x_2,x_3) \coloneqq (a,b,c,)$.The interpolated root is found by inserting $f(x_r) = 0$ into Equation (\ref{eq:inverse_quadratic_interpolation}). Since, by definition, $f^{-1}(f(x_r)) = x_r$ this gives an approximation for the root $x_r$ by the following equation (note the definition of an inverse quadratic interpolation function $\ell_{\text{iqi}}$):
+\begin{equation}
+\label{eq:inverse_quadratic_interpolation_root}
+x_r \approx \sum\limits_{i = 1}^3 x_i \prod\limits_{ \substack{j = 1 \\ j \neq i}}^3 \frac{f_j}{f_i - f_j} \eqqcolon \ell_{\text{iqi}}(x_1,x_2,x_3).
+\end{equation}
+
+Brent's method starts with two points $a_k,b_k$ such that $f(a_k)f(b_k) < 0$ where $b_k$ is the current solution guess and $\vert f(a_k) \vert > \vert f(b_k) \vert$. At the initial step $k = 0$, we define $b_{-1} \coloneqq a_0$. A candidate update $s$ is found by
+\begin{equation}
+s = 
+\begin{cases}
+\ell_\text{iqi}(a_k,b_k,b_{k-1}),& \text{if $f(a_k) \neq f(b_{k-1})$ and $f(a_k) \neq f(b_{k-1})$}. \\
+\ell_\text{s}(a_k,b_k),& \text{otherwise}.
+\end{cases}
+\end{equation}
+The function $\ell_\text{s}$ implements the \emph{secant method} defined in Equation (\ref{eq:secant_method}). If $s \notin [\frac{3a_k+b_k}{4},b_k]$ a bisection step $s = \frac{a_k+b_k}{2}$ is used in this iteration. On the other hand, if $s \in [\frac{3a_k+b_k}{4},b_k]$ we define a number $\Delta$ such that
+\begin{equation}
+\Delta =
+\begin{cases}
+b_k - b_{k-1},& \text{if bisection was used in the previous iteration} \\
+b_{k-1} - b_{k-2},& \text{if interpolation was used in the previous iteration}
+\end{cases}
+\end{equation}
+Now, if $|s-b_k| \geq \frac{1}{2}\Delta$ or $\vert \Delta \vert \geq \delta$, for some tolerance $\delta > 0$, we fall back to the bisection method, such that $s = \frac{a_k+b_k}{2}$. If $f(a_k)f(s) < 0$, $b_{k+1} = s$ and $a_{k+1} = a_k$. If $f(a_k)f(s) \geq 0$, then $a_{k+1} = s$ and $b_{k+1} = b_k$. The final step is to ensure $|f(a_{k+1})| > |f(b_{k+1})|$ by swapping $a_{k+1}$ and $b_{k+1}$, if necessary. This iteration continues until the interval size is below a given tolerance $\epsilon$ or a root is found. Brent's method is shown in pseudo code in Algorithm \ref{algorithm:brents_method} following the implementation in the \opm code.
+%\begin{algorithm}[ht]
+% \SetAlgoLined
+% \SetKw{And}{and}
+% \KwData{Initial guess $x_i$, a bracket $[x_0,x_1]_f$ for the function $f(x)$, a tolerance $\epsilon$, the machine precision $\delta$, and the iteration limit $n_{\text{max}}$}
+% \KwResult{An approximate root of $f(x)$}
+% \lIf{$x_0$,$x_1$, or $x_i$ is a root}{\Return the root}
+% \lElse{form a new bracket $[x_0,x_1]_f$ from $x_0$,$x_1$,$x_i$}
+%  $f_0 \coloneqq f(x_0)$\;
+%  $f_1 \coloneqq f(x_1)$\;
+%  $f_2 \coloneqq f_1$\;
+% \While{not converged \And iterations less than $n_{\text{max}}$}{
+%	\lIf{$[x_1,x_2]_f$ is not a valid bracket}{define a new bracket $[x_1,x_2]$ with $|f_1| < |f_2|$ from points $x_0$ and $x_1$}
+%	$x_m = \frac{x_2-x_1}{2}$\;
+%	define a modified tolerance by $\epsilon_{\text{mod}} \coloneqq 2.0\delta|x_1| + 0.5\epsilon$\;
+%	\lIf{If the solution $x_m$ is converged under $\epsilon_{\text{mod}}$}{\Return $x_1$}
+%	\uIf{$|e| < \epsilon_{\text{mod}}$ \And $|f_0|>|f_1|$}{
+%		Use inverse quadratic interpolation to find an update $d$\;
+%		\lIf{the interpolation failed}{use a bisection step to find $d$}
+%	}
+%	\Else{
+%		The interval bounds are decreasing too slowly: Use bisection to find an update $d$\;
+%	}
+%	Make a new bracket $[a,b]_f$\;
+%	$f_b \coloneqq f(b)$\;
+%}
+%Error: The iteration limit $n_{\text{max}}$ is exceeded\;
+% \caption{Pseudo code implementing Brent's method, see Section \ref{section:brents_method}.}
+%\label{algorithm:brents_method}
+%\end{algorithm}
+\begin{algorithm}[ht]
+ \SetAlgoLined
+ \SetKw{And}{and}
+  \SetKw{Or}{or}
+ \KwData{Initial guess $x_i$, function $f(x)$, bracket $[x_0,x_1]_f$, tolerance $\epsilon$, iteration limit $n_{\text{max}}$}
+ \KwResult{An approximate root of $f(x)$}
+ \lIf{$x_0$,$x_1$, or $x_i$ is a root}{\Return the root}
+ \lElse{form a new bracket $[x_0,x_1]_f$ from $x_0$,$x_1$,$x_i$}
+  $f_0 \coloneqq f(x_0)$\;
+  $f_1 \coloneqq f(x_1)$\;
+ \While{not converged \And iterations less than $n_{\text{max}}$}{
+	use inverse quadratic interpolation to find an update $x_n$\;
+	\lIf{the interpolation failed}{use the secant method to find $x_n$}
+	\lIf{iterate $x_n$ converged to slowly}{do a bisection step on $x_n$}
+	form a new bracket from points $x_0,x_1,x_n$\;
+}
+\lIf{point $x_1$ or $x_n$ is a converged root}{\Return $x_1$ or $x_n$}
+\lElse{the iteration limit $n_{\text{max}}$ is exceeded}
+\caption{Pseudo code implementing Brent's method, see Section \ref{section:brents_method}.}
+\label{algorithm:brents_method}
+\end{algorithm}
+
+%%%%%%%%%%%%% NEWTON'S METHOD %%%%%%%%%%%%%%%%%%%
+\subsubsection{Newton's Method}
+\label{section:newtons_method}
+Unlike the bisection method, Regula Falsi, and Ridders' method, Newton's method is an \emph{open} method, meaning that it does not restrict the search to a closed interval. This important feature allows the iterates to take on any value $x \in \mathbb{R}$, opening up the possibility for divergence of the solution. The upside is that the method has quadratic local convergence, in contrast to the super-linear convergence of the previously mentioned methods \citep{kincaid_ch._2002}. Newton's method does not exhibit global convergence properties. 
+
+To derive Newton's method for solving $f(x) = 0,~x\in\mathbb{R},f\colon\mathbb{R}\to\mathbb{R}$, we start with a Taylor expansion of $f(x)$ around an initial guess $x_0$:
+\begin{equation*}
+f(x) = f(x_0) + (x-x_0)f'(x_0) + \frac{(x-x_0)^2}{2!}f''(x_0) + \mathcal{O}((x-x_0)^3).
+\end{equation*}
+Evaluating this function at the root, say $x_r$, gives:
+\begin{equation*}
+f(x_r) = f(x_0) + \Delta x_0 f'(x_0) + \frac{\Delta x_0 ^2}{2!}f''(x_0) + \mathcal{O}(\Delta x_0^3) = 0,
+\end{equation*}
+where $\Delta x_0 = x-x_0$. Dropping all higher order terms in $\Delta x_0$ leads to the following approximate equation:
+\begin{equation*}
+0 = f(x_r) \approx f(x_0) + \Delta x_0 f'(x_0).
+\end{equation*}
+This relation implies that
+\begin{equation*}
+\Delta x_0 \approx -\frac{f(x_0)}{f'(x_0)} \implies x_r \approx x_0 - \frac{f(x_0)}{f'(x_0)} \coloneqq x_1.
+\end{equation*}
+for $f'(x_0) \neq 0$. Here $x_1$ is an updated guess for the root $x_r$. Iterating this equation leads to Newton's method for a univariate equation:
+\begin{equation}
+\label{eq:newtons_method}
+x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}. 
+\end{equation}
+
+Newton's method can also be derived from a geometric argument. The tangent $y(x;x_n)$ to a curve $f(x)$ at a point $x_n$ is given as
+\begin{equation*}
+y(x;x_n) = f'(x_n)(x-x_n)+f(x_n).
+\end{equation*}
+As long as $f'(x_n) \neq 0$ this tangent will cross the $x$-axis, i.e. we can find a root $x_{r_n}$ such that $y(x_{r_n};x_n) = 0$. The solution to this equation is given as
+\begin{equation*}
+x_{r_n} = x_n - \frac{f(x_n)}{f'(x_n)},
+\end{equation*}
+which when setting the new iterate $x_{n+1} = x_{r_n}$ is equivalent to Equation (\ref{eq:newtons_method}). Figure \ref{fig:newtons_method} illustrates the geometric interpretation and one step of Newton's method.
+\tikzsetnextfilename{newton_tangent}
+\begin{figure}[ht]
+\centering
+\begin{subfigure}[b]{0.49\textwidth}
+\begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=1.0\textwidth]{figures/newtons_method_convergence.pdf}};
+    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+        \node [right] at (0.3,0.3) {$f(x)$};
+        \node [right] at (0.77,0.69) {$f(x_0)$};
+        \node [right] at (0.78,0.1) {$x_0$};
+        \node [right] at (0.47,0.1) {$x_1$};
+        \node [right] at (0.24,0.1) {$x_r$};
+        \node [right] at (0.56,0.25) {$y(x)$};
+    \end{scope}
+\end{tikzpicture}
+\end{subfigure}
+\caption{One step of Newton's method on the function $f(x)$ used to approximate the root $x_r$. The new iterate $x_1$ is found by computing the root of the tangent line $y(x)$ to $f(x)$ at the initial guess $x_0$.}
+\label{fig:newtons_method}
+\end{figure}
+%%%%%%%%%%%% SECANT METHOD %%%%%%%%%%%%%%%%%%%%
+\subsubsubsection{The Secant Method}
+\label{section:secant_method}
+The \emph{secant method} is a derivative free version of Newton's method obtained by approximating $f'(x_n)$ as
+\begin{equation*}
+f'(x_n) \approx \frac{ f(x_n) - f(x_{n-1}) }{ x_n - x_{n-1}}
+\end{equation*}
+Inserted into Equation (\ref{eq:newtons_method}) this yields
+\begin{equation}
+\label{eq:secant_method}
+x_{n+1} = \ell_{\text{s}}(x_n,x_{n-1}) = x_n - f(x_n)\frac{ f(x_n) - f(x_{n-1}) }{ x_n - x_{n-1} } \eqqcolon \ell_{\text{s}}(x_n,x_{n-1}).
+\end{equation}
+Note that two initial guesses are required to start the method and that we have defined a secant method function $\ell_{\text{s}}$ for later use. The secant method has a super-linear convergence rate whereas Newton's method converges quadratically \citep{kincaid_ch._2002}.
+%%%%%%%%%%%%%% TRUST REGIONS %%%%%%%%%%%%%%%%%%
+\subsubsection{Trust Regions}
+\label{section:trust_regions}
+As mentioned in Section \ref{section:newtons_method}, Newton's method can diverge for bad initial guesses. Despite this shortcoming we would like to exploit the nice convergence properties of the method. Several modifications have been proposed, among others the \emph{Appleyard Heuristic} and the \emph{Modified Appleyard Heuristic}, see e.g. \citep{younis_modern_2011}. These methods seeks to scale the Newton update $\frac{f(x_n)}{f'(x_n)}$ to stop the method from diverging or using too many iterations to converge. Since we want to solve Equation (\ref{eq:residual_two_phase_transport}) for the saturation $S_V^{n+1}$ we already have a well defined region of allowable values, namely $S_V^{n+1} \in [0,1]$. This fact obviously follows from the physics of the problem and allows us to limit the Newton updates to this interval, keeping the iterates from diverging. This is one example of an imposed heuristic. Another approach, used in optimization, is to define a region within which the iterative technique is trusted to compute valid results, a so called \emph{trust region}. \citet{jenny_unconditionally_2009} applies this to reservoir simulation residuals by identifying regions where the Newton method converges reliably. This can also be viewed as a globalization technique for Newton's method. In order to present the update scaling choices for the trust region methods we first introduce the \emph{dimensionless flux function}.
+\input{dimensionless_water_flux_function}
+%%%%%%%%%%%%%%%% DIM.LESS FLUX FUNCTION %%%%%%%%%%%%%%%%
+\subsubsubsection{The Dimensionless Flux Function}
+\citet{wang_trust-region_2013} defines a \emph{dimensionless water flux function} by
+\begin{equation} \label{eq:water_flux_function}
+F_w = \frac{u_w}{u} = f_w + \frac{K g \lambda_o f_w(\rho_w-\rho_o) \nabla h}{u_t} + \frac{f_w K \lambda_o \nabla p_c}{u_t}.
+\end{equation}
+Here the permeability and gravity are assumed to be scalar. This equation states the water flux as a product of three terms; the viscosity terms, the buoyancy term, and the capillarity term, in that order. The idea is that this function is the main contribution to the non-linearity of the transport residual, and that this fact can be used to develop efficient update heuristics for Newton's method \citep{jenny_unconditionally_2009}. Because the transport equation has been split into two equations, see Section \ref{section:transport_solver}, we operate with a slightly modified set of flux functions, the effects of which is most apparent in the buoyancy term. The flux functions for the three regimes are shown in Figure \ref{fig:dimensionless_water_flux_function}. It is apparent from the figure that the different regimes have qualitative differences, which will be exploited in two different trust region schemes.
+\begin{algorithm}%
+ \SetKw{And}{and}
+ \SetAlgoLined
+ \KwData{Initial guess $x_0$, function $f(x)$, tolerance $\epsilon$}
+ \KwResult{A approximate root $x_r$}
+ $x_n = x_0$\;
+ \While{$f(x_n) > \epsilon$ \And $\Delta x_n > \epsilon$}{
+ 	$\Delta x_n \coloneqq \frac{f(x_n)}{f'(x_n)}$\;
+	\If{$x_n + \Delta x_n$ has crossed an inflection point $x_{\text{inflec}}$}{
+		$\Delta x_n \coloneqq x_{\text{inflec}} - x_n $\;
+	}
+	$x_n \coloneqq x_n + \Delta x_n$\;
+ }
+ $x_r \coloneqq x_n$\;
+ \Return the root $x_r$
+ \caption{Pseudo code implementing the JTR method, see Section \ref{section:numerical_methods_trust_region_jenny}.}%
+\label{algorithm:jtr}%
+\end{algorithm}%
+%%%%%%%%%%%%% JENNY ET AL. %%%%%%%%%%%%%%%%%%%
+\subsubsubsection{Jenny et al. Trust Region}
+\label{section:numerical_methods_trust_region_jenny}
+\citet{jenny_unconditionally_2009} presents an update heuristic for the Newton method in the viscosity dominated case, with the flux function shown in Figure \ref{fig:dimless_water_flux_viscosity}. This function is s-shaped and its qualitative features are governed by the fractional flow function $f_w$. A closer inspection of this function shows that the domain $[0,1]$ can be split into two subsets such that $F_w$ is concave on one and convex on the other. This is convenient, since Newton's method is known to converge regardless of starting point on convex or concave functions, see e.g. \citet{morris_computational_1983}. A smooth function making a transition from a concave to a convex region, or vice versa, must cross the so called \emph{inflection point}, here denoted $S_{\text{inflec}}$. The inflection point is exactly the point where the second derivative of the function at hand changes sign. The \emph{Jenny Trust Region} method, or the JTR, introduced in \citet{jenny_unconditionally_2009}, tries to exploit the convergence guarantee of the Newton-Raphson method on convex or concave regions by first doing a regular Newton solve and then restricting the saturation such that no update leaps between the two regions. That is, if a saturation update $\Delta S$ and the initial saturation $S$ is such that $(S-S_{\text{inflec}})(S+\Delta S - S_{\text{inflec}}) < 0$, then the new saturation is set to $S_{\text{inflec}}$. The inequality $f_w''(S)f_w''(S+\Delta S) < 0$ also holds if the inflection point has been crossed since the sign of the second derivative $f_w''(S)$ changes at $S_{\text{inflec}}$. This test is useful if the inflection point is not known \emph{a priori}. In that case \citet{jenny_unconditionally_2009} proposes to instead cut back the saturation update by some heuristic, for example setting the new saturation to $S+\frac{\Delta S}{2}$. We call this the \emph{approximate JTR scheme}. The \emph{precise JTR scheme} is summarized in Algorithm \ref{algorithm:jtr}.
+\input{newton_methods_viscosity}
+
+When solving the single cell residual in Equation (\ref{eq:residual_two_phase_transport}) the inflection point can be computed a priori when the fractional flow function $f_w$ is known. This follows since the second derivative of the residual becomes
+\begin{align} \label{eq:two_phase_transport_residual_second_derivative}
+\partial_{S_V^{n+1}}^2 R &= \partial_{S_V^{n+1}} \left[ 1 - \frac{\Delta t}{m(V)\phi_V}\partial_{S_V^{n+1}} f_w \right] \nonumber \\
+				       &= - \frac{\Delta t}{m(V)\phi_V}\partial_{S_V^{n+1}}^2 f_w,
+\end{align}
+which holds because all the terms besides the fractional flow function terms are constants (or first order) in $S_V^{n+1}$. Now, because the second derivative is zero at the inflection point $S_{\text{inflec}}$, Equation (\ref{eq:two_phase_transport_residual_second_derivative}) implies that $S_{\text{inflec}}$ can be found by solving
+\begin{equation} \label{eq:inflection_differential}
+\frac{\partial^2 f_w}{{\partial S_w}^2}(S_w) = 0,
+\end{equation}
+where $f_w = f_w(S)$. Recalling that $f_w$ was defined in Equation (\ref{eq:fractional_flow_function}) as the ratio of the water mobility $\lambda_w$ and the total mobility $\lambda$ we observe that in our case Equation (\ref{eq:inflection_differential}) is uniquely defined by the fluid model chosen at at the beginning of the simulation. Thus the inflection points are constant and equal for every cell residual throughout the simulation. With favorable definitions of the relative permeabilities $k_{rl}$ Equation (\ref{eq:inflection_differential}) can be solved algebraically. In the more general case a simple numerical root finder can be used to find $S_{\text{inflec}}$. It is important to note that these considerations are valid only for the viscosity dominated transport residual in Equation (\ref{eq:residual_two_phase_transport}). The inflection points of the gravity residual, Equation (\ref{eq:residual_two_phase_transport_gravity}), are dependent on the mobility in neighbor cells, calling for a new algebraic or numerical solution for $S_{\text{inflec}}$ before every call to the transport solver. In practice this leaves the approximate JTR procedure as the only viable update scheme for the gravity residual.
+
+Figure \ref{fig:newton_divergence} shows an example of a situation where the Newton method failed to converge and attained values outside the allowable range $[0,1]$. Figure \ref{fig:newton_jtr_convergence} shows the JTR method applied to the same problem. We observe that the method converges in a few iterations. Note especially the first step as compared to the first step in Figure \ref{fig:newton_divergence}. The pure Newton method computes and accepts a solution outside domain. When using the JTR, the algorithm detects that the solution update has crossed the inflection point and the solution is cut back to the inflection point $S_{\text{inflec}}$. The next update falls within the same concave region as the actual root, and the method converges in a few iterations.
+
+%%%%%%%%%%% WANG-TCHELEPI %%%%%%%%%%%%%%%%%%%%%
+\subsubsubsection{Wang-Tchelepi Trust Region}
+\label{section:numerical_methods_trust_region_wang}
+
+\citet{jenny_unconditionally_2009} only considered the viscosity dominated flux function, that is, all capillary and buoyant effects were removed from the flow equations. Building on the JTR method, \citet{wang_trust-region_2013}  present another trust region scheme in order to take the gravity and capillary forces into account. The strength of their new approach relative to the JTR method is based on the way the interface flux is computed. \citet{jenny_unconditionally_2009} uses a simple TPFA scheme with upwinding based on the phase velocity. The resulting residual is smooth and monotonic, with non-linearities caused by the fractional flow function $f_w$. In contrast, \citet{wang_trust-region_2013} includes the buoyancy term, as in Equation (\ref{eq:water_flux_function}), which can cause the water flux function to grow larger than one, i.e. $\exists S : F_w(S) > 1$. When this happens the flow of water is larger than the hydrocarbon pore volume and a back flow of the other phase, in our case oil, is implied by mass conservation. This is called \emph{counter current flow}. A phase based upwind method is then employed to evaluate these fluxes on the cell interfaces in a conservative manner. In practice this means that when the water flux crosses the \emph{unit flux point}, denoted $S_{F_w=1}$, the evaluation of the phase mobilities in the gravity flux term suddenly switches to the other cell, possibly causing a discontinuity in the resulting residual function. The residual is convex or concave on both sides of $S_{F_w=1}$, but the discontinuity can cause convergence problems for the ordinary Newton updates. To amend this, \citet{wang_trust-region_2013} presents a scheme where the unit flux point $S_{F_w=1}$ is handled in the same manner as the inflection points was by the JTR method; any solution updates crossing the inflection points or unit flux points are chopped back. This restricts the Newton updates to the regions where they are trusted to converge. Algorithm \ref{algorithm:wtr} presents the pseudo code for the \emph{Wang-Tchelepi trust region}, or WTR, method.
+\begin{algorithm}[ht]%
+ \SetAlgoLined
+ \SetKw{And}{and}
+ \KwData{$x_0$,$x_{\text{inflec}}$,$x_{f=1}$,$f(x)$,$\epsilon$,$n_{\text{max}}$}
+ \KwResult{$x_n$}
+ \CommentSty{Initial guess}\;
+ $x_n = x_0$\;
+ \While{not converged \And iterations less than $n_{\text{max}}$}{
+	$x_{n+1} \coloneqq x_n - \frac{f(x_n)}{f'(x_n)}$\;
+	\lIf{$x_{n+1} > 1$}{$x_{n+1} \coloneqq 1$}
+	\lElseIf{$x_{n+1} < 0$}{$x_{n+1} \coloneqq 0$}
+	\If{$x_{n+1},x_n$ has crossed the unit flux point point $x_{f=1}$}{
+		$x_{n+1} \coloneqq x_{f=1}$\;
+	}
+	\If{$x_{n+1},x_n$ has crossed an inflection point $x_{\text{inflec}}$}{
+		$x_{n+1} \coloneqq x_{\text{inflec}}$\;
+	}
+	$x_n \coloneqq x_{n+1}$\;
+ }
+ \Return the root approximation $x_n$
+ \caption{Pseudo code implementing the WTR method in a Newton iteration, see Section \ref{section:numerical_methods_trust_region_wang}.}%
+\label{algorithm:wtr}%
+\end{algorithm}%
+
+The preceding discussion indicates that the WTR method will not present any advantage over the simpler JTR when used to solve the residuals in Equations (\ref{eq:residual_two_phase_transport}) and (\ref{eq:residual_two_phase_transport_gravity}). This is caused by the gravity splitting scheme described in Section \ref{section:transport_solver} and the way the phase based upwind method is applied. Specifically, the upwind method used by \citet{wang_trust-region_2013} evaluates the dimensionless fractional flow function from Equation (\ref{eq:water_flux_function}) as a function of the updated cell saturation $S_V^{n+1}$. Thus, when the unit flux point is crossed the upwind method makes the interface flux a function of the oil mobility $\lambda_o$ in the neighbor cell, producing the discontinuity at $S_{F_w=1}$ in the residual as shown in Figure \ref{fig:wang_tchelepi_residual}. In contrast, the numerical method presented in Section \ref{section:transport_solver} evaluates the upwind method based on a flux field generated in the pressure solver. During the transport step this flux field is constant with respect to $S_V^{n+1}$, rendering the unit flux point check in the WTR method superfluous.
+\tikzsetnextfilename{wang_tchelepi_residual}
+\input{wang_tchelepi_residual}
+
+%\begin{figure}[ht]
+%\begin{subfigure} [b] {0.49\textwidth}
+%\centering
+%\tikzsetnextfilename{newton_jtr_divergence}
+%\begin{tikzpicture} [scale=0.8]
+%	\begin{axis}[
+%		xlabel={$s$},
+%		ylabel={$R(s)$},
+%		xmin = 0,
+%		xmax = 1,
+%		domain = 0:1,
+%		samples = 50,
+%		grid = major,
+%		clip mode = individual
+%		]
+%	\addplot [mark=none, thick] {x - 0.8 + 20*(1-x)^2*x^2/(x^2+10*(1-x)^2)};
+%	\addplot[mark=*,style=dashed] coordinates {
+%		(0.8,0.49231)
+%		(1,0.2)
+%		(0.8,0.49231)
+%		(1,0.2)
+%		(0.8,0.49231)
+%		(1,0.2)
+%	};
+%
+%	\node [right] at (axis cs:0.8,0.492307692307692) {$S_0$};
+%	\node [right] at (axis cs:0.47219467,0.085083605) {$S_{\text{inflec}}$};
+%	\node [left] at (axis cs:0.867499351501465,0.352207893209490) {$S_{\text{inflec}}$};
+%	
+%	\filldraw [red] (axis cs:0.47219467,0.085083605) circle (2pt);
+%	\filldraw [red] (axis cs:0.867499351501465,0.352207893209490) circle (2pt);
+%	
+%	\end{axis}
+%\end{tikzpicture}
+%\caption{JTR Newton}
+%\label{fig:newton_jtr_divergence}
+%\end{subfigure}
+%\begin{subfigure} [b] {0.49\textwidth}
+%\centering
+%\tikzsetnextfilename{newton_wtr_convergence}
+%\begin{tikzpicture} [scale=0.8]
+%	\begin{axis}[
+%		xlabel={$s$},
+%		ylabel={$R(s)$},
+%		xmin = 0,
+%		xmax = 1,
+%		domain = 0:1,
+%		samples = 50,
+%		grid = major,
+%		clip mode = individual
+%		]
+%	\addplot [mark=none, thick] {x - 0.8 + 20*(1-x)^2*x^2/(x^2+10*(1-x)^2)};
+%	\addplot[mark=*,style=dashed] coordinates {
+%		(0.8,0.49231)
+%		(0.8675,0.35221)
+%		(1,0.2)
+%		(0.8675,0.35221)
+%		(0.47219,0.085084)
+%		(0.43821,0.00022798)
+%		(0.43811,4.6479e-09)
+%	};
+%	\node [right] at (axis cs:0.8,0.492307692307692) {$S_0$};
+%	\node [right] at (axis cs:0.47219467,0.085083605) {$S_{\text{inflec}}$};
+%	\node [right] at (axis cs:0.867499351501465,0.352207893209490) {$S_{\text{inflec}}$};
+%	
+%	\filldraw [red] (axis cs:0.47219467,0.085083605) circle (2pt);
+%	\filldraw [red] (axis cs:0.867499351501465,0.352207893209490) circle (2pt);
+%	
+%	\end{axis}
+%\end{tikzpicture}
+%\caption{WTR Newton}
+%\label{fig:newton_wtr_convergence}
+%\end{subfigure}
+%\caption{Newton iterations using the JTR and WTR updates on the residual in Equation (\ref{eq:residual_two_phase_transport_gravity}) with $\Delta t = \unit[10000]{s}$, $\phi_V = 0.5$, $m(V) = \unit[1]{m^3}$, $F_V^g = \unit[1]{m^3/s}$, $\frac{\mu_w}{\mu_o} = 10$ and using initial guess $S_0 = 0.8$. $S_{\text{inflec}}$ is the inflection point of the residual. Note that the WTR method converges unlike the JTR procedure which jumps between two iterates.} \label{fig:newton_methods_buoyancy}
+%\end{figure}

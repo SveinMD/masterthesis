@@ -1,0 +1,17 @@
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+            width=0.97\textwidth,
+            height=0.26\textheight,
+            xlabel={$S_V^{n+1}$},
+            ylabel={$R(S_V^{n+1})$},
+            grid=major,
+            ]
+        \addplot [black] table[mark=none,col sep=comma, trim cells=true,x=s, y=Rs] {datafiles/wang_tchelepi_residual.data};
+        \addplot [black, mark = *, nodes near coords=$S_{F_w=1}$,every node near coord/.style={anchor=300}] coordinates{(0.4,0.98)};
+    \end{axis}
+\end{tikzpicture}%
+\caption{A transport equation residual with a discontinuity at $S_{F_w=1}$ caused by the upwind method as described in \citet{wang_trust-region_2013}.}
+\label{fig:wang_tchelepi_residual}
+\end{figure}

@@ -1,0 +1,74 @@
+\begin{figure}[ht]
+\tikzsetnextfilename{water_flux_viscosity}
+\begin{subfigure}[b]{0.32\textwidth}
+	\centering
+    	\begin{tikzpicture} [scale=0.5]
+	\begin{axis}[
+		xlabel={$S$},
+		ylabel={$F_w(S)$},
+		xmin = 0,
+		xmax = 1,
+		ymin = 0,
+		ymax = 1,
+		domain = 0:1,
+		samples = 100,
+		grid = major
+		]
+	\addplot [mark=none, thick] {x^2/(x^2+0.1*(1-x)^2)};
+	\addplot [black, mark = *, nodes near coords=$S_{\text{inflec}}$,every node near coord/.style={anchor=180}] coordinates {( 0.1859, 0.3427)};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Viscosity} \label{fig:dimless_water_flux_viscosity}
+\end{subfigure}
+\tikzsetnextfilename{water_flux_buoyancy}
+\begin{subfigure}[b]{0.32\textwidth}
+	\centering
+	\begin{tikzpicture} [scale=0.5]
+	\begin{axis}[
+		xlabel={$S$},
+		ylabel={$F_w(S)$},
+		xmin = 0,
+		xmax = 1,
+		ymin = 0,
+		ymax = 1.2,
+		domain = 0:1,
+		samples = 100,
+		grid = major
+		]
+	%\addplot [mark=none, thick] {(1-x)^2*x^2/(x^2+(1-x)^2) + (1-x)^2*x^2/(x^2+(1-x)^2)};
+	%\addplot [black, mark = *, nodes near coords=$S_{\text{inflec}}$,every node near coord/.style={anchor=180}] coordinates {( 0.1325,0.1424)};
+	%\addplot [black, mark = *, nodes near coords=$S_{\text{inflec}}$,every node near coord/.style={anchor=180}] coordinates {( 0.5278,0.2064)};
+	%\addplot [black, mark = *, nodes near coords=$S_{\text{s}}$,every node near coord/.style={anchor=200}] coordinates {( 0.3170,0.3186)};
+	\addplot [mark=none, thick] {x^2/(x^2+0.1*(1-x)^2) + (1-x)^2*x^2/(x^2+0.1*(1-x)^2)};
+	\addplot [black, mark = *, nodes near coords=$S_{\text{inflec}}$,every node near coord/.style={anchor=180}] coordinates {( 0.160446,0.456081)};
+	\addplot [black, mark = *, nodes near coords=$S_{\text{inflec}}$,every node near coord/.style={anchor=200}] coordinates {( 0.667646,1.083607)};
+	\addplot [black, mark = *, nodes near coords=$S_{\text{s}}$,every node near coord/.style={anchor=90}] coordinates {(0.484458,1.137022)};
+	\addplot [black, mark = *, nodes near coords=$S_{\text{f=1}}$,every node near coord/.style={anchor=330}] coordinates {(0.315,1.0)};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Buoyancy} \label{fig:dimless_water_flux_buoyancy}
+\end{subfigure}
+\tikzsetnextfilename{water_flux_capillarity}
+\begin{subfigure}[b]{0.32\textwidth}
+	\centering
+	\begin{tikzpicture} [scale=0.5]
+	\begin{axis}[
+		xlabel={$S$},
+		ylabel={$F_w(S)$},
+		xmin = 0,
+		xmax = 1,
+		ymin = 0,
+		ymax = 1.5,
+		domain = 0:1,
+		samples = 100,
+		grid = major
+		]
+	\addplot [mark=none, thick] {1.5*x^2/(x^2+0.1*(1-x)^2)};
+	\addplot [black, mark = *, nodes near coords=$S_{\text{inflec}}$,every node near coord/.style={anchor=180}] coordinates {( 0.1859,0.5141)};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Capillarity} \label{fig:dimless_water_flux_capillarity}
+\end{subfigure}
+\caption{Water flux function $F_w$ dominated by viscosity, buoyancy and capillarity. $S_{\text{inflec}}$ denotes inflection points and $S_{\text{s}}$ sonic points.}%
+\label{fig:dimensionless_water_flux_function}%
+\end{figure}%

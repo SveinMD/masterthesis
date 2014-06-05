@@ -1,0 +1,245 @@
+\documentclass[a4paper,12pt,twoside,openright]{report}
+
+%%%%%%%%%%% PACKAGES %%%%%%%%%%%%%%
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[toc,page]{appendix}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{pgfplots}
+\usepackage{subcaption}
+\usepackage{units}
+\usepackage{verbatim}
+
+\numberwithin{equation}{section}
+
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{backgrounds}
+\usepgfplotslibrary{external} 
+\tikzexternalize[prefix=tikz/]
+
+\usepackage[textwidth=3.8cm]{todonotes}
+%\usepackage[margin=1.5in]{geometry}
+%\usepackage{fullpage}
+%\usepackage{color}
+
+%%%%%%%%%%% DECLARATIONS %%%%%%%%%%%%%%%%%%
+\pgfdeclarelayer{mybackground}
+\pgfdeclarelayer{mybackground2}
+\pgfsetlayers{background,main,mybackground,mybackground2} 
+\pgfplotsset{compat=1.10}
+
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=7em, text centered, rounded corners, minimum height=4em]
+ \tikzstyle{block_low} = [rectangle, draw, fill=blue!20, 
+    text width=6em, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclareMathOperator{\sgn}{sgn}
+
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\makeatletter
+\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+\makeatother
+
+\renewcommand{\exp}[1]{\mathrm{e}^{#1}}
+
+\newcommand{\differential}[1]{\ \text{d}#1}
+\newcommand{\todoinline}[1]{\todo[inline]{#1}}
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}}
+\newcommand{\opm}{\text{OPM }}
+\newcommand{\code}[1]{\mbox{\texttt{#1}}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\setcitestyle{square,semicolon}
+\setlength{\headheight}{15pt} % For the fancyhdr package
+
+%\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\leftmark}
+\fancyhead[RE,LO]{\thepage}
+
+\fancypagestyle{intro}
+{
+	\fancyhead[LE,RO]{}
+	\fancyhead[RE,LO]{\thepage}
+}
+\fancypagestyle{chapterpage}
+{
+	\fancyhead[RE,LO]{\thepage}
+}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=C++,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+%%%%%%%%%%%%%%% DOCUMENT %%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%% TITLE %%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+\centering % Center all text
+\vspace*{\baselineskip} % White space at the top of the page
+
+\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt} % Thick horizontal line
+\rule{\textwidth}{0.4pt}\\[\baselineskip] % Thin horizontal line
+
+{\LARGE OPTIMAL NON-LINEAR SOLVERS \\FOR \\[0.3\baselineskip] FLOW IN POROUS MEDIA}\\[0.2\baselineskip] % Title
+\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt} % Thin horizontal line
+\rule{\textwidth}{1.6pt}\\[\baselineskip] % Thick horizontal line
+
+\scshape % Small caps
+Applications in Petroleum Reservoir Simulation \\ % Tagline(s) or further description
+[\baselineskip] % Tagline(s) or further description
+TMA4550 Master Project, Spring 2014\par % Location and year
+
+\vspace*{2\baselineskip} % Whitespace between location/year and editors
+
+By \\[\baselineskip]
+{\Large SVEIN MORTEN DREJER\par} % Editor list
+{\itshape Department of Mathematical Sciences \\
+NTNU, Trondheim\par} % Editor affiliation
+
+\vfill % Whitespace between editor names and publisher logo
+
+\begin{figure}[h] %[h]=here [t]=top [b]=bottom [p]=separat side
+\begin{center}
+\includegraphics[width=4.5cm]{figures/ntnuLogo.png}  
+\end{center}
+\end{figure}
+\end{titlepage}
+
+\pagenumbering{gobble}
+\pagestyle{plain}
+
+%%% TODOLIST %%%
+\listoftodos
+
+\newpage
+%%%%% BLANK PAGE %%%%%
+%\null
+%\newpage
+%%%%%%%%%%%%%% ABSTRACT %%%%%%%%%%%%%%%%%%
+\begin{abstract}
+\todoinline{Write the abstract!}
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+\addcontentsline{toc}{chapter}{Abstract}
+\end{abstract}
+\newpage
+%%%%% BLANK PAGE %%%%%
+\null
+\newpage
+%%%%%%%%%%%%%% SAMMENDRAG %%%%%%%%%%%%%%%%%%
+\renewcommand{\abstractname}{Sammendrag}
+\begin{abstract}
+\todoinline{Skriv sammendraget!}
+
+\pagenumbering{roman}
+\setcounter{page}{3}
+\addcontentsline{toc}{chapter}{Sammendrag}
+\end{abstract}
+\newpage
+%%%%%%%%%%%%% TABLE OF CONTENTS %%%%%%%%%%%%%%%%%%
+\tableofcontents
+\newpage
+%%%%%%%%%%%%% PREFACE %%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\chapter*{Preface}
+\thispagestyle{intro}
+\addcontentsline{toc}{chapter}{Preface}
+
+This report presents the work done as a the final obligatory thesis for my masters degree in Industrial Mathematics at the Norwegian University of Science and Technology (NTNU), course code TMA4910. The work was started in January 2014 and was handed in on the 12th of June 2014 and should represent 100\% of this semesters total work load. The project has been done in collaboration with Chief Scientist Knut-Andreas Lie at the Department of Applied Mathematics at SINTEF in Oslo and professor Helge Holden at the Department of Mathematics at NTNU, Trondheim.
+
+\vspace*{4\baselineskip}
+
+Svein Morten Drejer
+
+Oslo/Trondheim
+
+June 12th, 2014
+
+\newpage
+%%%%%%%%%%%%% INTRODUCTION %%%%%%%%%%%%%%%%%%
+\include{introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{mathematical_model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{numerical_methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{numerical_results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{Discussion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{appendices}
+\include{appendixA}
+\end{appendices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{plainnat}
+\bibliography{master_thesis.bib}
+
+\end{document}

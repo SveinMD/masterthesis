@@ -1,0 +1,78 @@
+\begin{figure} [ht]
+\centering
+\begin{tikzpicture}[scale=0.6,every node/.style={draw,circle,fill=black,inner sep=0.05cm}]
+\node [draw=none,fill=none] at (8.8,10.2) (control_colume) {$V_i$};
+\node [draw=none,fill=none] at (3,10) (domain) {$\Omega$};
+
+%%% MESH %%%
+\node at (6.5,12) (i1) {};
+\node at (7,10) (i2) {};
+\node at (5,8) (i3) {};
+\node at (3,6.9) (i4) {};
+
+\node at (6,14.08) (o1) {};
+\node at (4.07,13) (o2) {};
+\node at (4.2,11) (o3) {};
+\node at (4,9.5) (o4) {};
+\node at (2.8,7.7) (o5) {};
+\node at (2,7,) (o6) {};
+\node at (2,6) (o7) {};
+\node at (4,6.2) (o8) {};
+\node at (8,7.3) (o9) {};
+\node at (10.1,9) (o10) {};
+\node at (9.6,11.6) (o11) {};
+\node at (8,13.36) (o12) {};
+
+\draw [thick] (i1) -- (i2);
+\draw [thick] (i2) -- (i3);
+\draw [thick] (i3) -- (i4);
+
+\draw [thick] (i1) -- (o1);
+\draw [thick] (i1) -- (o2);
+\draw [thick] (i1) -- (o3);
+\draw [thick] (i1) -- (o11);
+\draw [thick] (i1) -- (o12);
+
+\draw [thick] (i2) -- (o3);
+\draw [thick] (i2) -- (o3);
+\draw [thick] (i2) -- (o4);
+\draw [thick] (i2) -- (o9);
+\draw [thick] (i2) -- (o10);
+\draw [thick] (i2) -- (o11);
+
+\draw [thick] (i3) -- (o4);
+\draw [thick] (i3) -- (o5);
+\draw [thick] (i3) -- (o8);
+\draw [thick] (i3) -- (o9);
+
+\draw [thick] (i4) -- (o5);
+\draw [thick] (i4) -- (o6);
+\draw [thick] (i4) -- (o7);
+\draw [thick] (i4) -- (o8);
+
+\draw [thick] (o1) -- (o2);
+\draw [thick] (o2) -- (o3);
+\draw [thick] (o3) -- (o4);
+\draw [thick] (o4) -- (o5);
+\draw [thick] (o5) -- (o6);
+\draw [thick] (o6) -- (o7);
+\draw [thick] (o7) -- (o8);
+\draw [thick] (o8) -- (o9);
+\draw [thick] (o9) -- (o10);
+\draw [thick] (o10) -- (o11);
+\draw [thick] (o11) -- (o12);
+\draw [thick] (o12) -- (o1);
+
+%%% DOMAIN %%%
+\begin{scope} % Top domain
+\draw[ultra thick]
+(2,6) 
+to [out=0,in=300] (10,11)
+to [out=120,in=10] (5,14)
+to [out=190,in=80] (4,10)
+to [out=260,in=180] (2,6);
+\end{scope}
+\end{tikzpicture}
+\caption{The domain $\Omega$, see Figure \ref{fig:spatial_temporal_domain}, with a grid $\mathcal{T}$ consisting of triangular control volumes $V_i$.}
+\label{fig:spatial_domain_mesh} 
+\end{figure}

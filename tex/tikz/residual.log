@@ -1,0 +1,1797 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.5.3)  3 MAY 2014 18:21
+entering extended mode
+ \write18 enabled.
+ %&-line parsing enabled.
+**\def\tikzexternalrealjob{main}\input{main}
+(./main.tex (/usr/local/texlive/2013/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/units/units.sty
+Package: units 1998/08/04 v0.9b Typesetting units
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/units/nicefrac.sty
+Package: nicefrac 1998/08/04 v0.9b Nice fractions
+\L@UnitsRaiseDisplaystyle=\skip43
+\L@UnitsRaiseTextstyle=\skip44
+\L@UnitsRaiseScriptstyle=\skip45
+)) (/usr/local/texlive/2013/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2004/08/06 v2.20
+\thm@style=\toks14
+\thm@bodyfont=\toks15
+\thm@headfont=\toks16
+\thm@notefont=\toks17
+\thm@headpunct=\toks18
+\thm@preskip=\skip46
+\thm@postskip=\skip47
+\thm@headsep=\skip48
+\dth@everypar=\toks19
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/mh/mathtools.sty
+Package: mathtools 2013/02/12 v1.13 mathematical typesetting tools
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks20
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count88
+\calc@Bcount=\count89
+\calc@Adimen=\dimen103
+\calc@Bdimen=\dimen104
+\calc@Askip=\skip49
+\calc@Bskip=\skip50
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count90
+\calc@Cskip=\skip51
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/mh/mhsetup.sty
+Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip52
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks21
+\ex@=\dimen105
+)) (/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen106
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count91
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count92
+\leftroot@=\count93
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count94
+\DOTSCASE@=\count95
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen107
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count96
+\c@MaxMatrixCols=\count97
+\dotsspace@=\muskip10
+\c@parentequation=\count98
+\dspbrk@lvl=\count99
+\tag@help=\toks22
+\row@=\count100
+\column@=\count101
+\maxfields@=\count102
+\andhelp@=\toks23
+\eqnshift@=\dimen108
+\alignsep@=\dimen109
+\tagshift@=\dimen110
+\tagwidth@=\dimen111
+\totwidth@=\dimen112
+\lineht@=\dimen113
+\@envbody=\toks24
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks25
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count103
+\l_MT_multwidth_dim=\dimen114
+\origjot=\skip55
+\l_MT_shortvdotswithinadjustabove_dim=\dimen115
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen116
+\l_MT_above_intertext_sep=\dimen117
+\l_MT_below_intertext_sep=\dimen118
+\l_MT_above_shortintertext_sep=\dimen119
+\l_MT_below_shortintertext_sep=\dimen120
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/usr/local/texlive/2013/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen121
+\captionmargin@=\dimen122
+\captionwidth=\dimen123
+\caption@tempdima=\dimen124
+\caption@indent=\dimen125
+\caption@parindent=\dimen126
+\caption@hangindent=\dimen127
+)
+\c@ContinuedFloat=\count104
+)
+\c@subfigure=\count105
+\c@subtable=\count106
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+) (/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count107
+)) (/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+\Gin@req@height=\dimen128
+\Gin@req@width=\dimen129
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks26
+\verbatim@line=\toks27
+\verbatim@in@stream=\read1
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/pgfplots/pgfplots.sty (/usr/loc
+al/texlive/2013/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2013/03/17 v1.8 Data Visualization (1.8-3-gaf58a29)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/
+local/texlive/2013/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/local/texl
+ive/2013/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.te
+x
+\pgfutil@everybye=\toks28
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box28
+(/usr/local/texlive/2013/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+)) (/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.te
+x
+Package: pgfrcs 2010/10/25 v2.10 (rcs-revision 1.24)
+))
+Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/usr/
+local/texlive/2013/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks29
+\pgfkeys@temptoks=\toks30
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.c
+ode.tex
+\pgfkeys@tmptoks=\toks31
+))
+\pgf@x=\dimen130
+\pgf@y=\dimen131
+\pgf@xa=\dimen132
+\pgf@ya=\dimen133
+\pgf@xb=\dimen134
+\pgf@yb=\dimen135
+\pgf@xc=\dimen136
+\pgf@yc=\dimen137
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count108
+\c@pgf@countb=\count109
+\c@pgf@countc=\count110
+\c@pgf@countd=\count111
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Package pgfsys Info: Driver file for pgf: pgfsys-pdftex.def on input line 900.
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.d
+ef
+File: pgfsys-pdftex.def 2009/05/22  (rcs-revision 1.26)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-p
+df.def
+File: pgfsys-common-pdf.def 2008/05/19  (rcs-revision 1.10)
+)))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.
+code.tex
+File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
+\pgfsyssoftpath@smallbuffer@items=\count112
+\pgfsyssoftpath@bigbuffer@items=\count113
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.
+code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+)) (/usr/local/texlive/2013/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/usr
+/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (/usr/
+local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen138
+\pgfmath@count=\count114
+\pgfmath@box=\box29
+\pgfmath@toks=\toks32
+\pgfmath@stack@operand=\toks33
+\pgfmath@stack@operation=\toks34
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.
+tex
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic
+.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigo
+nometric.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.rando
+m.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.compa
+rison.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.
+code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round
+.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.
+code.tex))) (/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/math/pgfmathflo
+at.code.tex
+\c@pgfmathroundto@lastzeros=\count115
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.co
+de.tex
+File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
+\pgf@picminx=\dimen139
+\pgf@picmaxx=\dimen140
+\pgf@picminy=\dimen141
+\pgf@picmaxy=\dimen142
+\pgf@pathminx=\dimen143
+\pgf@pathmaxx=\dimen144
+\pgf@pathminy=\dimen145
+\pgf@pathmaxy=\dimen146
+\pgf@xx=\dimen147
+\pgf@xy=\dimen148
+\pgf@yx=\dimen149
+\pgf@yy=\dimen150
+\pgf@zx=\dimen151
+\pgf@zy=\dimen152
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconst
+ruct.code.tex
+File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
+\pgf@path@lastx=\dimen153
+\pgf@path@lasty=\dimen154
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage
+.code.tex
+File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
+\pgf@shorten@end@additional=\dimen155
+\pgf@shorten@start@additional=\dimen156
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.co
+de.tex
+File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
+\pgfpic=\box30
+\pgf@hbox=\box31
+\pgf@layerbox@main=\box32
+\pgf@picture@serial@count=\count116
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicst
+ate.code.tex
+File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
+\pgflinewidth=\dimen157
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransform
+ations.code.tex
+File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
+\pgf@pt@x=\dimen158
+\pgf@pt@y=\dimen159
+\pgf@pt@temp=\dimen160
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.cod
+e.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.c
+ode.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathproce
+ssing.code.tex
+File: pgfcorepathprocessing.code.tex 2008/10/09  (rcs-revision 1.8)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.co
+de.tex
+File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.cod
+e.tex
+File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
+\pgf@max=\dimen161
+\pgf@sys@shading@range@num=\count117
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.cod
+e.tex
+File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.
+code.tex
+File: pgfcoreexternal.code.tex 2010/09/01  (rcs-revision 1.17)
+\pgfexternal@startupbox=\box33
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.co
+de.tex
+File: pgfcorelayers.code.tex 2010/08/27  (rcs-revision 1.2)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretranspare
+ncy.code.tex
+File: pgfcoretransparency.code.tex 2008/01/17  (rcs-revision 1.2)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.
+code.tex
+File: pgfcorepatterns.code.tex 2009/07/02  (rcs-revision 1.3)
+)))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.cod
+e.tex
+File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
+\pgfnodeparttextbox=\box34
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.
+tex
+File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version
+-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen162
+\pgf@nodesepend=\dimen163
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version
+-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
+)) (/usr/local/texlive/2013/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/usr
+/local/texlive/2013/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/usr/local/
+texlive/2013/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/usr/loca
+l/texlive/2013/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
+\pgffor@iter=\dimen164
+\pgffor@skip=\dimen165
+\pgffor@stack=\toks35
+\pgffor@toks=\toks36
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.cod
+e.tex
+Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothan
+dlers.code.tex
+File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
+\pgf@plot@mark@count=\count118
+\pgfplotmarksize=\dimen166
+)
+\tikz@lastx=\dimen167
+\tikz@lasty=\dimen168
+\tikz@lastxsaved=\dimen169
+\tikz@lastysaved=\dimen170
+\tikzleveldistance=\dimen171
+\tikzsiblingdistance=\dimen172
+\tikz@figbox=\box35
+\tikz@tempbox=\box36
+\tikztreelevel=\count119
+\tikznumberofchildren=\count120
+\tikznumberofcurrentchild=\count121
+\tikz@fig@count=\count122
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.cod
+e.tex
+File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
+\pgfmatrixcurrentrow=\count123
+\pgfmatrixcurrentcolumn=\count124
+\pgf@matrix@numberofcolumns=\count125
+)
+\tikz@expandcount=\count126
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
+))) (/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex 
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
+\t@pgfplots@toka=\toks37
+\t@pgfplots@tokb=\toks38
+\t@pgfplots@tokc=\toks39
+\pgfplots@tmpa=\dimen173
+\c@pgfplots@coordindex=\count127
+\c@pgfplots@scanlineindex=\count128
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric
+.code.tex))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.c
+ode.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_loader.code.tex
+Package pgfplots: loading complementary code for your PGF version...
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_misc.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks40
+\pgfkeys@temptoks=\toks41
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks42
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count129
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2012/09/11 v2.10 (rcs-revision 1.17)
+\pgf@plot@mark@count=\count130
+\pgfplotmarksize=\dimen174
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_pgflibraryfpu.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2012/11/30  (rcs-revision 1.38)
+\pgfpic=\box37
+\pgf@hbox=\box38
+\pgf@layerbox@main=\box39
+\pgf@picture@serial@count=\count131
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2012/11/07  (rcs-revision 1.5)
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.code
+.tex
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
+liststructure.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
+liststructureext.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
+array.code.tex
+\c@pgfplotsarray@tmp=\count132
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
+matrix.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstable
+shared.code.tex
+\c@pgfplotstable@counta=\count133
+\t@pgfplotstable@a=\toks43
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
+deque.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.co
+de.tex
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.da
+ta.code.tex))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.verb
+.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplot
+s.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count134
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots
+.surfshading.pgfsys-pdftex.def)))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.
+code.tex
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.cod
+e.tex))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.c
+ode.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.c
+ode.tex
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandle
+r.code.tex))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.
+tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessin
+g.code.tex)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.te
+x)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarydecorations.code.tex
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/modules/pgfmoduledecoration
+s.code.tex
+\pgfdecoratedcompleteddistance=\dimen175
+\pgfdecoratedremainingdistance=\dimen176
+\pgfdecoratedinputsegmentcompleteddistance=\dimen177
+\pgfdecoratedinputsegmentremainingdistance=\dimen178
+\pgf@decorate@distancetomove=\dimen179
+\pgf@decorate@repeatstate=\count135
+\pgfdecorationsegmentamplitude=\dimen180
+\pgfdecorationsegmentlength=\dimen181
+)
+\tikz@lib@dec@box=\box40
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarydecorations.pathmorphing.code.tex
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/decorations/pgfli
+brarydecorations.pathmorphing.code.tex))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarydecorations.pathreplacing.code.tex
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/decorations/pgfli
+brarydecorations.pathreplacing.code.tex))
+\pgfplots@numplots=\count136
+\pgfplots@xmin@reg=\dimen182
+\pgfplots@xmax@reg=\dimen183
+\pgfplots@ymin@reg=\dimen184
+\pgfplots@ymax@reg=\dimen185
+\pgfplots@zmin@reg=\dimen186
+\pgfplots@zmax@reg=\dimen187
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmar
+ks.code.tex
+File: pgflibraryplotmarks.code.tex 2010/10/15 v2.10 (rcs-revision 1.12)
+)))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.
+code.tex
+File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
+\arrowsize=\dimen188
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryshapes.code.tex
+File: tikzlibraryshapes.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibrary
+shapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2008/06/26 v2.10 (rcs-revision 1.1)
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryshapes.misc.code.tex
+File: tikzlibraryshapes.misc.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibrary
+shapes.misc.code.tex
+File: pgflibraryshapes.misc.code.tex 2008/10/07 v2.10 (rcs-revision 1.3)
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryshapes.symbols.code.tex
+File: tikzlibraryshapes.symbols.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibrary
+shapes.symbols.code.tex
+File: pgflibraryshapes.symbols.code.tex 2009/10/27 v2.10 (rcs-revision 1.3)
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryshapes.arrows.code.tex
+File: tikzlibraryshapes.arrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibrary
+shapes.arrows.code.tex
+File: pgflibraryshapes.arrows.code.tex 2008/06/26 v2.10 (rcs-revision 1.1)
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryshapes.callouts.code.tex
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibrary
+shapes.callouts.code.tex))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryshapes.multipart.code.tex
+File: tikzlibraryshapes.multipart.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibrary
+shapes.multipart.code.tex
+File: pgflibraryshapes.multipart.code.tex 2010/01/07 v2.10 (rcs-revision 1.2)
+\pgfnodepartlowerbox=\box41
+\pgfnodeparttwobox=\box42
+\pgfnodepartthreebox=\box43
+\pgfnodepartfourbox=\box44
+\pgfnodeparttwentybox=\box45
+\pgfnodepartnineteenbox=\box46
+\pgfnodeparteighteenbox=\box47
+\pgfnodepartseventeenbox=\box48
+\pgfnodepartsixteenbox=\box49
+\pgfnodepartfifteenbox=\box50
+\pgfnodepartfourteenbox=\box51
+\pgfnodepartthirteenbox=\box52
+\pgfnodeparttwelvebox=\box53
+\pgfnodepartelevenbox=\box54
+\pgfnodeparttenbox=\box55
+\pgfnodepartninebox=\box56
+\pgfnodeparteightbox=\box57
+\pgfnodepartsevenbox=\box58
+\pgfnodepartsixbox=\box59
+\pgfnodepartfivebox=\box60
+))) (/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2012/05/28 v1.2 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+) (/usr/local/texlive/2013/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+)
+\@linkdim=\dimen189
+\Hy@linkcounter=\count137
+\Hy@pagecounter=\count138
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count139
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4688.
+\c@Hy@tempcnt=\count140
+(/usr/local/texlive/2013/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen190
+\Fld@menulength=\count141
+\Field@Width=\dimen191
+\Fld@charsize=\dimen192
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring OFF on input line 6315.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
+\Hy@abspage=\count142
+\c@Item=\count143
+\c@Hfootnote=\count144
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
+\Fld@listcount=\count145
+\c@bookmark@seq@number=\count146
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip56
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip57
+\bibsep=\skip58
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count147
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+Package: algorithm2e 2013/01/06 v5.00 algorithms environments
+\c@AlgoLine=\count148
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2013/03/29 ver 4.1
+)
+********************************************************
+Package `algorithm2e' Release 5.0 -- january 06 2013 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (cfiorio@um2.fr)
+********************************************************
+\skiptotal=\skip59
+\skiplinenumber=\skip60
+\skiprule=\skip61
+\skiphlne=\skip62
+\skiptext=\skip63
+\skiplength=\skip64
+\algomargin=\skip65
+\skipalgocfslide=\skip66
+\algowidth=\dimen193
+\inoutsize=\dimen194
+\inoutindent=\dimen195
+\interspacetitleruled=\dimen196
+\interspacealgoruled=\dimen197
+\interspacetitleboxruled=\dimen198
+\algocf@inoutbox=\box61
+\algocf@inputbox=\box62
+\AlCapSkip=\skip67
+\AlCapHSkip=\skip68
+\algoskipindent=\skip69
+\algocf@nlbox=\box63
+\algocf@hangingbox=\box64
+\algocf@untilbox=\box65
+\algocf@skipuntil=\skip70
+\algocf@capbox=\box66
+\algoheightruledefault=\skip71
+\algoheightrule=\skip72
+\algotitleheightruledefault=\skip73
+\algotitleheightrule=\skip74
+\c@algocfline=\count149
+\c@algocfproc=\count150
+\c@algocf=\count151
+\algocf@algoframe=\box67
+\algocf@algobox=\box68
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplo
+ts.external.code.tex
+Package pgfplots external lib: loading complementary code for your PGF version.
+..
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2012/06/18  (rcs-revision 1.19)
+\pgfexternal@startupbox=\box69
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_tikzlibraryexternal.code.tex
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_tikzexternalshared.code.tex)))
+No auxiliary output files.
+
+\w@pgfexternal@auxout=\write4
+(./todonotes.sty
+Package: todonotes 2012/07/25 .dtx Todonotes source and documentation.
+Package: todonotes 2012/07/25
+(/usr/local/texlive/2013/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2012/10/14 v2.6b package option processing (HA)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks44
+\XKV@tempa@toks=\toks45
+\XKV@depth=\count152
+File: xkeyval.tex 2012/10/14 v2.6b key=value parser (HA)
+))
+(/usr/local/texlive/2013/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2008/10/06 v2.10 (rcs-revision 1.7)
+)
+\c@@todonotes@numberoftodonotes=\count153
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 44.
+\c@theorem=\count154
+No file tikz/residual.aux.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: End \AtBeginDocument code.
+(/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count155
+\scratchdimen=\dimen199
+\scratchbox=\box70
+\nofMPsegments=\count156
+\nofMParguments=\count157
+\everyMPshowfont=\toks46
+\MPscratchCnt=\count158
+\MPscratchDim=\dimen200
+\MPnumerator=\count159
+\makeMPintoPDFobject=\count160
+\everyMPtoPDFconversion=\toks47
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+)) ABD: EveryShipout initializing macros
+
+Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
+ick labels; missing features). Consider writing \pgfplotsset{compat=1.8} into y
+our preamble.
+ on input line 67.
+
+\AtBeginShipoutBox=\box71
+Package hyperref Info: Link coloring ON on input line 67.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count161
+)
+LaTeX Info: Redefining \ref on input line 67.
+LaTeX Info: Redefining \pageref on input line 67.
+LaTeX Info: Redefining \nameref on input line 67.
+The command '\includegraphics [width=4cm]{ntnuLogo.png}' has been optimized awa
+y. Use '/tikz/external/optimize=false' to disable this.
+(./mathematical_model.tex
+Chapter 1.
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
+ine 4.
+
+LaTeX Warning: Reference `section:introduction_petroleum_reservoirs' on page 4 
+undefined on input line 7.
+
+
+LaTeX Warning: Reference `section:continuity_equation' on page 4 undefined on i
+nput line 7.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 14.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 14.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+
+Package natbib Warning: Citation `jain_ch._2013' on page 4 undefined on input l
+ine 14.
+
+
+LaTeX Warning: Reference `fig:pore_void_space' on page 4 undefined on input lin
+e 14.
+
+The command '\includegraphics [width=0.7\textwidth ]{figures/mineral_grains.png
+}' has been optimized away. Use '/tikz/external/optimize=false' to disable this
+.
+The command '\includegraphics [width=0.7\textwidth ]{figures/fractures.png}' ha
+s been optimized away. Use '/tikz/external/optimize=false' to disable this.
+
+Package natbib Warning: Citation `dake_fundamentals_1978' on page 5 undefined o
+n input line 31.
+
+
+LaTeX Warning: Reference `fig:pore_void_space' on page 5 undefined on input lin
+e 33.
+
+
+Package natbib Warning: Citation `jain_ch._2013' on page 5 undefined on input l
+ine 33.
+
+
+LaTeX Warning: Reference `table:rock_permeabilites' on page 5 undefined on inpu
+t line 33.
+
+
+Package natbib Warning: Citation `bear_dynamics_1972' on page 5 undefined on in
+put line 33.
+
+
+Overfull \hbox (23.40852pt too wide) in paragraph at lines 37--45
+ [][] 
+ []
+
+
+Package natbib Warning: Citation `bear_dynamics_1972' on page 5 undefined on in
+put line 45.
+
+
+Package natbib Warning: Citation `bear_dynamics_1972' on page 5 undefined on in
+put line 45.
+
+
+Package natbib Warning: Citation `jain_ch._2013' on page 5 undefined on input l
+ine 48.
+
+
+Package natbib Warning: Citation `dake_fundamentals_1978' on page 6 undefined o
+n input line 51.
+
+
+Package natbib Warning: Citation `tzimas_enhanced_2005' on page 6 undefined on 
+input line 51.
+
+
+Package natbib Warning: Citation `green_enhanced_2003' on page 6 undefined on i
+nput line 53.
+
+
+Package natbib Warning: Citation `tzimas_enhanced_2005' on page 6 undefined on 
+input line 55.
+
+The command '\includegraphics [trim=3cm 0cm 2cm 0cm,width=0.8\textwidth ]{figur
+es/saigup_field_pressure.png}' has been optimized away. Use '/tikz/external/opt
+imize=false' to disable this.
+
+LaTeX Warning: Reference `section:seq_splitting_method' on page 7 undefined on 
+input line 67.
+
+
+LaTeX Warning: Reference `fig:saigup_field_pressure' on page 7 undefined on inp
+ut line 67.
+
+
+Package natbib Warning: Citation `einstein_considerations_1940' on page 7 undef
+ined on input line 73.
+
+
+LaTeX Warning: Reference `fig:control_volume' on page 7 undefined on input line
+ 73.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+Package natbib Warning: Citation `weber_essential_2003' on page 9 undefined on 
+input line 109.
+
+
+LaTeX Warning: Reference `eq:mass_conservation_equation_porosity' on page 10 un
+defined on input line 130.
+
+
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 146--146
+[][][] 
+ []
+
+
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 146--146
+[][][] 
+ []
+
+
+LaTeX Warning: Reference `eq:mass_conservation_equation_porosity' on page 10 un
+defined on input line 150.
+
+) (./numerical_methods.tex
+Chapter 2.
+
+LaTeX Warning: Reference `section:introduction_petroleum_reservoirs' on page 12
+ undefined on input line 5.
+
+
+LaTeX Warning: Reference `section:fluid_models' on page 12 undefined on input l
+ine 7.
+
+
+Package natbib Warning: Citation `buckley_mechanism_1942' on page 12 undefined 
+on input line 7.
+
+
+Package natbib Warning: Citation `aziz_petroleium_1979' on page 12 undefined on
+ input line 7.
+
+
+Package natbib Warning: Citation `molenaar_multigrid_1995' on page 12 undefined
+ on input line 7.
+
+
+Package natbib Warning: Citation `fagin_a-new_1966' on page 12 undefined on inp
+ut line 7.
+
+
+Package natbib Warning: Citation `coats_note_2000' on page 12 undefined on inpu
+t line 7.
+
+
+Package natbib Warning: Citation `aziz_petroleium_1979' on page 12 undefined on
+ input line 7.
+
+
+Package natbib Warning: Citation `macdonald_methods_1970' on page 12 undefined 
+on input line 7.
+
+
+Package natbib Warning: Citation `spillette_a-high-stability_1973' on page 12 u
+ndefined on input line 7.
+
+
+Package natbib Warning: Citation `aziz_petroleium_1979' on page 12 undefined on
+ input line 7.
+
+
+Package natbib Warning: Citation `aarnes_introduction_2007' on page 12 undefine
+d on input line 7.
+
+
+LaTeX Warning: Reference `section:seq_splitting_method' on page 12 undefined on
+ input line 9.
+
+
+LaTeX Warning: Reference `section:fvm' on page 12 undefined on input line 9.
+
+
+LaTeX Warning: Reference `section:pressure_solver' on page 12 undefined on inpu
+t line 9.
+
+
+LaTeX Warning: Reference `section:transport_solver' on page 12 undefined on inp
+ut line 9.
+
+
+LaTeX Warning: Reference `section:transport_solver' on page 12 undefined on inp
+ut line 9.
+
+
+LaTeX Warning: Reference `eq:black_oil_model' on page 12 undefined on input lin
+e 14.
+
+
+LaTeX Warning: Reference `eq:saturation_constraint' on page 12 undefined on inp
+ut line 14.
+
+
+Package natbib Warning: Citation `darcy_les_1856' on page 13 undefined on input
+ line 22.
+
+
+Package natbib Warning: Citation `aziz_petroleium_1979' on page 13 undefined on
+ input line 24.
+
+
+LaTeX Warning: Reference `eq:saturation_constraint' on page 13 undefined on inp
+ut line 24.
+
+
+LaTeX Warning: Reference `eq:darcy' on page 13 undefined on input line 24.
+
+
+LaTeX Warning: Reference `eq:capillary_pressure_definition' on page 13 undefine
+d on input line 24.
+
+
+LaTeX Warning: Reference `algorithm:sequential_splitting' on page 13 undefined 
+on input line 24.
+
+
+Package natbib Warning: Citation `aziz_petroleium_1979' on page 13 undefined on
+ input line 24.
+
+
+LaTeX Warning: Reference `section:seq_splitting_method' on page 13 undefined on
+ input line 43.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `eq:mass_conservation_equation_porosity' on page 13 un
+defined on input line 50.
+
+
+LaTeX Warning: Reference `eq:darcy' on page 14 undefined on input line 54.
+
+
+Package natbib Warning: Citation `chavent_mathematical_1982' on page 14 undefin
+ed on input line 66.
+
+
+LaTeX Warning: Reference `section:introduction_petroleum_reservoirs' on page 15
+ undefined on input line 70.
+
+
+Package natbib Warning: Citation `aarnes_introduction_2007' on page 15 undefine
+d on input line 74.
+
+
+LaTeX Warning: Reference `eq:pressure_equation_sum' on page 15 undefined on inp
+ut line 83.
+
+
+LaTeX Warning: Reference `eq:complementary_pressure_gradient' on page 15 undefi
+ned on input line 87.
+
+
+LaTeX Warning: Reference `eq:global_pressure_definition' on page 15 undefined o
+n input line 87.
+
+
+LaTeX Warning: Reference `eq:pressure_water_oil' on page 15 undefined on input 
+line 91.
+
+
+LaTeX Warning: Reference `eq:black_oil_model' on page 15 undefined on input lin
+e 98.
+
+
+LaTeX Warning: Reference `eq:darcy' on page 15 undefined on input line 98.
+
+
+LaTeX Warning: Reference `eq:capillary_pressure_definition' on page 15 undefine
+d on input line 98.
+
+
+Package natbib Warning: Citation `aarnes_introduction_2007' on page 15 undefine
+d on input line 98.
+
+
+LaTeX Warning: Reference `eq:fractional_flow_function' on page 16 undefined on 
+input line 110.
+
+
+LaTeX Warning: Reference `eq:continuity_phase' on page 16 undefined on input li
+ne 110.
+
+
+LaTeX Warning: Reference `eq:saturation_constraint' on page 16 undefined on inp
+ut line 110.
+
+
+LaTeX Warning: Reference `algorithm:sequential_splitting_newtons_method' on pag
+e 16 undefined on input line 114.
+
+
+LaTeX Warning: Reference `fig:spatial_temporal_domain' on page 16 undefined on 
+input line 118.
+
+(./spatial_temporal_domain.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+LaTeX Warning: Reference `eq:black_oil_model' on page 16 undefined on input lin
+e 53.
+
+
+LaTeX Warning: Reference `eq:black_oil_model' on page 16 undefined on input lin
+e 53.
+
+)
+
+LaTeX Warning: Reference `eq:pressure_equation' on page 16 undefined on input l
+ine 120.
+
+
+LaTeX Warning: Reference `eq:darcy' on page 17 undefined on input line 128.
+
+
+Package natbib Warning: Citation `patankar_numerical_1980' on page 17 undefined
+ on input line 146.
+
+(./spatial_domain_grid.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+LaTeX Warning: Reference `fig:spatial_temporal_domain' on page 17 undefined on 
+input line 76.
+
+
+LaTeX Warning: Reference `fig:spatial_temporal_domain' on page 17 undefined on 
+input line 76.
+
+)
+
+LaTeX Warning: Reference `fig:spatial_temporal_domain' on page 17 undefined on 
+input line 149.
+
+
+Package natbib Warning: Citation `eymard_finite_2000' on page 17 undefined on i
+nput line 149.
+
+
+LaTeX Warning: Reference `fig:spatial_domain_mesh' on page 17 undefined on inpu
+t line 149.
+
+
+LaTeX Warning: Reference `eq:pressure_equation' on page 18 undefined on input l
+ine 154.
+
+
+LaTeX Warning: Reference `eq:pressure_integral_conservation_form' on page 19 un
+defined on input line 178.
+
+
+LaTeX Warning: Reference `eq:two_phase_transport_equation' on page 20 undefined
+ on input line 209.
+
+
+Package natbib Warning: Citation `eymard_finite_2000' on page 21 undefined on i
+nput line 221.
+
+
+LaTeX Warning: Reference `section:pressure_solver' on page 21 undefined on inpu
+t line 229.
+
+
+LaTeX Warning: Reference `eq:pressure_face_fluxes' on page 21 undefined on inpu
+t line 229.
+
+
+LaTeX Warning: Reference `eq:transport_eq_fvm_raw' on page 22 undefined on inpu
+t line 241.
+
+
+LaTeX Warning: Reference `eq:cell_saturation_definition' on page 22 undefined o
+n input line 241.
+
+
+LaTeX Warning: Reference `eq:cell_production_definition' on page 22 undefined o
+n input line 241.
+
+
+LaTeX Warning: Reference `eq:transport_equation_semi_discrete' on page 22 undef
+ined on input line 245.
+
+
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 247--247
+[][][] 
+ []
+
+
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 247--247
+[][][] 
+ []
+
+
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 247--247
+[][][] 
+ []
+
+
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 247--247
+[][][] 
+ []
+
+
+LaTeX Warning: Reference `eq:transport_equation_semi_discrete' on page 22 undef
+ined on input line 247.
+
+
+LaTeX Warning: Marginpar on page 22 moved.
+
+(./residual.tikz.tex
+\openout4 = `tikz/residual.dpth'.
+
+PGFPlots: reading {datafiles/one_cell_residual-s-1_000000.data}
+\tikzexternal@dep@file=\write5
+\openout5 = `tikz/residual.dep'.
+
+[23
+
+{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_equation' on page 23 
+undefined on input line 284.
+
+
+LaTeX Warning: Reference `fig:one_cell_residual_viscosity' on page 23 undefined
+ on input line 284.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_equation' on page 23 
+undefined on input line 284.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_equation' on page 23 
+undefined on input line 284.
+
+
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 284--284
+[][][] 
+ []
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_equation' on page 23 
+undefined on input line 284.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_equation' on page 23 
+undefined on input line 284.
+
+
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 284--284
+[][][] 
+ []
+
+
+LaTeX Warning: Reference `fig:discretization_velocity_natural_numbering_sparsit
+y_pattern' on page 23 undefined on input line 288.
+
+
+LaTeX Warning: Reference `fig:discretization_velocity_topological_numbering_spa
+rsity_pattern' on page 23 undefined on input line 291.
+
+
+LaTeX Warning: Reference `fig:discretization_velocity_natural_numbering_sparsit
+y_pattern' on page 23 undefined on input line 291.
+
+
+Package natbib Warning: Citation `natvig_fast_2006' on page 23 undefined on inp
+ut line 293.
+
+
+Package natbib Warning: Citation `lie_fast_2013' on page 23 undefined on input 
+line 293.
+
+
+Package natbib Warning: Citation `natvig_fast_2006' on page 23 undefined on inp
+ut line 293.
+
+
+Package natbib Warning: Citation `kwok_potential-based_2007' on page 23 undefin
+ed on input line 293.
+
+
+Package natbib Warning: Citation `lie_fast_2013' on page 23 undefined on input 
+line 293.
+
+
+Package natbib Warning: Citation `natvig_fast_2006' on page 23 undefined on inp
+ut line 293.
+
+
+Package natbib Warning: Citation `lie_fast_2013' on page 23 undefined on input 
+line 293.
+
+
+Package natbib Warning: Citation `kwok_potential-based_2007' on page 23 undefin
+ed on input line 293.
+
+
+Package natbib Warning: Citation `lie_fast_2013' on page 23 undefined on input 
+line 293.
+
+
+Package natbib Warning: Citation `natvig_fast_2008' on page 23 undefined on inp
+ut line 293.
+
+
+LaTeX Warning: Characters dropped after `\end{comment}' on input line 363.
+
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_equation' on page 24 
+undefined on input line 494.
+
+
+Package natbib Warning: Citation `kincaid_ch._2002' on page 24 undefined on inp
+ut line 494.
+
+
+Package natbib Warning: Citation `binmore_mathematical_1977' on page 25 undefin
+ed on input line 500.
+
+
+LaTeX Warning: Reference `theorem:ivt' on page 25 undefined on input line 507.
+
+
+LaTeX Warning: Reference `section:bisection_method' on page 25 undefined on inp
+ut line 510.
+
+
+LaTeX Warning: Reference `section:regula_falsi' on page 25 undefined on input l
+ine 510.
+
+
+LaTeX Warning: Reference `section:newtons_method' on page 25 undefined on input
+ line 510.
+
+
+Package natbib Warning: Citation `kincaid_ch._2002' on page 25 undefined on inp
+ut line 518.
+
+
+Package natbib Warning: Citation `kincaid_bisection_2002' on page 25 undefined 
+on input line 520.
+
+
+Overfull \hbox (53.7819pt too wide) in paragraph at lines 522--524
+[][]\OT1/cmr/bx/n/12 Theorem 2.3. []\OT1/cmr/bx/it/12 Bi-sec-tion Con-ver-gence
+ The-o-rem: \OT1/cmr/m/it/12 If $\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 a[]; c[]\OT1
+/cmr/m/n/12 ]\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 [\OML/cmm/m/it/12 a[]; c[]\OT1/
+cmr/m/n/12 ]\OML/cmm/m/it/12 ; [] ; \OT1/cmr/m/n/12 [\OML/cmm/m/it/12 a[]; c[]\
+OT1/cmr/m/n/12 ]\OML/cmm/m/it/12 ; [] $
+ []
+
+
+LaTeX Warning: Reference `fig:bisection' on page 25 undefined on input line 527
+.
+
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+LaTeX Warning: Reference `corollary:root_existence' on page 26 undefined on inp
+ut line 575.
+
+
+LaTeX Warning: Reference `corollary:root_existence' on page 26 undefined on inp
+ut line 581.
+
+
+LaTeX Warning: Reference `fig:regula_falsi' on page 26 undefined on input line 
+599.
+
+
+Package natbib Warning: Citation `ridders_new_1979' on page 26 undefined on inp
+ut line 607.
+
+
+LaTeX Warning: Reference `appendix:derivation_ridders_method' on page 27 undefi
+ned on input line 615.
+
+
+LaTeX Warning: Reference `eq:regula_falsi_update' on page 27 undefined on input
+ line 615.
+
+
+LaTeX Warning: Reference `eq:regula_falsi_update_rule' on page 27 undefined on 
+input line 627.
+
+
+LaTeX Warning: Reference `fig:ridders' on page 27 undefined on input line 627.
+
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Package natbib Warning: Citation `kincaid_ch._2002' on page 27 undefined on inp
+ut line 672.
+
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+LaTeX Warning: Reference `fig:newtons_method' on page 28 undefined on input lin
+e 712.
+
+
+LaTeX Warning: Reference `eq:newtons_method' on page 28 undefined on input line
+ 722.
+
+
+Package natbib Warning: Citation `kincaid_ch._2002' on page 28 undefined on inp
+ut line 722.
+
+
+LaTeX Warning: Reference `fig:newtons_method_divergence' on page 29 undefined o
+n input line 729.
+
+
+Package natbib Warning: Citation `kincaid_ch._2002' on page 29 undefined on inp
+ut line 729.
+
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+Package natbib Warning: Citation `kincaid_ch._2002' on page 29 undefined on inp
+ut line 746.
+
+
+Package natbib Warning: Citation `kincaid_ch._2002' on page 29 undefined on inp
+ut line 746.
+
+
+Overfull \hbox (259.25826pt too wide) in paragraph at lines 753--753
+ []\OT1/cmr/bx/n/12 Newton's method for a sys-tem of equa-tions[] [] 
+ []
+
+
+Package natbib Warning: Citation `kincaid_ch._2002' on page 29 undefined on inp
+ut line 758.
+
+
+Overfull \hbox (211.1013pt too wide) in paragraph at lines 779--779
+ []\OT1/cmr/bx/n/12 Restarted New-ton with line search[] [] 
+ []
+
+
+LaTeX Warning: Reference `algorithm:sequential_splitting_newtons_method' on pag
+e 30 undefined on input line 783.
+
+
+LaTeX Warning: Reference `section:numerical_methods_restarted_newton' on page 3
+0 undefined on input line 807.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `section:newtons_method' on page 30 undefined on input
+ line 815.
+
+
+Package natbib Warning: Citation `kincaid_ch._2002' on page 30 undefined on inp
+ut line 826.
+
+
+Package natbib Warning: Citation `muller_method_1956' on page 31 undefined on i
+nput line 828.
+
+
+LaTeX Warning: Reference `section:bisection_method' on page 31 undefined on inp
+ut line 834.
+
+
+LaTeX Warning: Reference `section:secant_method' on page 31 undefined on input 
+line 834.
+
+
+LaTeX Warning: Reference `section:secant_method' on page 31 undefined on input 
+line 836.
+
+
+LaTeX Warning: Reference `eq:inverse_quadratic_interpolation' on page 32 undefi
+ned on input line 850.
+
+
+LaTeX Warning: Reference `fig:brents_method' on page 33 undefined on input line
+ 872.
+
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+Package natbib Warning: Citation `younis_modern_2011' on page 33 undefined on i
+nput line 929.
+
+
+Overfull \hbox (193.84293pt too wide) in paragraph at lines 933--933
+ []\OT1/cmr/bx/n/12 The di-men-sion-less flux func-tion[] [] 
+ []
+
+
+Package natbib Warning: Citation `wang_trust-region_2013' on page 33 undefined 
+on input line 934.
+
+
+Package natbib Warning: Citation `wang_trust-region_2013' on page 33 undefined 
+on input line 938.
+
+
+LaTeX Warning: Reference `fig:dimensionless_water_flux_function' on page 33 und
+efined on input line 938.
+
+The command '\includegraphics [width=0.9\textwidth ]{figures/F_w_viscosity.pdf}
+' has been optimized away. Use '/tikz/external/optimize=false' to disable this.
+
+The command '\includegraphics [width=0.9\textwidth ]{figures/F_w_buoyancy.pdf}'
+ has been optimized away. Use '/tikz/external/optimize=false' to disable this.
+The command '\includegraphics [width=0.9\textwidth ]{figures/F_w_capilarity.pdf
+}' has been optimized away. Use '/tikz/external/optimize=false' to disable this
+.
+
+LaTeX Warning: Reference `eq:two_phase_transport_equation' on page 33 undefined
+ on input line 964.
+
+
+LaTeX Warning: Reference `fig:one_cell_residual_viscosity' on page 33 undefined
+ on input line 964.
+
+
+LaTeX Warning: Reference `fig:one_cell_residual_gravity' on page 33 undefined o
+n input line 964.
+
+
+LaTeX Warning: Reference `fig:dimless_water_flux_viscosity' on page 33 undefine
+d on input line 964.
+
+
+LaTeX Warning: Reference `eq:newtons_method_multi' on page 33 undefined on inpu
+t line 966.
+
+
+Package natbib Warning: Citation `jenny_unconditionally_2009' on page 33 undefi
+ned on input line 966.
+
+
+LaTeX Warning: Reference `fig:trust_regions_inflection_chop' on page 34 undefin
+ed on input line 976.
+
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+Package natbib Warning: Citation `jenny_unconditionally_2009' on page 34 undefi
+ned on input line 1028.
+
+
+Package natbib Warning: Citation `jenny_unconditionally_2009' on page 34 undefi
+ned on input line 1028.
+
+
+Package natbib Warning: Citation `wang_trust-region_2013' on page 34 undefined 
+on input line 1035.
+
+
+LaTeX Warning: Reference `fig:trust_region_buoyancy_flux_function' on page 34 u
+ndefined on input line 1035.
+
+
+LaTeX Warning: Reference `section:caseA' on page 34 undefined on input line 103
+5.
+
+
+LaTeX Warning: Reference `fig:trust_region_buoyancy_flux_function' on page 34 u
+ndefined on input line 1035.
+
+
+Package natbib Warning: Citation `jenny_unconditionally_2009' on page 34 undefi
+ned on input line 1035.
+
+
+Package natbib Warning: Citation `wang_trust-region_2013' on page 34 undefined 
+on input line 1035.
+
+
+LaTeX Warning: Reference `section:numerical_methods_trust_region_jenny' on page
+ 34 undefined on input line 1035.
+
+
+Overfull \hbox (1.02258pt too wide) in paragraph at lines 1035--1036
+ []\OT1/cmr/bx/n/12 Wang-Tchelepi trust re-gion[] \OT1/cmr/m/n/12 In prac-tice 
+the flux func-tion can have strong
+ []
+
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+Package natbib Warning: Citation `wang_trust-region_2013' on page 35 undefined 
+on input line 1072.
+
+
+Package natbib Warning: Citation `wang_trust-region_2013' on page 35 undefined 
+on input line 1072.
+
+
+LaTeX Warning: Reference `fig:trust_region_buoyancy_flux_function' on page 36 u
+ndefined on input line 1087.
+
+
+LaTeX Warning: Characters dropped after `\end{comment}' on input line 1196.
+
+)
+Chapter 3.
+No file tikz/residual.bbl.
+
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 201.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 201.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 201.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 201.
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 201.
+ ) 
+Here is how much of TeX's memory you used:
+ 28173 strings out of 493315
+ 635834 string characters out of 6137905
+ 1810852 words of memory out of 5000000
+ 31086 multiletter control sequences out of 15000+600000
+ 15944 words of font info for 58 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 64i,15n,82p,3245b,1823s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
+></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
+/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
+sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
+local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on tikz/residual.pdf (1 page, 69972 bytes).
+PDF statistics:
+ 32 PDF objects out of 1000 (max. 8388607)
+ 23 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -1,0 +1,99 @@
+\documentclass[a4paper,12pt,twoside,openright]{report}
+
+%%%%%%%%%%% PACKAGES %%%%%%%%%%%%%%
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[toc,page]{appendix}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{natbib}
+\usepackage{pgfplots}
+\usepackage{subcaption}
+\usepackage{units}
+\usepackage{verbatim}
+
+\numberwithin{equation}{section}
+
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{backgrounds}
+\usepgfplotslibrary{external} 
+\tikzexternalize[prefix=tikz/]
+
+\usepackage[textwidth=3.8cm]{todonotes}
+
+%%%%%%%%%%% DECLARATIONS %%%%%%%%%%%%%%%%%%
+\pgfdeclarelayer{mybackground}
+\pgfdeclarelayer{mybackground2}
+\pgfsetlayers{background,main,mybackground,mybackground2} 
+
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=7em, text centered, rounded corners, minimum height=4em]
+ \tikzstyle{block_low} = [rectangle, draw, fill=blue!20, 
+    text width=6em, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclareMathOperator{\sgn}{sgn}
+
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\makeatletter
+\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+\makeatother
+
+\renewcommand{\exp}[1]{\mathrm{e}^{#1}}
+
+\newcommand{\differential}[1]{\ \text{d}#1}
+\newcommand{\todoinline}[1]{\todo[inline]{#1}}
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}}
+\newcommand{\opm}{\text{OPM }}
+\newcommand{\code}[1]{\mbox{\texttt{#1}}}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\setcitestyle{square,semicolon}
+
+%%%%%%%%%%%%%%% DOCUMENT %%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%% M = 0.1 %%%%%%%%
+\subsection{M = 0.1}
+\input{residual-convergence2-s-x-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-x}
+\input{residual-convergence2-s-x-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-x}
+\input{residual-convergence2-s-x-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-x}
+\input{residual-convergence2-s-x-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-x}
+
+\clearpage
+%%%%% M = 1 %%%%%%%%
+\subsection{M = 1} 
+\input{residual-convergence2-s-x-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-x}
+\input{residual-convergence2-s-x-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-x}
+\input{residual-convergence2-s-x-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-x}
+\input{residual-convergence2-s-x-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-x}
+
+\clearpage
+%%%%%%% M = 10 %%%%%%%%%
+\subsection{M = 10} 
+\input{residual-convergence2-s-x-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-x}
+\input{residual-convergence2-s-x-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-x}
+\input{residual-convergence2-s-x-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-x}
+\input{residual-convergence2-s-x-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-x}
+
+\end{document}
+

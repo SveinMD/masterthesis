@@ -1,0 +1,15 @@
+\begin{tikzpicture}%
+    \begin{axis}[
+            view={-60}{30},
+            width=0.6\textwidth,
+            height=0.3\textheight,
+            xlabel={$\Delta t$},
+            ylabel={$S^{n+1}$},
+            zlabel={$R(S^{n+1},\Delta t)$},
+            xmajorgrids,
+	    ymajorgrids,
+	    zmajorgrids
+            ]
+        \addplot3[surf,shader=faceted] table[col sep=comma,trim cells=true,x=dt, y=snp, z=Rnp] {datafiles/one_cell_residual-s-1_000000.data};
+    \end{axis}
+\end{tikzpicture}%

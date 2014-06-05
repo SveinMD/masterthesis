@@ -1,0 +1,4 @@
+tikz/gravres-cell-60.pdf: datafiles/gravres-cell-60.data
+tikz/gravres-cell-60.pdf: datafiles/gravres-cell-60.data
+tikz/gravres-cell-60.pdf: datafiles/gravres-cell-70.data
+tikz/gravres-cell-60.pdf: datafiles/gravres-cell-70.data

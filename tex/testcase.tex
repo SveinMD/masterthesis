@@ -1,0 +1,1699 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{comment}
+\usepackage{units}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.8}
+
+\newcommand{\test}{\includegraphics[width=\figurewidth,height=\figureheight]{x}}
+
+\newlength\figureheight 
+\newlength\figurewidth
+
+\begin{document}
+
+%\begin{comment}
+%TODO:
+%Check \delta t sensitivity 								-> OK
+%q5-homogeneous: Viscosity ratio 1, 1/10, 10/1				-> OK
+%q5-SPE10: Use a layer from SPE10 for inhomogeneous q5	-> OK
+%Convection: Test only convection solver and with segregation	-> Not started
+%Running cases with injection volume proportional to physical domain size -> OK
+%
+%AD-implementation?
+%
+%Plot $f_w$ vs saturation/viscosity ratio
+%Describe all root finders
+%Describe reordering
+%Describe the underlying physical problem and the approximate mathematical model
+%
+%Run test with high uniform permeability
+%Run test with low uniform permeability
+%Run test against permeability gradient
+%Run test with significant permeability jumps
+%Run test with varying initial guess precision: Bad initial guesses can result from any one or more of the aforementioned causes. This test should find out which methods are most sensitive to the initial guess.
+%
+%\end{comment}
+
+\section{Root finders}
+The OPM code has been modified to accommodate user choice of root finders. Four new methods has been implemented, Ridder's method, Brent's method, a standard Newton-Raphson method and a Newton trust region method [references, of course]. The methods are packaged in solver classes following the existing code base. For the time being, the new code can be found at https://github.com/SveinMD/opm-core.
+
+The trust region method has two different implementations. The first implementation defines the trust region explicitly a priori by computing the inflection point of the fractional flow function. This saturation value is then used to determine if a saturation update has crossed the inflection point, in which case the iterate is set equal to the computed inflection point. The other implementation uses a more implicit approach, that is, the value of the second derivative of the fractional flow function is checked on both the old and new saturation iterate. If the sign changed, indicating a crossing of the inflection point, the saturation iterate is chopped back. Here the chop is performed by taking an average of the two saturation values at hand. This approximate method is marked by a star (*) in the following table and figures.
+
+%%%%%%%% Homogeneous permeability %%%%%%%%%%%
+\section{Quarter five spot tests, homogeneous permeability}
+The quarter five spot is a quadratic 2D domain with side length 10 meters. The fluid density is set to $\unitfrac[1000]{kg}{m^3}$, porosity $\unit[0.5]{}$ and permeability $\unit[10]{mD}$. The base case has a 20x20 grid with a source in cell 1 and a sink in cell 400. The viscosity is varied through three cases; $\mu_w = \unit[1]{cP}$ and $\mu_o= \unit[1]{cP}$, $\mu_w = \unit[1]{cP}$ and $\mu_o= \unit[10]{cP}$, and $\mu_w = \unit[10]{cP}$ and $\mu_o= \unit[1]{cP}$. These three cases gives a \emph{viscosity ratio} $\frac{\mu_w}{\mu_o}$ of 1, 0.1, and 10, respectively.
+
+Table \ref{table:comp_results_fivequarterspot} shows preliminary computational results for different root finders using a time step of 0.1 days and final time 2 days with viscosity ratio 1. Note that the standard Newton-Raphson scheme failed to converge. Tests shows that a time step of around 0.014 days is required for convergence on this problem using the NR method. Also note that the trust region method uses fewer iterations than all the other methods, while having the worst performance in terms of CPU time averaged over several runs. This indicates that the computational complexity of the inner trust region algorithms is higher than the other methods. Counting the number of function calls of the different methods supports this conclusion. The trust region scheme needs four calls to subroutines while the other methods only need one or two calls. The following figures shows CPU time versus number of cells in the grid and time step length.
+ 
+\subsection{Brief observations from homogeneous tests}
+ \begin{itemize}
+  \item A trust region regula falsi method was tested without satisfactory results, as expected.
+  \item All methods solves the problem within the prescribed amount of iterations and with sufficient accuracy as compared to the Regula Falsi reference.
+  \item The approximate trust region method, i.e. using an averaging cutback, is the second most inefficient method along with Ridder's method, for all viscosity ratios when solving the problem using varying grid spacing.
+  \item The precise trust region method, i.e. with an a priori computed $f_w$ inflection point, performs on par with Brent's method, or slightly worse when solving the problem using varying grid spacing. This finding is consistent over all tested viscosity ratios.
+  \item The reference Regula Falsi method is the most efficient method for all tested viscosity ratios when solving the problem using varying grid spacing.
+  \item The time step cases show similar performance for all methods except the approximate trust region method which is the least efficient for all viscosity ratios.
+\end{itemize}
+
+\subsection{Q5, viscosity ratio 1}
+% Visc. ratio 1:1
+\begin{table}
+\centering
+\begin{tabular}{lccc}
+\hline
+ & Iterations & Time & Func. eval./iter. \\
+- & - & \emph{s} & - \\ 
+\hline
+Regula Falsi & 28079 & 0.0367433 & 1 \\
+Trust Region & 19220 & 0.0373589 & 2 \\
+Trust Region* & 19631 & 0.0414707 & 4 \\
+Ridder & 31543 & 0.03549950 & 2 \\
+Brent & 32759 & 0.0374697 & 1 \\
+Newton Raphson & - & - & 2 \\
+\end{tabular}
+\label{table:comp_results_fivequarterspot}
+\caption{Computational results for the quarter five spot test problem with time step 0.1 days, final time 2 days, and both water and oil viscosity at 1 cP.}
+\end{table}
+
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase1-error-s-x-T-2-t-0_1.tex}
+\end{center}
+\caption{Quarter five spot. Absolute error of saturation values at each of 20 time steps. Computation run with end time 2 days, time step size 0.1 days and viscosity ratio 1. Regula Falsi is used as reference solver.}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase1-cputvsdt-s-x-T-2000-viscrat-1_1.tex}
+\end{center}
+\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 1$ cP. }
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase1-cputvscellcpcell-s-x-T-2000-t-10-viscrat-1_1.tex}
+\end{center}
+\caption{Quarter five spot. CPU time in each cell versus cell count for different root finders. $\mu_w = 1$ cP, $\mu_o = 1$ cP.}
+\end{figure}
+
+\clearpage
+\subsection{Q5, viscosity ratio 0.1}
+% Visc. ratio 1:10
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase1-cputvsdt-s-x-T-2000-viscrat-1_10.tex}
+\end{center}
+\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 10$ cP.}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase1-cputvscellcpcell-s-x-T-2000-t-10-viscrat-1_10.tex}
+\end{center}
+\caption{Quarter five spot. CPU time in each cell versus cell count for different root finders. $\mu_w = 1$ cP, $\mu_o = 10$ cP.}
+\end{figure}
+
+\clearpage
+\subsection{Q5, viscosity ratio 10}
+% Visc. ratio 10:1
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase1-cputvsdt-s-x-T-2000-viscrat-10_1.tex}
+\end{center}
+\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 10$ cP, $\mu_o = 1$ cP.}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase1-cputvscellcpcell-s-x-T-2000-t-10-viscrat-10_1.tex}
+\end{center}
+\caption{Quarter five spot. CPU time in each cell versus cell count for different root finders. $\mu_w = 10$ cP, $\mu_o = 1$ cP.}
+\end{figure}
+
+\clearpage
+
+%%%%%%%%% Inhomogeneous permeability %%%%%%%%%%%%%
+\section{Quarter five spot tests, inhomogeneous permeability}
+The following section contains preliminary results from running the quarter five spot with inhomogeneous permeabilities gathered from the 120x120 m region starting at $x = 0, y = 0$ in the top layer of the SPE 10 permeability data set. The permeabilities in the selected region are shown in figure \ref{fig:perm-pos-0-0-layer-0-dim-120-120-20-20}. Figure \ref{fig:testCase2_solution_profile_comparison_inhomo} shows a few snapshots of saturation profiles found using the reference Regula Falsi solver.
+
+\subsection{Brief observations from inhomogeneous tests}
+\begin{itemize}
+\item All the tested methods solve the problem at hand and with precision comparable to the reference Regula Falsi method
+\item The grid spacing test at viscosity ratio 1 has a much tighter spread in computational results than the homogeneous case, with all the methods showing similar performance.
+\item For the 0.1 and 10 viscosity ratio cases, Brent and the approximate trust region methods outperforms the other methods for the coarsest grids. For higher resolution grids all methods perform similarly.
+\item Ridder's method generally outperforms all the other methods for all tested viscosity ratios in the time step test case.
+\item The only exception to the bullet above is found for small time steps in the case with viscosity ratio 1. Here the approximate trust region method is better for time steps less than 200 days. The other methods also perform similarly for time steps smaller than 20 days in this case.
+\item The approximate trust region method gains performance relative to all other methods for all tested viscosity ratios. In the 0.1 viscosity ratio case it ties with Ridder's method, just beating the precise trust region method. Brent's method and Regula Falsi are performing worse in this case, compared to the other methods.
+\item The approximate trust region method performs on par with the precise trust region, Brent's method and the Regula Falsi in the 10 viscosity ratio case, while Ridder beats them all.
+\end{itemize}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.5]{perm-pos-0-0-layer-0-dim-120-120-20-20.png}
+\end{center}
+\caption{20x20 cell grid on the 120x120 m permeability region in the first layer of the SPE10 model with logarithmic scale.}
+\label{fig:perm-pos-0-0-layer-0-dim-120-120-20-20}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=0.35]{sat-hist-s-r-T-500-t-25-pos-0-0-layer-0-dim-120-120-20-20.png}
+\end{center}
+\caption{The saturation profile at a few points in time when solving the inhomogeneous five quarter spot problem on a 20x20 cell grid using final time 500 days and time step 25 days. The permeability data are gathered from the SPE10 data set in the first layer.}
+\label{fig:testCase2_solution_profile_comparison_inhomo}
+\end{figure}
+
+\clearpage
+
+%% 120 x 120 
+\subsection{Q5, viscosity ratio 1}
+% Visc. ratio 1:1
+
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase2-error-s-x-T-2-t-0_1-pos-0-0-layer-0-dim-120-120-20-20.tex}
+\end{center}
+\caption{Quarter five spot. Absolute error of saturation values at each of 20 time steps. Computation run with end time 2 days, time step size 0.1 days and viscosity ratio 1. Regula Falsi is used as reference solver.}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-1-dim-120-120-20-20-pos-0-0-i-180.tex}
+\end{center}
+\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 1$ cP. }
+\end{figure}
+
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvscellcpercell-s-x-T-2000-t-10-m-1-1-dim-120-120-pos-0-0-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time in each cell versus cell count for different root finders. $\mu_w = 1$ cP, $\mu_o = 1$ cP.}
+%\end{figure}
+
+\clearpage
+
+\subsection{Q5, viscosity ratio 0.1}
+% Visc. ratio 1:10
+
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-10-dim-120-120-20-20-pos-0-0-i-180.tex}
+\end{center}
+\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 10$ cP.}
+\end{figure}
+
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvscellcpercell-s-x-T-2000-t-10-m-1-10-dim-120-120-pos-0-0-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time in each cell versus cell count for different root finders. $\mu_w = 1$ cP, $\mu_o = 10$ cP.}
+%\end{figure}
+
+\subsection{Q5, viscosity ratio 10}
+% Visc. ratio 10:1
+\begin{figure}[!ht]
+\begin{center}
+\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-10-1-dim-120-120-20-20-pos-0-0-i-180.tex}
+\end{center}
+\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 10$ cP, $\mu_o = 1$ cP.}
+\end{figure}
+
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvscellcpercell-s-x-T-2000-t-10-m-10-1-dim-120-120-pos-0-0-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time in each cell versus cell count for different root finders. $\mu_w = 10$ cP, $\mu_o = 1$ cP.}
+%\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={Cell count},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-r-T-2000-t-10-m-1-10-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-t-T-2000-t-10-m-1-10-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-ta-T-2000-t-10-m-1-10-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-b-T-2000-t-10-m-1-10-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-i-T-2000-t-10-m-1-10-dim-120-120-perm-i-0-0-0-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_inhomperm_viscrat_0_1}
+\caption{Viscosity ratio 0.1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={Cell count},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-r-T-2000-t-10-m-1-1-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-t-T-2000-t-10-m-1-1-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-ta-T-2000-t-10-m-1-1-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-b-T-2000-t-10-m-1-1-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-i-T-2000-t-10-m-1-1-dim-120-120-perm-i-0-0-0-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_1}
+\caption{Viscosity ratio 1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={Cell count},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-r-T-2000-t-10-m-10-1-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-t-T-2000-t-10-m-10-1-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-ta-T-2000-t-10-m-10-1-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-b-T-2000-t-10-m-10-1-dim-120-120-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr=\thisrow{cputime} / \thisrow{dt}] {datafilestestcase/testCase2-cputvscellc-s-i-T-2000-t-10-m-10-1-dim-120-120-perm-i-0-0-0-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_10}
+\caption{Viscosity ratio 10}
+\end{subfigure}%
+\label{fig:q5_inhomperm}
+\caption{CPU time per cell versus number of cells in grid. Inhomogeneous permeability, 120 x 120 m region at position (0,0).}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-10-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        %\addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-10-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        %\addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-10-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-10-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-10-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+       %\legend{RF,TR,TR*,B,R}
+        \legend{RF,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_inhomperm_viscrat_0_1}
+\caption{Viscosity ratio 0.1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-1-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        %\addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-1-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        %\addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-1-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-1-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-1-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        %\legend{RF,TR,TR*,B,R}
+        \legend{RF,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_1}
+\caption{Viscosity ratio 1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-10-1-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        %\addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-10-1-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        %\addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-10-1-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-10-1-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-10-1-dim-120-120-20-20-perm-i-0-0-0-i-180.data};
+        %\legend{RF,TR,TR*,B,R}
+        \legend{RF,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_10}
+\caption{Viscosity ratio 10}
+\end{subfigure}%
+\label{fig:q5_inhomperm}
+\caption{CPU time versus time step. Inhomogeneous permeability. 120 x 120 m region at position (0,0).}
+\end{figure}
+
+\clearpage
+
+\subsection{Explaining the results}
+
+\begin{itemize}
+\item High permeability values 
+\item Low permeability values
+\item Permeability gradients
+\item Permeability jumps/contrasts
+\item Initial guess effects
+\item Size of domain/cells
+\item NB: Beware of edge effects with regards to simulation lifetime vs. time step size!
+\end{itemize}
+
+\clearpage
+
+\section{Constant permeability tests}
+
+%\subsection{Visc. rat. 1}
+%% Visc. ratio 1:1
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-1-dim-120-120-20-20-perm-h-1-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 1$ cP, $K = \unit[1]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 1$ cP, $K = \unit[10]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-1-dim-120-120-20-20-perm-h-100-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 1$ cP, $K = \unit[100]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-1-dim-120-120-20-20-perm-h-1000-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 1$ cP, $K = \unit[1000]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-1-dim-120-120-20-20-perm-h-10000-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 1$ cP, $K = \unit[10000]{mD}$. }
+%\end{figure}
+%
+%\clearpage
+%\subsection{Visc. rat. 0.1}
+%% Visc. ratio 1:10
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-10-dim-120-120-20-20-perm-h-1-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 10$ cP, $K = \unit[1]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 10$ cP, $K = \unit[10]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-10-dim-120-120-20-20-perm-h-100-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 10$ cP, $K = \unit[100]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-10-dim-120-120-20-20-perm-h-1000-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 10$ cP, $K = \unit[1000]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-10-dim-120-120-20-20-perm-h-10000-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 1$ cP, $\mu_o = 10$ cP, $K = \unit[10000]{mD}$. }
+%\end{figure}
+%
+%\clearpage
+%\subsection{Visc. rat. 10}
+%% Visc. ratio 10:1
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-10-1-dim-120-120-20-20-perm-h-1-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 10$ cP, $\mu_o = 1$ cP, $K = \unit[1]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 10$ cP, $\mu_o = 1$ cP, $K = \unit[10]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-10-1-dim-120-120-20-20-perm-h-100-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 10$ cP, $\mu_o = 1$ cP, $K = \unit[100]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-1-1-dim-120-120-20-20-perm-h-1000-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 10$ cP, $\mu_o = 1$ cP, $K = \unit[1000]{mD}$. }
+%\end{figure}
+%
+%\begin{figure}[!ht]
+%\begin{center}
+%\input{datafilestestcase/testCase2-cputvsdt-s-x-T-2000-m-10-1-dim-120-120-20-20-perm-h-10000-i-180.tex}
+%\end{center}
+%\caption{Quarter five spot. CPU time versus time step length for different root finders. $\mu_w = 10$ cP, $\mu_o = 1$ cP, $K = \unit[10000]{mD}$. }
+%\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-10-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-10-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-10-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-10-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-10-dim-120-120-20-20-perm-h-1-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_0_1}
+\caption{Viscosity ratio 0.1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-1-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-1-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-1-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-1-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-1-dim-120-120-20-20-perm-h-1-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_1}
+\caption{Viscosity ratio 1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-10-1-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-10-1-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-10-1-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-10-1-dim-120-120-20-20-perm-h-1-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-10-1-dim-120-120-20-20-perm-h-1-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_10}
+\caption{Viscosity ratio 10}
+\end{subfigure}%
+\label{fig:q5_homperm_1}
+\caption{Homogeneous permeabiltiy \unit[1]{mD}}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_0_1}
+\caption{Viscosity ratio 0.1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_1}
+\caption{Viscosity ratio 1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_10}
+\caption{Viscosity ratio 10}
+\end{subfigure}%
+\label{fig:q5_homperm_10}
+\caption{Homogeneous permeabiltiy \unit[10]{mD}}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-10-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-10-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-10-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-10-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-10-dim-120-120-20-20-perm-h-100-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_0_1}
+\caption{Viscosity ratio 0.1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-1-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-1-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-1-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-1-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-1-dim-120-120-20-20-perm-h-100-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_1}
+\caption{Viscosity ratio 1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-10-1-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-10-1-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-10-1-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-10-1-dim-120-120-20-20-perm-h-100-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-10-1-dim-120-120-20-20-perm-h-100-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_10}
+\caption{Viscosity ratio 10}
+\end{subfigure}%
+\label{fig:q5_homperm_100}
+\caption{Homogeneous permeabiltiy \unit[100]{mD}}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-10-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-10-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-10-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-10-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-10-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_0_1}
+\caption{Viscosity ratio 0.1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-1-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-1-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-1-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-1-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-1-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_1}
+\caption{Viscosity ratio 1}
+\end{subfigure}%
+\vspace{0.5cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-10-1-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-10-1-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-10-1-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-10-1-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-10-1-dim-120-120-20-20-perm-h-1000-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_10}
+\caption{Viscosity ratio 10}
+\end{subfigure}%
+\label{fig:q5_homperm_1000}
+\caption{Homogeneous permeabiltiy \unit[1000]{mD}}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-10-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-10-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-10-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-10-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-10-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_0_1}
+\caption{Viscosity ratio 0.1}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-1-1-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-1-1-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-1-1-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-1-1-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-1-1-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_viscrat_1}
+\caption{Viscosity ratio 1}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={dt~[days]},
+            ylabel={CPU time~[s]},
+            grid=major,
+            ]
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-r-T-2000-m-10-1-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-t-T-2000-m-10-1-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-ta-T-2000-m-10-1-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-b-T-2000-m-10-1-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafilestestcase/testCase2-cputvsdt-s-i-T-2000-m-10-1-dim-120-120-20-20-perm-h-10000-i-180.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{fig:q5_homperm_10000_viscrat_10}
+\caption{Viscosity ratio 10}
+\end{subfigure}%
+\label{fig:q5_homperm_10000}
+\caption{Homogeneous permeabiltiy \unit[10000]{mD}}
+\end{figure}
+
+\clearpage
+
+\begin{itemize}
+\item \textbf{Visc. rat. 1}
+\item $K = \unit[1]{mD}$: Ridder good. Trust region good first half, bad second half. Trust region* runner up.
+\item $K = \unit[10]{mD}$: Brent everywhere. Regula Falsi runner up.
+\item $K = \unit[100]{mD}$: Brent, Ridder, Trust Region good initially. Trust Region* best towards end.
+\item $K = \unit[1000]{mD}$: Trust region* best overall, Brent, Regula Falsi good initially
+\item $K = \unit[10000]{mD}$: Trust Region (+Ridder) best initially. Regula Falsi best towards end.
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Visc. rat. 0.1}
+\item $K = \unit[1]{mD}$: Brent marginally better in mid range, Ridder best in second half
+\item $K = \unit[10]{mD}$: Ridder best in first half, Ragula Falsi in second
+\item $K = \unit[100]{mD}$: Regul Falsi best overall, Ridder also good in first half
+\item $K = \unit[1000]{mD}$: Regula falsi slightly better than Ridder throughout, Trust Region* also pretty good
+\item $K = \unit[10000]{mD}$: No clear winner. Tie between Brent, Ridder, Regula Falsi.
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Visc. rat. 1}
+\item $K = \unit[1]{mD}$: Ridder best for time steps larger than 100 days, no clear cut winner for smaller steps
+\item $K = \unit[10]{mD}$: Regula Falsi in first half, Brent in second half
+\item $K = \unit[100]{mD}$: Ridder good in mid section, otherwise few clear results
+\item $K = \unit[1000]{mD}$: Trust Region* best in second half, tie in first half
+\item $K = \unit[10000]{mD}$: Regula Falsi and Trust Region slightly better in first 3/4, Brent and Trust Region* in last 1/4.
+\end{itemize}
+
+\section{Convergence testing!}
+
+\subsection{M = 0.1} % M = 0.1
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 0.1, dtpv = 6, influx = -0.05, outflux = 0.05}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 0.1, dtpv = 6, influx = -0.35, outflux = 0.35}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 0.1, dtpv = 6, influx = 0.0, outflux = 0.8}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 0.1, dtpv = 6, influx = -0.35, outflux = 0.35}
+\end{figure}
+
+\clearpage
+\subsection{M = 1} %%%%% M = 1 %%%%%%%%
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 1, dtpv = 6, influx = -0.05, outflux = 0.05}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 1, dtpv = 6, influx = -0.35, outflux = 0.35}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 1, dtpv = 6, influx = 0.0, outflux = 0.8}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 1, dtpv = 6, influx = -0.35, outflux = 0.35}
+\end{figure}
+
+\clearpage
+\subsection{M = 10} %%%%%%% M = 10 %%%%%%%%%
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 10, dtpv = 6, influx = -0.05, outflux = 0.05}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 10, dtpv = 6, influx = -0.35, outflux = 0.35}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 10, dtpv = 6, influx = 0.0, outflux = 0.8}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_100000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.1$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.5$}
+\end{subfigure}%
+\vspace{0.4cm}
+\begin{subfigure}[b]{0.75\textwidth}
+\begin{tikzpicture}
+    \begin{semilogyaxis}[
+            width=0.97\textwidth,
+            height=0.3\textheight,
+            xlabel={step~[days]},
+            ylabel={error~[s]},
+            grid=major,
+            ]
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-r-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-t-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-a-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-b-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence-s-i-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_900000.data};
+        \legend{RF,TR,TR*,B,R}
+    \end{semilogyaxis}
+\end{tikzpicture}%
+\label{}
+\caption{$s_0 = 0.9$}
+\end{subfigure}%
+\label{}
+\caption{M = 10, dtpv = 6, influx = -0.35, outflux = 0.35}
+\end{figure}
+
+\end{document}
