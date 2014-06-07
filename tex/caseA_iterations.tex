@@ -18,15 +18,15 @@
 	/pgf/number format/precision=3},
     point meta=y *10^-5
     ]
-\addplot coordinates {(M=10,83158) (M=1,86480) (M=0.1,91040)};
-\addplot coordinates {(M=10,107758) (M=1,110793) (M=0.1,112777)};
-\addplot coordinates {(M=10,67537) (M=1,63510) (M=0.1,67961)};
-\addplot coordinates {(M=10,58621) (M=1,61930) (M=0.1,63792)};
-\addplot coordinates {(M=10,52802) (M=1,53068) (M=0.1,53450)};
-\addplot coordinates {(M=10,48972) (M=1,50383) (M=0.1,50389)};
-\legend{RF,B,R,JTR,JTR*,GN}
+\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-b-T-300-t-5.data};
+\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-r-T-300-t-5.data};
+\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-i-T-300-t-5.data};
+\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-a-T-300-t-5.data};
+\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-g-T-300-t-5.data};
+\addplot [color=blue] table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-t-T-300-t-5.data};
+\legend{B,RF,R,JTR*,GN,JTR}
 \end{axis}
 \end{tikzpicture}
-\caption{Number of iterations spent for six different root finders when solving Case A, see Section \ref{section:caseA}, with viscosity ratio $M = \frac{\mu_w}{\mu_o}$. Root finders: RF (Regula Falsi), B (Brent), R (Ridders), JTR (Jenny Trust Region), JTR* (Approximate Jenny Trust Region), and GN (Globalized Newton).}
+\caption{Number of iterations spent for six different root finders when solving Case A, see Section \ref{section:caseA}, with viscosity ratio $M = \frac{\mu_w}{\mu_o}$ and time step $\Delta t = \unit[5]{d}$.}
 \label{fig:caseA_iterations}
 \end{figure}

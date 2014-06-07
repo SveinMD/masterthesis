@@ -1,8 +1,8 @@
-\begin{figure}[ht]
+\begin{figure}[ht]%
 \tikzsetnextfilename{fractional_flow_wrt_viscosity_ratio}
-\centering
-\begin{tikzpicture}
-\begin{axis}[
+\centering%
+\begin{tikzpicture}%
+\begin{axis}[%
 	width=0.5\textwidth,
 	height=0.35\textwidth,
 	xlabel={$S$},
@@ -17,16 +17,16 @@
 	legend style={
 		cells={anchor=west},
 		legend pos=outer north east,
-	}
-	]
-	\addplot {x^2/(x^2+0.01*(1-x)^2)};
-	\addplot {x^2/(x^2+0.1*(1-x)^2)};
-	\addplot {x^2/(x^2+1*(1-x)^2)};
-	\addplot {x^2/(x^2+10*(1-x)^2)};
-	\addplot {x^2/(x^2+100*(1-x)^2)};
+	}%
+	]%
+	\addplot [solid,mark=*,mark repeat=3,color=black] {x^2/(x^2+0.01*(1-x)^2)};
+	\addplot [dashed,mark=*,mark repeat=3,color=black] {x^2/(x^2+0.1*(1-x)^2)};
+	\addplot [solid,mark=x,mark repeat=3,color=black] {x^2/(x^2+1*(1-x)^2)};
+	\addplot [dashed,mark=x,mark repeat=3,color=black] {x^2/(x^2+10*(1-x)^2)};
+	\addplot [solid,mark=square*,mark repeat=3,color=black] {x^2/(x^2+100*(1-x)^2)};
 	\legend{M=0.01,M=0.1,M=1,M=10,M=100}
-\end{axis}
-\end{tikzpicture}
+\end{axis}%
+\end{tikzpicture}%
 \caption{The fractional water flow function $f_w$, Equation (\ref{eq:fractional_flow_function}), with quadratic $k_{rl}$ and viscosity ratio $M$, Equation (\ref{eq:viscosity_ratio}).}%
 \label{fig:fractional_flow_wrt_viscosity_ratio}%
 \end{figure}%

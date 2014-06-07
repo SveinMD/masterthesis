@@ -10,12 +10,12 @@
             ylabel={CPU time~[s]},
             grid=major,
             ]
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-r-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-t-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-a-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-b-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-i-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
-                \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-g-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-r-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-t-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-a-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-b-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-i-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
+                \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-g-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
         \legend{RF,TR,TR*,B,R,GN}
     \end{semilogyaxis}
 \end{tikzpicture}%
@@ -34,12 +34,12 @@
             ylabel={CPU time~[s]},
             grid=major,
             ]
-         \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-r-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-t-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-a-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-b-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-i-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
-                \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-g-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+         \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-r-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-t-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-a-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-b-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-i-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
+                \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-g-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
         \legend{RF,TR,TR*,B,R,GN}
     \end{semilogyaxis}
 \end{tikzpicture}%
@@ -58,12 +58,12 @@
             ylabel={CPU time~[s]},
             grid=major,
             ]
-         \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-r-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-t-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-a-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-b-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-i-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
-                \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/testCase2-cputvsdt-s-g-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+         \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-r-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-t-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-a-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-b-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-i-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
+                \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-g-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
         \legend{RF,TR,TR*,B,R,GN}
     \end{semilogyaxis}
 \end{tikzpicture}%

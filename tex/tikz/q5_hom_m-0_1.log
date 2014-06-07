@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.5.3)  1 JUN 2014 18:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.5.3)  6 JUN 2014 15:36
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -902,7 +902,7 @@ File: tikzlibrarypositioning.code.tex 2008/10/06 v3.0.0 (rcs-revision 1.7)
 \pgf@layerboxsaved@mybackground=\box73
 \pgf@layerbox@mybackground2=\box74
 \pgf@layerboxsaved@mybackground2=\box75
-Package hyperref Info: Option `colorlinks' set `true' on input line 55.
+Package hyperref Info: Option `colorlinks' set `true' on input line 56.
 \c@definition=\count162
 \c@theorem=\count163
 (/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -913,20 +913,20 @@ File: lstlang1.sty 2004/09/05 1.3 listings language file
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 )
 No file tikz/q5_hom_m-0_1.aux.
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
 (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count164
@@ -954,7 +954,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box77
-Package hyperref Info: Link coloring ON on input line 133.
+Package hyperref Info: Link coloring ON on input line 134.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -962,23 +962,20 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count170
 )
-LaTeX Info: Redefining \ref on input line 133.
-LaTeX Info: Redefining \pageref on input line 133.
-LaTeX Info: Redefining \nameref on input line 133.
+LaTeX Info: Redefining \ref on input line 134.
+LaTeX Info: Redefining \pageref on input line 134.
+LaTeX Info: Redefining \nameref on input line 134.
 \c@lstlisting=\count171
 ABD: EveryShipout initializing macros
-
-Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
-ick labels; missing features). Consider writing \pgfplotsset{compat=1.10} into 
-your preamble.
- on input line 133.
+Package pgfplots notification 'compat/show suggested version=true': document ha
+s been generated with the most recent feature set (\pgfplotsset{compat=1.10}).
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 The command '\includegraphics [width=4.5cm]{figures/ntnuLogo.png}' has been opt
 imized away. Use '/tikz/external/optimize=false' to disable this.
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 180.
+ine 181.
 (./introduction.tex
 LaTeX Font Info:    Try loading font information for U+msa on input line 13.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1202,124 +1199,121 @@ Package natbib Warning: Citation `darcy_les_1856' on page 13 undefined on input
  line 19.
 
 
-LaTeX Warning: Reference `eq:black_oil_model' on page 13 undefined on input lin
-e 19.
+LaTeX Warning: Reference `eq:black_oil_model' on page 14 undefined on input lin
+e 23.
 
 
 Package natbib Warning: Citation `aziz_petroleium_1979' on page 14 undefined on
- input line 21.
+ input line 25.
 
 
 LaTeX Warning: Reference `eq:saturation_constraint' on page 14 undefined on inp
-ut line 21.
+ut line 25.
 
 
-LaTeX Warning: Reference `eq:darcy' on page 14 undefined on input line 21.
+LaTeX Warning: Reference `eq:darcy' on page 14 undefined on input line 25.
 
 
 LaTeX Warning: Reference `eq:capillary_pressure_definition' on page 14 undefine
-d on input line 21.
+d on input line 25.
 
 
 LaTeX Warning: Reference `algorithm:sequential_splitting' on page 14 undefined 
-on input line 21.
+on input line 25.
 
 
 Package natbib Warning: Citation `aziz_petroleium_1979' on page 14 undefined on
- input line 21.
+ input line 25.
 
 
 LaTeX Warning: Reference `section:seq_splitting_method' on page 14 undefined on
- input line 39.
+ input line 43.
 
 
 Package natbib Warning: Citation `aarnes_introduction_2007' on page 14 undefine
-d on input line 46.
+d on input line 50.
 
 
 Package natbib Warning: Citation `lie_mathematical_2013' on page 14 undefined o
-n input line 46.
+n input line 50.
 
 
 LaTeX Warning: Reference `eq:mass_conservation_equation_porosity' on page 14 un
-defined on input line 46.
+defined on input line 50.
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-LaTeX Warning: Reference `eq:darcy' on page 15 undefined on input line 50.
+LaTeX Warning: Reference `eq:darcy' on page 15 undefined on input line 54.
 
 
 Package natbib Warning: Citation `chavent_mathematical_1982' on page 16 undefin
-ed on input line 62.
+ed on input line 66.
 
 
 LaTeX Warning: Reference `section:introduction_petroleum_reservoirs' on page 16
- undefined on input line 66.
+ undefined on input line 70.
 
 
 LaTeX Warning: Reference `eq:complementary_pressure' on page 16 undefined on in
-put line 70.
+put line 82.
 
 
 Package natbib Warning: Citation `aarnes_introduction_2007' on page 16 undefine
-d on input line 70.
+d on input line 82.
 
 
 LaTeX Warning: Reference `eq:pressure_water_oil' on page 16 undefined on input 
-line 79.
+line 91.
 
 
 LaTeX Warning: Reference `eq:complementary_pressure_gradient' on page 16 undefi
-ned on input line 83.
+ned on input line 95.
 
 
 LaTeX Warning: Reference `eq:global_pressure_definition' on page 16 undefined o
-n input line 83.
+n input line 95.
 
 
-LaTeX Warning: Reference `eq:pressure_water_oil' on page 16 undefined on input 
-line 87.
+LaTeX Warning: Reference `eq:pressure_water_oil' on page 17 undefined on input 
+line 99.
 
 
-LaTeX Warning: Reference `eq:black_oil_model' on page 16 undefined on input lin
-e 94.
+LaTeX Warning: Reference `eq:black_oil_model' on page 17 undefined on input lin
+e 106.
 
 
-LaTeX Warning: Reference `eq:darcy' on page 16 undefined on input line 94.
+LaTeX Warning: Reference `eq:darcy' on page 17 undefined on input line 106.
 
 
-LaTeX Warning: Reference `eq:capillary_pressure_definition' on page 16 undefine
-d on input line 94.
+LaTeX Warning: Reference `eq:capillary_pressure_definition' on page 17 undefine
+d on input line 106.
 
 
-Package natbib Warning: Citation `aarnes_introduction_2007' on page 16 undefine
-d on input line 94.
+Package natbib Warning: Citation `aarnes_introduction_2007' on page 17 undefine
+d on input line 106.
 
 
 LaTeX Warning: Reference `eq:fractional_flow_function' on page 17 undefined on 
-input line 106.
+input line 118.
 
 
 LaTeX Warning: Reference `eq:continuity_phase' on page 17 undefined on input li
-ne 106.
+ne 118.
 
 
 LaTeX Warning: Reference `eq:saturation_constraint' on page 17 undefined on inp
-ut line 106.
+ut line 118.
 
 
 Package natbib Warning: Citation `aziz_petroleium_1979' on page 17 undefined on
- input line 110.
+ input line 122.
 
 
 LaTeX Warning: Reference `algorithm:sequential_splitting' on page 17 undefined 
-on input line 110.
+on input line 122.
 
 
 LaTeX Warning: Reference `fig:spatial_temporal_domain' on page 17 undefined on 
-input line 114.
+input line 126.
 
 (./spatial_temporal_domain.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
@@ -1335,26 +1329,29 @@ e 53.
 )
 
 LaTeX Warning: Reference `eq:pressure_equation' on page 17 undefined on input l
-ine 117.
+ine 129.
 
 
-LaTeX Warning: Reference `eq:darcy' on page 18 undefined on input line 125.
+LaTeX Warning: Reference `eq:darcy' on page 18 undefined on input line 137.
 
 
-Package natbib Warning: Citation `patankar_numerical_1980' on page 18 undefined
- on input line 142.
+Underfull \vbox (badness 2126) has occurred while \output is active []
+
+
+Package natbib Warning: Citation `patankar_numerical_1980' on page 19 undefined
+ on input line 154.
 
 
 LaTeX Warning: Reference `fig:spatial_temporal_domain' on page 19 undefined on 
-input line 145.
+input line 157.
 
 
 Package natbib Warning: Citation `eymard_finite_2000' on page 19 undefined on i
-nput line 145.
+nput line 157.
 
 
 LaTeX Warning: Reference `fig:spatial_domain_mesh' on page 19 undefined on inpu
-t line 145.
+t line 157.
 
 (./spatial_domain_grid.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
@@ -1370,70 +1367,67 @@ input line 76.
 )
 
 LaTeX Warning: Reference `eq:pressure_equation' on page 19 undefined on input l
-ine 152.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ine 164.
 
 
 Package natbib Warning: Citation `eymard_finite_2000' on page 20 undefined on i
-nput line 168.
+nput line 180.
 
 
 LaTeX Warning: Reference `eq:pressure_integral_conservation_form' on page 21 un
-defined on input line 176.
+defined on input line 188.
 
 
 LaTeX Warning: Reference `eq:pressure_integral_conservation_form' on page 21 un
-defined on input line 180.
+defined on input line 192.
 
 
-LaTeX Warning: Reference `eq:two_phase_transport' on page 21 undefined on input
- line 207.
+LaTeX Warning: Reference `eq:two_phase_transport' on page 22 undefined on input
+ line 219.
 
 
 LaTeX Warning: Reference `eq:two_phase_transport_visc_pc' on page 22 undefined 
-on input line 215.
+on input line 227.
 
 
-LaTeX Warning: Reference `section:pressure_solver' on page 22 undefined on inpu
-t line 235.
-
-
-LaTeX Warning: Reference `eq:pressure_face_fluxes' on page 22 undefined on inpu
-t line 235.
-
-
-LaTeX Warning: Reference `eq:transport_eq_fvm_raw' on page 23 undefined on inpu
+LaTeX Warning: Reference `section:pressure_solver' on page 23 undefined on inpu
 t line 247.
 
 
+LaTeX Warning: Reference `eq:pressure_face_fluxes' on page 23 undefined on inpu
+t line 247.
+
+
+LaTeX Warning: Reference `eq:transport_eq_fvm_raw' on page 23 undefined on inpu
+t line 259.
+
+
 LaTeX Warning: Reference `eq:cell_saturation_definition' on page 23 undefined o
-n input line 247.
+n input line 259.
 
 
 LaTeX Warning: Reference `eq:cell_production_definition' on page 23 undefined o
-n input line 247.
-
-
-LaTeX Warning: Reference `eq:transport_equation_semi_discrete' on page 23 undef
-ined on input line 251.
-
-
-Package natbib Warning: Citation `courant_uber_1928' on page 23 undefined on in
-put line 253.
-
-
-Package natbib Warning: Citation `aziz_petroleium_1979' on page 23 undefined on
- input line 253.
+n input line 259.
 
 
 LaTeX Warning: Reference `eq:transport_equation_semi_discrete' on page 24 undef
-ined on input line 255.
+ined on input line 263.
+
+
+Package natbib Warning: Citation `courant_uber_1928' on page 24 undefined on in
+put line 265.
+
+
+Package natbib Warning: Citation `aziz_petroleium_1979' on page 24 undefined on
+ input line 265.
+
+
+LaTeX Warning: Reference `eq:transport_equation_semi_discrete' on page 24 undef
+ined on input line 267.
 
 
 LaTeX Warning: Reference `fig:residual_two_phase_transport' on page 24 undefine
-d on input line 255.
+d on input line 267.
 
 (./residual.tikz.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
@@ -1441,23 +1435,23 @@ isable this.
 )
 
 LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 24 undefined
- on input line 264.
+ on input line 276.
 
 
 LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 24 undefined
- on input line 264.
+ on input line 276.
 
 
 LaTeX Warning: Reference `eq:two_phase_transport_gravity' on page 24 undefined 
-on input line 268.
+on input line 280.
 
 
 LaTeX Warning: Reference `section:introduction_petroleum_reservoirs' on page 24
- undefined on input line 268.
+ undefined on input line 280.
 
 
 LaTeX Warning: Reference `fig:mobility_upwind' on page 24 undefined on input li
-ne 268.
+ne 280.
 
 (./mobility_upwind.tikz.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
@@ -1465,15 +1459,15 @@ isable this.
 )
 
 LaTeX Warning: Reference `fig:mobility_upwind' on page 25 undefined on input li
-ne 282.
+ne 294.
 
 
 LaTeX Warning: Reference `eq:residual_two_phase_transport_gravity' on page 25 u
-ndefined on input line 282.
+ndefined on input line 294.
 
 
 LaTeX Warning: Reference `fig:residual_two_phase_transport_gravity' on page 25 
-undefined on input line 282.
+undefined on input line 294.
 
 (./residual_grav.tikz.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
@@ -1481,114 +1475,114 @@ isable this.
 )
 
 LaTeX Warning: Reference `eq:residual_two_phase_transport_gravity' on page 25 u
-ndefined on input line 287.
+ndefined on input line 299.
 
 
 LaTeX Warning: Reference `eq:residual_two_phase_transport_gravity' on page 25 u
-ndefined on input line 287.
+ndefined on input line 299.
 
 
-LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 25 undefined
- on input line 291.
+LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 26 undefined
+ on input line 303.
 
 
-LaTeX Warning: Reference `eq:residual_two_phase_transport_gravity' on page 25 u
-ndefined on input line 291.
+LaTeX Warning: Reference `eq:residual_two_phase_transport_gravity' on page 26 u
+ndefined on input line 303.
 
 
-Package natbib Warning: Citation `younis_adaptively_2010' on page 25 undefined 
-on input line 291.
+Package natbib Warning: Citation `younis_adaptively_2010' on page 26 undefined 
+on input line 303.
 
 
-LaTeX Warning: Reference `definition:bracket' on page 25 undefined on input lin
-e 291.
+LaTeX Warning: Reference `definition:bracket' on page 26 undefined on input lin
+e 303.
 
 
-LaTeX Warning: Reference `theorem:ivt' on page 25 undefined on input line 291.
+LaTeX Warning: Reference `theorem:ivt' on page 26 undefined on input line 303.
 
 
 LaTeX Warning: Reference `fig:discretization_velocity_natural_numbering_sparsit
-y_pattern' on page 26 undefined on input line 296.
+y_pattern' on page 26 undefined on input line 308.
 
 
 LaTeX Warning: Reference `fig:discretization_velocity_topological_numbering_spa
-rsity_pattern' on page 26 undefined on input line 299.
+rsity_pattern' on page 26 undefined on input line 311.
 
 
 LaTeX Warning: Reference `fig:discretization_velocity_natural_numbering_sparsit
-y_pattern' on page 26 undefined on input line 299.
+y_pattern' on page 26 undefined on input line 311.
 
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 
-Underfull \hbox (badness 6396) in paragraph at lines 304--337
+Underfull \hbox (badness 6396) in paragraph at lines 316--349
 [] \OT1/cmr/m/n/12 [ \OT1/cmr/m/sc/12 tikzpic-ture op-ti-mized
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 304--337
+Underfull \hbox (badness 10000) in paragraph at lines 316--349
 \OT1/cmr/m/sc/12 con-tribute to ex-ported
  []
 
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 
-Package natbib Warning: Citation `natvig_fast_2006' on page 26 undefined on inp
-ut line 364.
+Package natbib Warning: Citation `natvig_fast_2006' on page 27 undefined on inp
+ut line 376.
 
 
-Package natbib Warning: Citation `lie_fast_2013' on page 26 undefined on input 
-line 364.
+Package natbib Warning: Citation `lie_fast_2013' on page 27 undefined on input 
+line 376.
 
 
-Package natbib Warning: Citation `natvig_fast_2006' on page 26 undefined on inp
-ut line 364.
+Package natbib Warning: Citation `natvig_fast_2006' on page 27 undefined on inp
+ut line 376.
 
 
-Package natbib Warning: Citation `kwok_potential-based_2007' on page 26 undefin
-ed on input line 364.
+Package natbib Warning: Citation `kwok_potential-based_2007' on page 27 undefin
+ed on input line 376.
 
 
-Package natbib Warning: Citation `lie_fast_2013' on page 26 undefined on input 
-line 364.
+Package natbib Warning: Citation `lie_fast_2013' on page 27 undefined on input 
+line 376.
 
 
-Package natbib Warning: Citation `natvig_fast_2006' on page 26 undefined on inp
-ut line 364.
+Package natbib Warning: Citation `natvig_fast_2006' on page 27 undefined on inp
+ut line 376.
 
 
-Package natbib Warning: Citation `lie_fast_2013' on page 26 undefined on input 
-line 364.
+Package natbib Warning: Citation `lie_fast_2013' on page 27 undefined on input 
+line 376.
 
 
-Package natbib Warning: Citation `kwok_potential-based_2007' on page 26 undefin
-ed on input line 364.
+Package natbib Warning: Citation `kwok_potential-based_2007' on page 27 undefin
+ed on input line 376.
 
 
-Package natbib Warning: Citation `lie_fast_2013' on page 26 undefined on input 
-line 364.
+Package natbib Warning: Citation `lie_fast_2013' on page 27 undefined on input 
+line 376.
 
 
-Package natbib Warning: Citation `natvig_fast_2008' on page 26 undefined on inp
-ut line 364.
+Package natbib Warning: Citation `natvig_fast_2008' on page 27 undefined on inp
+ut line 376.
 
 
-LaTeX Warning: Reference `algorithm:reordering' on page 26 undefined on input l
-ine 364.
+LaTeX Warning: Reference `algorithm:reordering' on page 27 undefined on input l
+ine 376.
 
 
-LaTeX Warning: Reference `eq:two_phase_transport' on page 26 undefined on input
- line 364.
+LaTeX Warning: Reference `eq:two_phase_transport' on page 27 undefined on input
+ line 376.
 
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 
-Underfull \hbox (badness 6396) in paragraph at lines 369--402
+Underfull \hbox (badness 6396) in paragraph at lines 381--414
 [] \OT1/cmr/m/n/12 [ \OT1/cmr/m/sc/12 tikzpic-ture op-ti-mized
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 369--402
+Underfull \hbox (badness 10000) in paragraph at lines 381--414
 \OT1/cmr/m/sc/12 con-tribute to ex-ported
  []
 
@@ -1596,225 +1590,230 @@ A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 
 LaTeX Warning: Reference `eq:two_phase_transport' on page 27 undefined on input
- line 444.
+ line 456.
 
 
 LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 27 undefined
- on input line 518.
+ on input line 530.
 
 
-Package natbib Warning: Citation `binmore_mathematical_1977' on page 28 undefin
-ed on input line 531.
+Package natbib Warning: Citation `binmore_mathematical_1977' on page 29 undefin
+ed on input line 543.
 
 
-LaTeX Warning: Reference `theorem:ivt' on page 28 undefined on input line 531.
+LaTeX Warning: Reference `theorem:ivt' on page 29 undefined on input line 543.
 
 
-LaTeX Warning: Reference `theorem:ivt' on page 28 undefined on input line 533.
+LaTeX Warning: Reference `theorem:ivt' on page 29 undefined on input line 545.
 
 
-LaTeX Warning: Reference `theorem:ivt' on page 28 undefined on input line 535.
+LaTeX Warning: Reference `theorem:ivt' on page 29 undefined on input line 547.
 
 
 LaTeX Warning: Reference `definition:bracket' on page 29 undefined on input lin
-e 541.
+e 553.
 
 
 LaTeX Warning: Reference `corollary:root_existence' on page 29 undefined on inp
-ut line 541.
+ut line 553.
 
 
 Package natbib Warning: Citation `kincaid_ch._2002' on page 29 undefined on inp
-ut line 541.
+ut line 553.
 
 
 LaTeX Warning: Reference `fig:regula_falsi_secant' on page 29 undefined on inpu
-t line 546.
+t line 558.
 
 
 LaTeX Warning: Reference `corollary:root_existence' on page 29 undefined on inp
-ut line 550.
+ut line 562.
 
 
-LaTeX Warning: Reference `definition:bracket' on page 29 undefined on input lin
-e 554.
+LaTeX Warning: Reference `definition:bracket' on page 30 undefined on input lin
+e 566.
 
 
-LaTeX Warning: Reference `algorithm:regula_falsi' on page 29 undefined on input
- line 554.
+LaTeX Warning: Reference `algorithm:regula_falsi' on page 30 undefined on input
+ line 566.
 
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 
-LaTeX Warning: Reference `section:regula_falsi' on page 29 undefined on input l
-ine 599.
+LaTeX Warning: Reference `section:regula_falsi' on page 30 undefined on input l
+ine 611.
 
 
-Package natbib Warning: Citation `dowell_the_1972' on page 29 undefined on inpu
-t line 599.
+Package natbib Warning: Citation `dowell_the_1972' on page 30 undefined on inpu
+t line 611.
 
 
-Package natbib Warning: Citation `ridders_new_1979' on page 29 undefined on inp
-ut line 605.
+Package natbib Warning: Citation `ridders_new_1979' on page 30 undefined on inp
+ut line 617.
 
 
 LaTeX Warning: Reference `definition:bracket' on page 30 undefined on input lin
-e 625.
+e 637.
 
 
-LaTeX Warning: Reference `eq:ridders_exp_sol' on page 30 undefined on input lin
-e 630.
+LaTeX Warning: Reference `eq:ridders_exp_sol' on page 31 undefined on input lin
+e 642.
 
 
-LaTeX Warning: Reference `eq:regula_falsi_update' on page 31 undefined on input
- line 638.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+LaTeX Warning: Reference `eq:regula_falsi_update' on page 32 undefined on input
+ line 650.
 
 
 LaTeX Warning: Reference `eq:ridders_exp_sol_sgn' on page 32 undefined on input
- line 646.
+ line 658.
 
 
 LaTeX Warning: Reference `definition:bracket' on page 32 undefined on input lin
-e 654.
+e 666.
 
 
 LaTeX Warning: Reference `definition:bracket' on page 32 undefined on input lin
-e 658.
+e 670.
 
 
 LaTeX Warning: Reference `algorithm:ridders' on page 32 undefined on input line
- 658.
+ 670.
 
 
 LaTeX Warning: Reference `section:ridders_method' on page 32 undefined on input
- line 684.
+ line 696.
 
 
 Package natbib Warning: Citation `brent_algorithms_1973' on page 32 undefined o
-n input line 759.
+n input line 771.
 
 
 LaTeX Warning: Reference `section:bisection_method' on page 32 undefined on inp
-ut line 759.
+ut line 771.
 
 
 LaTeX Warning: Reference `section:secant_method' on page 32 undefined on input 
-line 759.
+line 771.
 
 
 Package natbib Warning: Citation `dekker_finding_1969' on page 32 undefined on 
-input line 759.
+input line 771.
 
 
-LaTeX Warning: Reference `section:secant_method' on page 32 undefined on input 
-line 761.
+LaTeX Warning: Reference `section:secant_method' on page 33 undefined on input 
+line 773.
 
 
-LaTeX Warning: Reference `eq:inverse_quadratic_interpolation' on page 32 undefi
-ned on input line 766.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \vbox (badness 2932) has occurred while \output is active []
+LaTeX Warning: Reference `eq:inverse_quadratic_interpolation' on page 34 undefi
+ned on input line 778.
 
 
 LaTeX Warning: Reference `eq:secant_method' on page 34 undefined on input line 
-780.
+792.
 
 
 LaTeX Warning: Reference `algorithm:brents_method' on page 34 undefined on inpu
-t line 788.
+t line 800.
 
 
 LaTeX Warning: Reference `section:brents_method' on page 34 undefined on input 
-line 836.
+line 848.
 
 
 Package natbib Warning: Citation `kincaid_ch._2002' on page 34 undefined on inp
-ut line 843.
+ut line 855.
 
 
-LaTeX Warning: Reference `eq:newtons_method' on page 35 undefined on input line
- 875.
+LaTeX Warning: Reference `eq:newtons_method' on page 36 undefined on input line
+ 887.
 
 
-LaTeX Warning: Reference `fig:newtons_method' on page 35 undefined on input lin
-e 875.
+LaTeX Warning: Reference `fig:newtons_method' on page 36 undefined on input lin
+e 887.
 
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 
 LaTeX Warning: Reference `eq:newtons_method' on page 36 undefined on input line
- 902.
+ 914.
 
 
 Package natbib Warning: Citation `kincaid_ch._2002' on page 36 undefined on inp
-ut line 907.
+ut line 919.
 
 
 LaTeX Warning: Reference `section:newtons_method' on page 36 undefined on input
- line 911.
+ line 923.
 
 
 Package natbib Warning: Citation `younis_modern_2011' on page 36 undefined on i
-nput line 911.
+nput line 923.
 
 
 LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 36 undefined
- on input line 911.
+ on input line 923.
 
 
 Package natbib Warning: Citation `jenny_unconditionally_2009' on page 36 undefi
-ned on input line 911.
+ned on input line 923.
 
+(./dimensionless_water_flux_function.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
+)
 
-Package natbib Warning: Citation `wang_trust-region_2013' on page 36 undefined 
-on input line 988.
+Package natbib Warning: Citation `wang_trust-region_2013' on page 37 undefined 
+on input line 927.
 
 
 Package natbib Warning: Citation `jenny_unconditionally_2009' on page 37 undefi
-ned on input line 992.
+ned on input line 931.
 
 
 LaTeX Warning: Reference `section:transport_solver' on page 37 undefined on inp
-ut line 992.
+ut line 931.
 
 
 LaTeX Warning: Reference `fig:dimensionless_water_flux_function' on page 37 und
-efined on input line 992.
+efined on input line 931.
 
 
 LaTeX Warning: Reference `section:numerical_methods_trust_region_jenny' on page
- 37 undefined on input line 1008.
+ 37 undefined on input line 947.
 
 
-Package natbib Warning: Citation `jenny_unconditionally_2009' on page 37 undefi
-ned on input line 1014.
+Package natbib Warning: Citation `jenny_unconditionally_2009' on page 38 undefi
+ned on input line 953.
 
 
-LaTeX Warning: Reference `fig:dimless_water_flux_viscosity' on page 37 undefine
-d on input line 1014.
+LaTeX Warning: Reference `fig:dimless_water_flux_viscosity' on page 38 undefine
+d on input line 953.
 
 
-Package natbib Warning: Citation `morris_computational_1983' on page 37 undefin
-ed on input line 1014.
+Package natbib Warning: Citation `morris_computational_1983' on page 38 undefin
+ed on input line 953.
 
 
-Package natbib Warning: Citation `jenny_unconditionally_2009' on page 37 undefi
-ned on input line 1014.
+Package natbib Warning: Citation `jenny_unconditionally_2009' on page 38 undefi
+ned on input line 953.
 
 
-Package natbib Warning: Citation `jenny_unconditionally_2009' on page 37 undefi
-ned on input line 1014.
+Package natbib Warning: Citation `jenny_unconditionally_2009' on page 38 undefi
+ned on input line 953.
 
 
-LaTeX Warning: Reference `algorithm:jtr' on page 37 undefined on input line 101
-4.
+LaTeX Warning: Reference `algorithm:jtr' on page 38 undefined on input line 953
+.
 
 (./newton_methods_viscosity.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
@@ -1822,124 +1821,124 @@ isable this.
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 
-LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 37 undefined
+LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 38 undefined
  on input line 68.
 
 
-LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 37 undefined
+LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 38 undefined
  on input line 68.
 
 )
 
-LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 38 undefined
- on input line 1017.
+LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 39 undefined
+ on input line 956.
 
 
 LaTeX Warning: Reference `eq:two_phase_transport_residual_second_derivative' on
- page 39 undefined on input line 1022.
+ page 39 undefined on input line 961.
 
 
 LaTeX Warning: Reference `eq:fractional_flow_function' on page 39 undefined on 
-input line 1026.
+input line 965.
 
 
 LaTeX Warning: Reference `eq:inflection_differential' on page 39 undefined on i
-nput line 1026.
+nput line 965.
 
 
 LaTeX Warning: Reference `eq:inflection_differential' on page 39 undefined on i
-nput line 1026.
+nput line 965.
 
 
 LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 39 undefined
- on input line 1026.
+ on input line 965.
 
 
 LaTeX Warning: Reference `eq:residual_two_phase_transport_gravity' on page 39 u
-ndefined on input line 1026.
+ndefined on input line 965.
 
 
-LaTeX Warning: Reference `fig:newton_divergence' on page 39 undefined on input 
-line 1028.
+LaTeX Warning: Reference `fig:newton_divergence' on page 40 undefined on input 
+line 967.
 
 
-LaTeX Warning: Reference `fig:newton_jtr_convergence' on page 39 undefined on i
-nput line 1028.
+LaTeX Warning: Reference `fig:newton_jtr_convergence' on page 40 undefined on i
+nput line 967.
 
 
-LaTeX Warning: Reference `fig:newton_divergence' on page 39 undefined on input 
-line 1028.
+LaTeX Warning: Reference `fig:newton_divergence' on page 40 undefined on input 
+line 967.
 
 
-Package natbib Warning: Citation `jenny_unconditionally_2009' on page 39 undefi
-ned on input line 1034.
-
-
-Package natbib Warning: Citation `wang_trust-region_2013' on page 39 undefined 
-on input line 1034.
-
-
-Package natbib Warning: Citation `jenny_unconditionally_2009' on page 39 undefi
-ned on input line 1034.
-
-
-Package natbib Warning: Citation `wang_trust-region_2013' on page 39 undefined 
-on input line 1034.
-
-
-LaTeX Warning: Reference `eq:water_flux_function' on page 39 undefined on input
- line 1034.
-
-
-Package natbib Warning: Citation `wang_trust-region_2013' on page 39 undefined 
-on input line 1034.
-
-
-LaTeX Warning: Reference `algorithm:wtr' on page 39 undefined on input line 103
-4.
-
-
-LaTeX Warning: Reference `section:numerical_methods_trust_region_wang' on page 
-39 undefined on input line 1055.
-
-
-LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 40 undefined
- on input line 1059.
-
-
-LaTeX Warning: Reference `eq:residual_two_phase_transport_gravity' on page 40 u
-ndefined on input line 1059.
-
-
-LaTeX Warning: Reference `section:transport_solver' on page 40 undefined on inp
-ut line 1059.
+Package natbib Warning: Citation `jenny_unconditionally_2009' on page 40 undefi
+ned on input line 973.
 
 
 Package natbib Warning: Citation `wang_trust-region_2013' on page 40 undefined 
-on input line 1059.
+on input line 973.
 
 
-LaTeX Warning: Reference `fig:dimensionless_water_flux_function' on page 40 und
-efined on input line 1059.
+Package natbib Warning: Citation `jenny_unconditionally_2009' on page 40 undefi
+ned on input line 973.
 
 
-LaTeX Warning: Reference `fig:wang_tchelepi_residual' on page 40 undefined on i
-nput line 1059.
+Package natbib Warning: Citation `wang_trust-region_2013' on page 40 undefined 
+on input line 973.
 
 
-LaTeX Warning: Reference `section:transport_solver' on page 40 undefined on inp
-ut line 1059.
+LaTeX Warning: Reference `eq:water_flux_function' on page 40 undefined on input
+ line 973.
+
+
+Package natbib Warning: Citation `wang_trust-region_2013' on page 40 undefined 
+on input line 973.
+
+
+LaTeX Warning: Reference `algorithm:wtr' on page 40 undefined on input line 973
+.
+
+
+LaTeX Warning: Reference `section:numerical_methods_trust_region_wang' on page 
+40 undefined on input line 994.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 41 undefined
+ on input line 998.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_gravity' on page 41 u
+ndefined on input line 998.
+
+
+LaTeX Warning: Reference `section:transport_solver' on page 41 undefined on inp
+ut line 998.
+
+
+Package natbib Warning: Citation `wang_trust-region_2013' on page 41 undefined 
+on input line 998.
+
+
+LaTeX Warning: Reference `eq:water_flux_function' on page 41 undefined on input
+ line 998.
+
+
+LaTeX Warning: Reference `fig:wang_tchelepi_residual' on page 41 undefined on i
+nput line 998.
+
+
+LaTeX Warning: Reference `section:transport_solver' on page 41 undefined on inp
+ut line 998.
 
 (./wang_tchelepi_residual.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 
-Package natbib Warning: Citation `wang_trust-region_2013' on page 40 undefined 
-on input line 16.
+Package natbib Warning: Citation `wang_trust-region_2013' on page 41 undefined 
+on input line 15.
 
 
-Package natbib Warning: Citation `wang_trust-region_2013' on page 40 undefined 
-on input line 16.
+Package natbib Warning: Citation `wang_trust-region_2013' on page 41 undefined 
+on input line 15.
 
 )) (./numerical_results.tex
 Chapter 3.
@@ -2061,37 +2060,37 @@ LaTeX Warning: Reference `fig:sat_hist_hom' on page 44 undefined on input line
 32.
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1253) has occurred while \output is active []
 
 (./caseA_iterations.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 
-LaTeX Warning: Reference `section:caseA' on page 45 undefined on input line 30.
+LaTeX Warning: Reference `section:caseA' on page 45 undefined on input line 36.
 
 
 
-LaTeX Warning: Reference `section:caseA' on page 45 undefined on input line 30.
+LaTeX Warning: Reference `section:caseA' on page 45 undefined on input line 36.
 
 
-) (./testCase2-cputvsdt-s-x-T-3000-m-x-dim-120-120-20-20-perm-h-10-i-180.tex
+) (./q5-cputvsdt-s-x-T-300-m-x-dim-120-120-20-20-perm-h-10-i-180.tex
 \openout4 = `tikz/q5_hom_m-0_1.dpth'.
 
-PGFPlots: reading {datafiles/testCase2-cputvsdt-s-r-T-3000-m-1-10-dim-120-120-2
-0-20-perm-h-10-i-180.data}
+PGFPlots: reading {datafiles/q5-cputvsdt-s-r-T-300-m-1-10-dim-120-120-20-20-per
+m-h-10-i-180.data}
 \tikzexternal@dep@file=\write5
 \openout5 = `tikz/q5_hom_m-0_1.dep'.
 
-PGFPlots: reading {datafiles/testCase2-cputvsdt-s-t-T-3000-m-1-10-dim-120-120-2
-0-20-perm-h-10-i-180.data}
-PGFPlots: reading {datafiles/testCase2-cputvsdt-s-a-T-3000-m-1-10-dim-120-120-2
-0-20-perm-h-10-i-180.data}
-PGFPlots: reading {datafiles/testCase2-cputvsdt-s-b-T-3000-m-1-10-dim-120-120-2
-0-20-perm-h-10-i-180.data}
-PGFPlots: reading {datafiles/testCase2-cputvsdt-s-i-T-3000-m-1-10-dim-120-120-2
-0-20-perm-h-10-i-180.data}
-PGFPlots: reading {datafiles/testCase2-cputvsdt-s-g-T-3000-m-1-10-dim-120-120-2
-0-20-perm-h-10-i-180.data}
+PGFPlots: reading {datafiles/q5-cputvsdt-s-t-T-300-m-1-10-dim-120-120-20-20-per
+m-h-10-i-180.data}
+PGFPlots: reading {datafiles/q5-cputvsdt-s-a-T-300-m-1-10-dim-120-120-20-20-per
+m-h-10-i-180.data}
+PGFPlots: reading {datafiles/q5-cputvsdt-s-b-T-300-m-1-10-dim-120-120-20-20-per
+m-h-10-i-180.data}
+PGFPlots: reading {datafiles/q5-cputvsdt-s-i-T-300-m-1-10-dim-120-120-20-20-per
+m-h-10-i-180.data}
+PGFPlots: reading {datafiles/q5-cputvsdt-s-g-T-300-m-1-10-dim-120-120-20-20-per
+m-h-10-i-180.data}
 [45
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
@@ -2102,10 +2101,10 @@ isable this.
 )
 
 Package natbib Warning: Citation `spe10_2000' on page 47 undefined on input lin
-e 43.
+e 46.
 
 
-LaTeX Warning: Reference `fig:spe10_perm' on page 47 undefined on input line 43
+LaTeX Warning: Reference `fig:spe10_perm' on page 47 undefined on input line 46
 .
 
 (./sat_perm_tarbert_2D.tex
@@ -2153,16 +2152,16 @@ ne 72.
 
 )
 
-LaTeX Warning: Reference `fig:spe10_perm' on page 49 undefined on input line 55
+LaTeX Warning: Reference `fig:spe10_perm' on page 49 undefined on input line 58
 .
 
 
-Overfull \hbox (22.62054pt too wide) in paragraph at lines 55--55
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 58--58
 [][][] 
  []
 
 
-Overfull \hbox (22.62054pt too wide) in paragraph at lines 55--55
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 58--58
 [][][] 
  []
 
@@ -2210,62 +2209,44 @@ LaTeX Warning: Reference `fig:tarbert_layer-0' on page 49 undefined on input li
 ne 72.
 
 )
-(./convergence2-s-x-M-0_100000-dtpv-6_000000-in--0_050000-out-0_050000-s0-x.tex
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-)
-(./convergence2-s-x-M-0_100000-dtpv-6_000000-in--0_350000-out-0_350000-s0-x.tex
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-) (./convergence2-s-x-M-0_100000-dtpv-6_000000-in-0_000000-out-0_800000-s0-x.te
-x
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-)
-(./convergence2-s-x-M-0_100000-dtpv-6_000000-in--0_500000-out-0_800000-s0-x.tex
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-)
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 88--88
+[][][] 
+ []
+
+
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 88--88
+[][][] 
+ []
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 53 undefined
+ on input line 88.
+
+
+LaTeX Warning: Reference `eq:viscosity_ratio' on page 53 undefined on input lin
+e 88.
+
+
+LaTeX Warning: Reference `fig:conv_res_in_0_05_out_0_05' on page 53 undefined o
+n input line 88.
+
+
+LaTeX Warning: Reference `fig:conv_res_in_0_5_out_0_8' on page 53 undefined on 
+input line 88.
+
+
+LaTeX Warning: Reference `fig:conv_res_in_0_05_out_0_05' on page 53 undefined o
+n input line 90.
+
+
+LaTeX Warning: Reference `fig:conv_res_in_0_35_out_0_35' on page 53 undefined o
+n input line 92.
+
+
+LaTeX Warning: Reference `fig:conv_res_in_0_5_out_0_8' on page 53 undefined on 
+input line 94.
+
+
 (./convergence2-s-x-M-1_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-x.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
@@ -2293,20 +2274,6 @@ A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
-) (./convergence2-s-x-M-1_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-x.te
-x
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
 )
 (./convergence2-s-x-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-x.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
@@ -2321,67 +2288,91 @@ A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
-)
-(./convergence2-s-x-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-x.te
-x
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-)
-(./convergence2-s-x-M-10_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-x.te
-x
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-)
-(./convergence2-s-x-M-10_000000-dtpv-6_000000-in-0_000000-out-0_800000-s0-x.tex
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-)
-(./convergence2-s-x-M-10_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-x.te
-x
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
 )) (./Discussion.tex
 Chapter 4.
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport' on page 57 undefined
+ on input line 7.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_simple' on page 57 un
+defined on input line 15.
+
+
+LaTeX Warning: Reference `section:numerical_results_convergence_tests' on page 
+57 undefined on input line 15.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_simple' on page 57 un
+defined on input line 15.
+
+
+LaTeX Warning: Reference `section:numerical_results_convergence_tests' on page 
+57 undefined on input line 15.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_simple' on page 57 un
+defined on input line 15.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_simple' on page 58 un
+defined on input line 19.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_simple' on page 58 un
+defined on input line 25.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_simple' on page 58 un
+defined on input line 31.
+
+
+LaTeX Warning: Reference `eq:flux_dominated_residual' on page 58 undefined on i
+nput line 43.
+
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_simple' on page 61 un
+defined on input line 77.
+
+
+LaTeX Warning: Reference `fig:fractional_flow_wrt_viscosity_ratio' on page 61 u
+ndefined on input line 81.
+
+(./fractional_flow_wrt_viscosity_ratio.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+
+LaTeX Warning: Reference `eq:fractional_flow_function' on page 61 undefined on 
+input line 30.
+
+
+LaTeX Warning: Reference `eq:viscosity_ratio' on page 61 undefined on input lin
+e 30.
+
+
+LaTeX Warning: Reference `eq:fractional_flow_function' on page 61 undefined on 
+input line 30.
+
+
+LaTeX Warning: Reference `eq:viscosity_ratio' on page 61 undefined on input lin
+e 30.
+
+)
+
+LaTeX Warning: Reference `eq:residual_two_phase_transport_simple' on page 61 un
+defined on input line 96.
+
+
+LaTeX Warning: Reference `eq:fractional_flow_function_expanded' on page 61 unde
+fined on input line 100.
+
+
+LaTeX Warning: Reference `eq:mobility' on page 61 undefined on input line 104.
+
+
+LaTeX Warning: Reference `eq:flux_term_dominance_criterium' on page 61 undefine
+d on input line 108.
+
 ) (./appendixA.tex
 Appendix A.
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
@@ -2427,27 +2418,27 @@ No file tikz/q5_hom_m-0_1.bbl.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 244.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 244.
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 244.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 244.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 245.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 245.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 245.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 245.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 244.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 245.
  ) 
 Here is how much of TeX's memory you used:
- 33862 strings out of 493315
- 781679 string characters out of 6137905
- 1179029 words of memory out of 5000000
- 36625 multiletter control sequences out of 15000+600000
+ 33700 strings out of 493315
+ 776564 string characters out of 6137905
+ 1177590 words of memory out of 5000000
+ 36484 multiletter control sequences out of 15000+600000
  18595 words of font info for 69 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 64i,23n,105p,2744b,2491s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
-></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
-/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-Output written on tikz/q5_hom_m-0_1.pdf (1 page, 35560 bytes).
+ 64i,23n,105p,2744b,2495s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></u
+sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on tikz/q5_hom_m-0_1.pdf (1 page, 33772 bytes).
 PDF statistics:
  28 PDF objects out of 1000 (max. 8388607)
  21 compressed objects within 1 object stream

@@ -1,18 +1,18 @@
-function [] = plotWRTViscosity(s,s0,qo,qi,dtpv,muw,muo,r)
+function [] = plotWRTViscosity(s,s0,qo,qi,dtpv,v,r)
+n = length(v);
+if(numel(v) < 2)
+    throw('To few elements in viscosity vector')
+elseif(numel(v) == 2)
+    n = 1;
+end
+
 clf;
 hold on; grid on;
-v = [1, 1000;...
-     1, 100; ...
-     1, 10;  ...
-     1, 1;   ...
-     10, 1;  ...
-     100, 1; ...
-     1000, 1;...
-    ];
-for i = 1:length(v)
-Rs = r(s,s0,qo,qi,dtpv,muw*v(i,1),muo*v(i,2));
+
+for i = 1:n
+Rs = r(s,s0,qo,qi,dtpv,v(i,1),v(i,2));
 plot(s,Rs);
-plot(scale(v(i,1)/v(i,2),qo,qi,dtpv),0,'c*');
+plot(scale(v(i,1)/v(i,2),qo,qi,dtpv),0,'ko');
 end
 plot(s,0*s,'r');
 hold off;

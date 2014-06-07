@@ -14,6 +14,6 @@ if(abs(rq) == 1)% && abs(tau*qo) <= 100)
         s0 = 1;
     end
 else
-    root_guess_m = @(Rq,M) 1./(1+Rq./M).*(1-sqrt(abs(Rq)./M));
+    root_guess_m = @(Rq,M) (1-sqrt(abs(Rq)./M))./(1+Rq./M);
     s0 = root_guess_m(1+rq,M);
 end
