@@ -3,4 +3,3 @@ tikz/tarbert_2D_m-1_0.pdf: datafiles/spe10-cputvsdt-s-t-T-30-m-1-1-dim-60-60-10-
 tikz/tarbert_2D_m-1_0.pdf: datafiles/spe10-cputvsdt-s-a-T-30-m-1-1-dim-60-60-10-60-220-1-perm-i-0-0-0-i-50.data
 tikz/tarbert_2D_m-1_0.pdf: datafiles/spe10-cputvsdt-s-b-T-30-m-1-1-dim-60-60-10-60-220-1-perm-i-0-0-0-i-50.data
 tikz/tarbert_2D_m-1_0.pdf: datafiles/spe10-cputvsdt-s-i-T-30-m-1-1-dim-60-60-10-60-220-1-perm-i-0-0-0-i-50.data
-tikz/tarbert_2D_m-1_0.pdf: datafiles/spe10-cputvsdt-s-g-T-30-m-1-1-dim-60-60-10-60-220-1-perm-i-0-0-0-i-50.data

@@ -1,0 +1,5 @@
+tikz/q5_cputime_perm_h_10_m_10_1_i_4.pdf: datafiles/q5-cputvsdt-s-r-T-300-m-10-1-dim-10-10-20-20-perm-h-10-i-4.data
+tikz/q5_cputime_perm_h_10_m_10_1_i_4.pdf: datafiles/q5-cputvsdt-s-t-T-300-m-10-1-dim-10-10-20-20-perm-h-10-i-4.data
+tikz/q5_cputime_perm_h_10_m_10_1_i_4.pdf: datafiles/q5-cputvsdt-s-a-T-300-m-10-1-dim-10-10-20-20-perm-h-10-i-4.data
+tikz/q5_cputime_perm_h_10_m_10_1_i_4.pdf: datafiles/q5-cputvsdt-s-b-T-300-m-10-1-dim-10-10-20-20-perm-h-10-i-4.data
+tikz/q5_cputime_perm_h_10_m_10_1_i_4.pdf: datafiles/q5-cputvsdt-s-i-T-300-m-10-1-dim-10-10-20-20-perm-h-10-i-4.data

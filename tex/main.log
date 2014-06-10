@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.5.3)  6 JUN 2014 22:57
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.5.3)  9 JUN 2014 23:00
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -977,6 +977,31 @@ File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 ods.aux)
 (./numerical_results.aux
 
+LaTeX Warning: Label `table:q5_saturations_statisitcs_t_50_i_180' multiply defi
+ned.
+
+
+LaTeX Warning: Label `fig:tarbert_2d_viscrat_0_1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:tarbert_2d_viscrat_0_1' multiply defined.
+
+
+LaTeX Warning: Label `fig:tarbert_2d_viscrat_1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:tarbert_2d_viscrat_1' multiply defined.
+
+
+LaTeX Warning: Label `fig:tarbert_2d_viscrat_10' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:tarbert_2d_viscrat_10' multiply defined.
+
+
+LaTeX Warning: Label `fig:tarbert_2d' multiply defined.
+
+
 LaTeX Warning: Label `fig:tarbert_2d_viscrat_0_1' multiply defined.
 
 
@@ -1069,7 +1094,7 @@ s been generated with the most recent feature set (\pgfplotsset{compat=1.10}).
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<figures/ntnuLogo.png, id=155, 404.9529pt x 76.8471pt>
+<figures/ntnuLogo.png, id=151, 404.9529pt x 76.8471pt>
 File: figures/ntnuLogo.png Graphic file (type png)
 
 <use figures/ntnuLogo.png>
@@ -1127,14 +1152,14 @@ ut line 15.
 
  (./mathematical_model.tex
 Chapter 1.
-<figures/mineral_grains.png, id=316, 501.875pt x 501.875pt>
+<figures/mineral_grains.png, id=305, 501.875pt x 501.875pt>
 File: figures/mineral_grains.png Graphic file (type png)
 
 <use figures/mineral_grains.png>
 Package pdftex.def Info: figures/mineral_grains.png used on input line 15.
 (pdftex.def)             Requested size: 133.7709pt x 133.76968pt.
 
-<figures/fractures.png, id=317, 501.875pt x 501.875pt>
+<figures/fractures.png, id=306, 501.875pt x 501.875pt>
 File: figures/fractures.png Graphic file (type png)
 
 <use figures/fractures.png>
@@ -1145,12 +1170,12 @@ Package pdftex.def Info: figures/fractures.png used on input line 20.
 
 
 ]
-Overfull \hbox (4.11118pt too wide) in paragraph at lines 33--33
+Overfull \hbox (4.11118pt too wide) in paragraph at lines 35--35
  []|\OT1/cmr/bx/n/12 Permeability| 
  []
 
 [6 <./figures/mineral_grains.png (PNG copy)> <./figures/fractures.png (PNG copy
-)>] [7] <figures/saigup_field_pressure.png, id=364, 821.0675pt x 497.86pt>
+)>] [7] <figures/saigup_field_pressure.png, id=353, 821.0675pt x 497.86pt>
 File: figures/saigup_field_pressure.png Graphic file (type png)
 
 <use figures/saigup_field_pressure.png>
@@ -1164,17 +1189,17 @@ with the same identifier (name{equation.1.2.1}) has been already used, duplicat
 e ignored
 <to be read again> 
                    \relax 
-l.177 \end{align}
+l.178 \end{align}
                  pdfTeX warning (ext4): destination with the same identifier (n
 ame{equation.1.2.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.177 \end{align}
+l.178 \end{align}
                  pdfTeX warning (ext4): destination with the same identifier (n
 ame{equation.1.2.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.177 \end{align}
+l.178 \end{align}
                  ) [13]
 \openout2 = `numerical_methods.aux'.
 
@@ -1197,36 +1222,37 @@ Underfull \vbox (badness 2818) has occurred while \output is active []
 ) [22] [23 <./tikz/spatial_domain_grid.pdf>] [24] [25] [26]
 (./residual.tikz.tex
 ===== Image 'tikz/residual' is up-to-date. ======
-) (./mobility_upwind.tikz.tex
+) [27 <./tikz/residual.pdf>] (./mobility_upwind.tikz.tex
 ===== Image 'tikz/mobility_upwind' is up-to-date. ======
-) [27]
+)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [28 <./tikz/residual.pdf>] (./residual_grav.tikz.tex
+ [28]
+(./residual_grav.tikz.tex
 ===== Image 'tikz/residual_gravity' is up-to-date. ======
-) [29 <./tikz/mobility_upwind.pdf>]
+) [29 <./tikz/mobility_upwind.pdf> <./tikz/residual_gravity.pdf>]
+(./discretization_velocity_sparsity_pattern_natural_numbering.tex
 ===== Image 'tikz/3x3_grid_natural_numbering' is up-to-date. ======
 ===== Image 'tikz/3x3_array_natural_numbering' is up-to-date. ======
+) (./discretization_velocity_sparsity_pattern_topological_numbering.tex
 ===== Image 'tikz/3x3_grid_topological_numbering' is up-to-date. ======
 ===== Image 'tikz/3x3_array_topological_numbering' is up-to-date. ======
-
-Underfull \vbox (badness 5652) has occurred while \output is active []
-
- [30 <./tikz/residual_gravity.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [31 <./tikz/3x3_grid_natural_numbering.pdf> <./tikz/3x3_array_natural_numberin
-g.pdf>]
-[32 <./tikz/3x3_grid_topological_numbering.pdf> <./tikz/3x3_array_topological_n
-umbering.pdf>] [33]
+) [30] [31 <./tikz/3x3_grid_natural_numbering.pdf> <./tikz/3x3_array_natural_nu
+mbering.pdf> <./tikz/3x3_grid_topological_numbering.pdf> <./tikz/3x3_array_topo
+logical_numbering.pdf>] [32] [33]
 ===== Image 'tikz/regula_falsi_secant' is up-to-date. ======
-[34 <./tikz/regula_falsi_secant.pdf>] [35] [36] [37] [38] [39]
+[34] [35 <./tikz/regula_falsi_secant.pdf>] [36] [37] [38]
 ===== Image 'tikz/newton_tangent' is up-to-date. ======
-[40] (./dimensionless_water_flux_function.tex
+[39 <./tikz/newton_tangent.pdf>] [40] [41]
+(./dimensionless_water_flux_function.tex
 ===== Image 'tikz/water_flux_viscosity' is up-to-date. ======
 ===== Image 'tikz/water_flux_buoyancy' is up-to-date. ======
 ===== Image 'tikz/water_flux_capillarity' is up-to-date. ======
-) [41 <./tikz/newton_tangent.pdf>] (./newton_methods_viscosity.tex
+) [42]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [43 <./tikz/water_flux_viscosity.pdf> <./tikz/water_flux_buoyancy.pdf> <./tikz
+/water_flux_capillarity.pdf>] [44] (./newton_methods_viscosity.tex
 ===== Image 'tikz/newton_divergence' is up-to-date. ======
 
 Overfull \hbox (10.2142pt too wide) in paragraph at lines 5--30
@@ -1239,11 +1265,10 @@ Overfull \hbox (10.21822pt too wide) in paragraph at lines 36--66
  [][] 
  []
 
-) [42 <./tikz/water_flux_viscosity.pdf> <./tikz/water_flux_buoyancy.pdf> <./tik
-z/water_flux_capillarity.pdf>] [43] [44 <./tikz/newton_divergence.pdf> <./tikz/
-newton_jtr_convergence.pdf>] (./wang_tchelepi_residual.tex
+) [45 <./tikz/newton_divergence.pdf> <./tikz/newton_jtr_convergence.pdf>]
+(./wang_tchelepi_residual.tex
 ===== Image 'tikz/wang_tchelepi_residual' is up-to-date. ======
-) [45]) [46] [47 <./tikz/wang_tchelepi_residual.pdf>]
+)) [46] [47 <./tikz/wang_tchelepi_residual.pdf>]
 \openout2 = `numerical_results.aux'.
 
  (./numerical_results.tex
@@ -1257,59 +1282,209 @@ Chapter 3.
 ===== Image 'tikz/spe10_perm_tarbert' is up-to-date. ======
 ===== Image 'tikz/spe10_perm_upperness' is up-to-date. ======
 )
-Overfull \hbox (11.57735pt too wide) in paragraph at lines 16--19
+Overfull \hbox (11.57735pt too wide) in paragraph at lines 13--15
 [] \OT1/cmr/m/n/12 im-ple-ments the func-tion-al-ity needed
  []
 
 
-Overfull \hbox (7.78917pt too wide) in paragraph at lines 16--19
+Overfull \hbox (7.78917pt too wide) in paragraph at lines 13--15
 \OT1/cmr/m/n/12 method [] on a per-sis-tent []
  []
 
 [49]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 24.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 22.
  (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 22.
 
 (./sat_hist_hom.tex
 ===== Image 'tikz/sat_hist_hom' is up-to-date. ======
-) [50 <./tikz/spe10_perm_tarbert.pdf> <./tikz/spe10_perm_upperness.pdf>]
-[51 <./tikz/sat_hist_hom.pdf>] (./caseA_iterations.tex
-===== Image 'tikz/caseA_iterations' is up-to-date. ======
-) [52 <./tikz/caseA_iterations.pdf>]
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [50 <./tikz/spe10_perm_tarbert.pdf> <./tikz/spe10_perm_upperness.pdf>] [51 <./
+tikz/sat_hist_hom.pdf>]
+
+LaTeX Warning: Reference `fig:caseA_iterations_t_5' on page 52 undefined on inp
+ut line 33.
+
+
+LaTeX Warning: Reference `fig:caseA_iterations_t_5' on page 52 undefined on inp
+ut line 33.
+
+
+LaTeX Warning: Reference `fig:q5_homperm_10' on page 52 undefined on input line
+ 35.
+
 (./q5-cputvsdt-s-x-T-300-m-x-dim-120-120-20-20-perm-h-10-i-180.tex
-===== Image 'tikz/q5_hom_m-0_1' is up-to-date. ======
+===== Image 'tikz/q5_cputime_perm_h_10_m_1_10_i_180' is up-to-date. ======
 
 Overfull \hbox (2.48271pt too wide) in paragraph at lines 5--22
 [][] 
  []
 
-===== Image 'tikz/q5_hom_m-1_0' is up-to-date. ======
+===== Image 'tikz/q5_cputime_perm_h_10_m_1_1_i_180' is up-to-date. ======
 
 Overfull \hbox (2.48271pt too wide) in paragraph at lines 28--45
 [][] 
  []
 
-===== Image 'tikz/q5_hom_m-10_0' is up-to-date. ======
+===== Image 'tikz/q5_cputime_perm_h_10_m_10_1_i_180' is up-to-date. ======
 
 Overfull \hbox (2.48271pt too wide) in paragraph at lines 51--68
 [][] 
  []
 
-) [53]
+) (./q5-iterations-s-x-T-300-m-x-dim-120-120-20-20-perm-h-10-i-180.tex
+===== Image 'tikz/q5_iterations_perm_h_10_m_1_10_i_180_dt_1to30' is up-to-date.
+ ======
+===== Image 'tikz/q5_iterations_perm_h_10_m_1_10_i_180_dt_40to150' is up-to-dat
+e. ======
+
+Overfull \hbox (10.77306pt too wide) in paragraph at lines 31--53
+[][] 
+ []
+
+===== Image 'tikz/q5_iterations_perm_h_10_m_1_1_i_180_dt_1to30' is up-to-date. 
+======
+===== Image 'tikz/q5_iterations_perm_h_10_m_1_1_i_180_dt_40to150' is up-to-date
+. ======
+
+Overfull \hbox (10.77306pt too wide) in paragraph at lines 85--107
+[][] 
+ []
+
+===== Image 'tikz/q5_iterations_perm_h_10_m_10_1_i_180_dt_1to30' is up-to-date.
+ ======
+===== Image 'tikz/q5_iterations_perm_h_10_m_10_1_i_180_dt_40to150' is up-to-dat
+e. ======
+
+Overfull \hbox (10.77306pt too wide) in paragraph at lines 139--161
+[][] 
+ []
+
+)
+
+LaTeX Warning: Reference `fig:caseA_iterations_t_5' on page 52 undefined on inp
+ut line 43.
+
+[52]
+
+LaTeX Warning: Text page 53 contains only floats.
+
+
+Underfull \vbox (badness 7326) has occurred while \output is active []
+
+ [53 <./tikz/q5_cputime_perm_h_10_m_1_10_i_180.pdf> <./tikz/q5_cputime_perm_h_1
+0_m_1_1_i_180.pdf> <./tikz/q5_cputime_perm_h_10_m_10_1_i_180.pdf>]
 
 LaTeX Warning: Text page 54 contains only floats.
 
 
-Underfull \vbox (badness 7362) has occurred while \output is active []
+Overfull \vbox (2.121pt too high) has occurred while \output is active []
 
- [54 <./tikz/q5_hom_m-0_1.pdf> <./tikz/q5_hom_m-1_0.pdf> <./tikz/q5_hom_m-10_0.
-pdf>]
-(./sat_perm_tarbert_2D.tex
-<figures/saturation_tarbert_layer-0.png, id=1458, 954.56625pt x 260.975pt>
+ [54 <./tikz/q5_iterations_perm_h_10_m_1_10_i_180_dt_1to30.pdf> <./tikz/q5_iter
+ations_perm_h_10_m_1_10_i_180_dt_40to150.pdf> <./tikz/q5_iterations_perm_h_10_m
+_1_1_i_180_dt_1to30.pdf> <./tikz/q5_iterations_perm_h_10_m_1_1_i_180_dt_40to150
+.pdf> <./tikz/q5_iterations_perm_h_10_m_10_1_i_180_dt_1to30.pdf> <./tikz/q5_ite
+rations_perm_h_10_m_10_1_i_180_dt_40to150.pdf>]
+
+LaTeX Warning: Reference `fig:q5_root_saturations_t_50' on page 55 undefined on
+ input line 53.
+
+
+LaTeX Warning: Reference `table:q5_saturations_statisitcs_t_50' on page 55 unde
+fined on input line 53.
+
+
+LaTeX Warning: Reference `fig:q5_root_saturations_t_50' on page 55 undefined on
+ input line 53.
+
+(./q5_saturations_statisitcs_t_50_i_180.tex) [55]
+(./q5_root_saturations_i_180.tex
+===== Image 'tikz/q5_root_saturations_i_180' is up-to-date. ======
+) (./q5_initial_guess_errors_i_180.tex
+===== Image 'tikz/q5_initial_guess_errors_i_180' is up-to-date. ======
+) [56 <./tikz/q5_root_saturations_i_180.pdf>] [57 <./tikz/q5_initial_guess_erro
+rs_i_180.pdf>] (./q5-iterations-s-x-T-300-m-x-dim-10-10-20-20-perm-h-10-i-4.tex
+===== Image 'tikz/q5_iterations_perm_h_10_m_1_10_i_4_dt_1to30' is up-to-date. =
+=====
+===== Image 'tikz/q5_iterations_perm_h_10_m_1_10_i_4_dt_40to150' is up-to-date.
+ ======
+
+Overfull \hbox (10.77306pt too wide) in paragraph at lines 31--53
+[][] 
+ []
+
+===== Image 'tikz/q5_iterations_perm_h_10_m_1_1_i_4_dt_1to30' is up-to-date. ==
+====
+===== Image 'tikz/q5_iterations_perm_h_10_m_1_1_i_4_dt_40to150' is up-to-date. 
+======
+
+Overfull \hbox (10.77306pt too wide) in paragraph at lines 85--107
+[][] 
+ []
+
+===== Image 'tikz/q5_iterations_perm_h_10_m_10_1_i_4_dt_1to30' is up-to-date. =
+=====
+===== Image 'tikz/q5_iterations_perm_h_10_m_10_1_i_4_dt_40to150' is up-to-date.
+ ======
+
+Overfull \hbox (10.77306pt too wide) in paragraph at lines 139--161
+[][] 
+ []
+
+) [58
+
+]
+
+LaTeX Warning: Text page 59 contains only floats.
+
+
+Underfull \vbox (badness 7326) has occurred while \output is active []
+
+ [59 <./tikz/q5_iterations_perm_h_10_m_1_10_i_4_dt_1to30.pdf> <./tikz/q5_iterat
+ions_perm_h_10_m_1_10_i_4_dt_40to150.pdf> <./tikz/q5_iterations_perm_h_10_m_1_1
+_i_4_dt_1to30.pdf> <./tikz/q5_iterations_perm_h_10_m_1_1_i_4_dt_40to150.pdf> <.
+/tikz/q5_iterations_perm_h_10_m_10_1_i_4_dt_1to30.pdf> <./tikz/q5_iterations_pe
+rm_h_10_m_10_1_i_4_dt_40to150.pdf>]
+(./q5-cputvsdt-s-x-T-300-m-x-dim-10-10-20-20-perm-h-10-i-4.tex
+===== Image 'tikz/q5_cputime_perm_h_10_m_1_10_i_4' is up-to-date. ======
+
+Overfull \hbox (2.48271pt too wide) in paragraph at lines 5--22
+[][] 
+ []
+
+===== Image 'tikz/q5_cputime_perm_h_10_m_1_1_i_4' is up-to-date. ======
+
+Overfull \hbox (2.48271pt too wide) in paragraph at lines 28--45
+[][] 
+ []
+
+===== Image 'tikz/q5_cputime_perm_h_10_m_10_1_i_4' is up-to-date. ======
+
+Overfull \hbox (2.48271pt too wide) in paragraph at lines 51--68
+[][] 
+ []
+
+) (./q5_saturations_statisitcs_t_50_i_4.tex) (./q5_root_saturations_i_4.tex
+===== Image 'tikz/q5_root_saturations_i_4' is up-to-date. ======
+) (./q5_initial_guess_errors_i_4.tex
+===== Image 'tikz/q5_initial_guess_errors_i_4' is up-to-date. ======
+) [60]
+
+LaTeX Warning: Text page 61 contains only floats.
+
+
+Underfull \vbox (badness 7344) has occurred while \output is active []
+
+ [61 <./tikz/q5_cputime_perm_h_10_m_1_10_i_4.pdf> <./tikz/q5_cputime_perm_h_10_
+m_1_1_i_4.pdf> <./tikz/q5_cputime_perm_h_10_m_10_1_i_4.pdf>] [62 <./tikz/q5_roo
+t_saturations_i_4.pdf> <./tikz/q5_initial_guess_errors_i_4.pdf>] (./sat_perm_ta
+rbert_2D.tex <figures/saturation_tarbert_layer-0.png, id=1693, 954.56625pt x 26
+0.975pt>
 File: figures/saturation_tarbert_layer-0.png Graphic file (type png)
 
 <use figures/saturation_tarbert_layer-0.png>
@@ -1317,35 +1492,87 @@ Package pdftex.def Info: figures/saturation_tarbert_layer-0.png used on input l
 ine 4.
 (pdftex.def)             Requested size: 191.10214pt x 52.24583pt.
 
-<figures/perm_tarbert_layer-0.png, id=1459, 839.135pt x 226.8475pt>
+<figures/perm_tarbert_layer-0.png, id=1694, 839.135pt x 226.8475pt>
 File: figures/perm_tarbert_layer-0.png Graphic file (type png)
 
 <use figures/perm_tarbert_layer-0.png>
 Package pdftex.def Info: figures/perm_tarbert_layer-0.png used on input line 10
 .
 (pdftex.def)             Requested size: 191.10214pt x 51.66153pt.
-) (./caseB_iterations.tex
-===== Image 'tikz/caseB_iterations' is up-to-date. ======
-) (./spe10-cputvsdt-s-x-T-30-m-x-dim-60-60-10-60-220-1-perm-i-0-0-0-i-50.tex
+)
+(./spe10-cputvsdt-s-x-T-30-m-x-dim-60-60-10-60-220-1-perm-i-0-0-0-i-50.tex
 ===== Image 'tikz/tarbert_2D_m-0_1' is up-to-date. ======
+
+Overfull \hbox (3.628pt too wide) in paragraph at lines 5--23
+[][]
+ []
+
 ===== Image 'tikz/tarbert_2D_m-1_0' is up-to-date. ======
+
+Overfull \hbox (3.628pt too wide) in paragraph at lines 28--46
+[][]
+ []
+
 ===== Image 'tikz/tarbert_2D_m-10_0' is up-to-date. ======
-) [55
+
+Overfull \hbox (3.628pt too wide) in paragraph at lines 51--69
+[][]
+ []
+
+
+LaTeX Warning: Float too large for page by 31.12845pt on input line 73.
+
+) [63
 
  <./figures/saturation_tarbert_layer-0.png> <./figures/perm_tarbert_layer-0.png
->] [56 <./tikz/caseB_iterations.pdf>] [57 <./tikz/tarbert_2D_m-0_1.pdf> <./tikz
-/tarbert_2D_m-1_0.pdf> <./tikz/tarbert_2D_m-10_0.pdf>]
-Overfull \hbox (22.62054pt too wide) in paragraph at lines 68--68
+>] [64 <./tikz/tarbert_2D_m-0_1.pdf> <./tikz/tarbert_2D_m-1_0.pdf> <./tikz/tarb
+ert_2D_m-10_0.pdf>]
+(./spe10-iterations-s-x-T-400-m-x-dim-10-10-60-220-perm-i-0-0-0-i-50.tex
+===== Image 'tikz/spe10_iterations_perm_i_0_0_0_m_1_10_i_50_dt_1to30' is up-to-
+date. ======
+===== Image 'tikz/spe10_iterations_perm_i_0_0_0_m_1_10_i_50_dt_40to150' is up-t
+o-date. ======
+
+Overfull \hbox (4.16237pt too wide) in paragraph at lines 31--53
+[][] 
+ []
+
+===== Image 'tikz/spe10_iterations_perm_i_0_0_0_m_1_1_i_50_dt_1to30' is up-to-d
+ate. ======
+===== Image 'tikz/spe10_iterations_perm_i_0_0_0_m_1_1_i_50_dt_40to150' is up-to
+-date. ======
+
+Overfull \hbox (4.16237pt too wide) in paragraph at lines 85--107
+[][] 
+ []
+
+===== Image 'tikz/spe10_iterations_perm_i_0_0_0_m_10_1_i_50_dt_1to30' is up-to-
+date. ======
+===== Image 'tikz/spe10_iterations_perm_i_0_0_0_m_10_1_i_50_dt_40to150' is up-t
+o-date. ======
+
+Overfull \hbox (4.16237pt too wide) in paragraph at lines 139--161
+[][] 
+ []
+
+) [65
+
+] [66 <./tikz/spe10_iterations_perm_i_0_0_0_m_1_10_i_50_dt_1to30.pdf> <./tikz/s
+pe10_iterations_perm_i_0_0_0_m_1_10_i_50_dt_40to150.pdf> <./tikz/spe10_iteratio
+ns_perm_i_0_0_0_m_1_1_i_50_dt_1to30.pdf> <./tikz/spe10_iterations_perm_i_0_0_0_
+m_1_1_i_50_dt_40to150.pdf> <./tikz/spe10_iterations_perm_i_0_0_0_m_10_1_i_50_dt
+_1to30.pdf> <./tikz/spe10_iterations_perm_i_0_0_0_m_10_1_i_50_dt_40to150.pdf>]
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 118--118
 [][][] 
  []
 
 
-Overfull \hbox (22.62054pt too wide) in paragraph at lines 68--68
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 118--118
 [][][] 
  []
 
 (./sat_perm_upperness_2D.tex
-<figures/saturation_upperness_layer-35.png, id=1529, 958.58125pt x 260.975pt>
+<figures/saturation_upperness_layer-35.png, id=1815, 958.58125pt x 260.975pt>
 File: figures/saturation_upperness_layer-35.png Graphic file (type png)
 
 <use figures/saturation_upperness_layer-35.png>
@@ -1353,38 +1580,82 @@ Package pdftex.def Info: figures/saturation_upperness_layer-35.png used on inpu
 t line 4.
 (pdftex.def)             Requested size: 191.10214pt x 52.02682pt.
 
-<figures/perm_upperness_layer-35.png, id=1530, 433.62pt x 115.43124pt>
+<figures/perm_upperness_layer-35.png, id=1816, 433.62pt x 115.43124pt>
 File: figures/perm_upperness_layer-35.png Graphic file (type png)
 
 <use figures/perm_upperness_layer-35.png>
 Package pdftex.def Info: figures/perm_upperness_layer-35.png used on input line
  10.
 (pdftex.def)             Requested size: 191.10214pt x 50.87268pt.
-) (./caseC_iterations.tex
-===== Image 'tikz/caseC_iterations' is up-to-date. ======
+)
+(./spe10-cputvsdt-s-x-T-30-m-x-dim-60-60-10-60-220-1-perm-i-36-0-0-i-50.tex
+===== Image 'tikz/upperness_2D_m-0_1' is up-to-date. ======
+===== Image 'tikz/upperness_2D_m-1_0' is up-to-date. ======
+===== Image 'tikz/upperness_2D_m-10_0' is up-to-date. ======
 ) (./spe10-cputvsdt-s-x-T-30-m-x-dim-60-60-10-60-220-1-perm-i-36-0-0-i-50.tex
 ===== Image 'tikz/upperness_2D_m-0_1' is up-to-date. ======
 ===== Image 'tikz/upperness_2D_m-1_0' is up-to-date. ======
 ===== Image 'tikz/upperness_2D_m-10_0' is up-to-date. ======
-) [58
+) [67
 
  <./figures/saturation_upperness_layer-35.png> <./figures/perm_upperness_layer-
-35.png> <./tikz/caseC_iterations.pdf>]
+35.png>]
 
-LaTeX Warning: Text page 59 contains only floats.
+LaTeX Warning: Text page 68 contains only floats.
 
-[59 <./tikz/upperness_2D_m-0_1.pdf> <./tikz/upperness_2D_m-1_0.pdf> <./tikz/upp
-erness_2D_m-10_0.pdf>] [60
+[68 <./tikz/upperness_2D_m-0_1.pdf> <./tikz/upperness_2D_m-1_0.pdf> <./tikz/upp
+erness_2D_m-10_0.pdf>]
 
-] [61
+LaTeX Warning: Text page 69 contains only floats.
+
+[69 <./tikz/upperness_2D_m-0_1.pdf> <./tikz/upperness_2D_m-1_0.pdf> <./tikz/upp
+erness_2D_m-10_0.pdf>]
+(./spe10-iterations-s-x-T-400-m-x-dim-10-10-60-220-perm-i-36-0-0-i-50.tex
+===== Image 'tikz/spe10_iterations_perm_i_36_0_0_m_1_10_i_50_dt_1to30' is up-to
+-date. ======
+===== Image 'tikz/spe10_iterations_perm_i_36_0_0_m_1_10_i_50_dt_40to150' is up-
+to-date. ======
+
+Overfull \hbox (4.16237pt too wide) in paragraph at lines 31--53
+[][] 
+ []
+
+===== Image 'tikz/spe10_iterations_perm_i_36_0_0_m_1_1_i_50_dt_1to30' is up-to-
+date. ======
+===== Image 'tikz/spe10_iterations_perm_i_36_0_0_m_1_1_i_50_dt_40to150' is up-t
+o-date. ======
+
+Overfull \hbox (4.16237pt too wide) in paragraph at lines 85--107
+[][] 
+ []
+
+===== Image 'tikz/spe10_iterations_perm_i_36_0_0_m_10_1_i_50_dt_1to30' is up-to
+-date. ======
+===== Image 'tikz/spe10_iterations_perm_i_36_0_0_m_10_1_i_50_dt_40to150' is up-
+to-date. ======
+
+Overfull \hbox (4.16237pt too wide) in paragraph at lines 139--161
+[][] 
+ []
+
+) [70
+
+] [71 <./tikz/spe10_iterations_perm_i_36_0_0_m_1_10_i_50_dt_1to30.pdf> <./tikz/
+spe10_iterations_perm_i_36_0_0_m_1_10_i_50_dt_40to150.pdf> <./tikz/spe10_iterat
+ions_perm_i_36_0_0_m_1_1_i_50_dt_1to30.pdf> <./tikz/spe10_iterations_perm_i_36_
+0_0_m_1_1_i_50_dt_40to150.pdf> <./tikz/spe10_iterations_perm_i_36_0_0_m_10_1_i_
+50_dt_1to30.pdf> <./tikz/spe10_iterations_perm_i_36_0_0_m_10_1_i_50_dt_40to150.
+pdf>] [72
+
+] [73
 
 ]
-Overfull \hbox (22.62054pt too wide) in paragraph at lines 98--98
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 157--157
 [][][] 
  []
 
 
-Overfull \hbox (22.62054pt too wide) in paragraph at lines 98--98
+Overfull \hbox (22.62054pt too wide) in paragraph at lines 157--157
 [][][] 
  []
 
@@ -1421,35 +1692,40 @@ LaTeX Warning: Float too large for page by 27.8649pt on input line 127.
 
 LaTeX Warning: Float too large for page by 31.36597pt on input line 127.
 
-) [62
+)) [74
 
-] [63 <./tikz/main-figure0.pdf> <./tikz/main-figure1.pdf> <./tikz/main-figure2.
+] [75 <./tikz/main-figure0.pdf> <./tikz/main-figure1.pdf> <./tikz/main-figure2.
 pdf> <./tikz/main-figure3.pdf> <./tikz/main-figure4.pdf> <./tikz/main-figure5.p
-df>] [64 <./tikz/main-figure6.pdf> <./tikz/main-figure7.pdf> <./tikz/main-figur
+df>] [76 <./tikz/main-figure6.pdf> <./tikz/main-figure7.pdf> <./tikz/main-figur
 e8.pdf> <./tikz/main-figure9.pdf> <./tikz/main-figure10.pdf> <./tikz/main-figur
-e11.pdf>] [65 <./tikz/main-figure12.pdf> <./tikz/main-figure13.pdf> <./tikz/mai
+e11.pdf>] [77 <./tikz/main-figure12.pdf> <./tikz/main-figure13.pdf> <./tikz/mai
 n-figure14.pdf> <./tikz/main-figure15.pdf> <./tikz/main-figure16.pdf> <./tikz/m
-ain-figure17.pdf>]) [66
-
-]
+ain-figure17.pdf>]
 \openout2 = `Discussion.aux'.
 
- (./Discussion.tex
+ (./Discussion.tex [78
+
+
+
+]
 Chapter 4.
-[67
+[79] [80] [81] [82]) [83] [84
 
 
+]
+Overfull \hbox (12.26805pt too wide) in paragraph at lines 238--239
+[]\OT1/cmr/m/n/12 Pellentesque ve-hic-ula vulpu-tate mi, sed scelerisque la-cus
+ con-secte-tur viverra.
+ []
 
-] [68] [69] [70] [71
 
-]) [72] [73
+Underfull \vbox (badness 1803) has occurred while \output is active []
+
+ [85]
+[86] [87
 
 
-] [74
-
-] [75
-
-] [76]
+] [88]
 \openout2 = `appendixA.aux'.
 
  (./appendixA.tex
@@ -1464,36 +1740,36 @@ File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 27.
- [77
+ [89
 
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [78]
-[79]
+ [90]
+[91]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [80]
+ [92]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [81]
+ [93]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [82])
-(./main.bbl [83
+ [94])
+(./main.bbl [95
 
 
-] [84] [85]) [86]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 245.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 245.
+] [96] [97]) [98]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 255.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 255.
  (./main.aux (./introduction.aux)
 (./mathematical_model.aux) (./numerical_methods.aux) (./numerical_results.aux)
 (./Discussion.aux) (./appendixA.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 245.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 245.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 255.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 255.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5C212D0594528424DBAF5B7A13DE0DC8;2348.
+(rerunfilecheck)             Checksum: DEE24E78360C83D8CB420DB8A2B323C7;2288.
 
 
 LaTeX Warning: There were undefined references.
@@ -1501,49 +1777,43 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 245.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 255.
  ) 
 Here is how much of TeX's memory you used:
- 34173 strings out of 493315
- 778787 string characters out of 6137905
- 1170992 words of memory out of 5000000
- 36260 multiletter control sequences out of 15000+600000
+ 34321 strings out of 493315
+ 785685 string characters out of 6137905
+ 1172992 words of memory out of 5000000
+ 36325 multiletter control sequences out of 15000+600000
  18595 words of font info for 69 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  62i,18n,97p,2710b,1937s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{figure.caption.45} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section*.47} has been referenced but does not exist
-, replaced by a fixed one
-
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
-/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></u
-sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></
-usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></
-usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
-/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/l
-ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loc
-al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/loc
-al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local
-/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/t
-exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/tex
-live/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
-e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
-013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
-13/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2013
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2013/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2013/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2013/texmf
--dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2013/t
-exmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (94 pages, 2815547 bytes).
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><
+/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb>
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
+/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
+ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/l
+ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
+al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
+/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texl
+ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive
+/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/
+2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/20
+13/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2013/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2013/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2013/tex
+mf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2013
+/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (106 pages, 3133984 bytes).
 PDF statistics:
- 2400 PDF objects out of 2487 (max. 8388607)
- 2139 compressed objects within 22 object streams
- 625 named destinations out of 1000 (max. 500000)
- 609 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2747 PDF objects out of 2984 (max. 8388607)
+ 2429 compressed objects within 25 object streams
+ 649 named destinations out of 1000 (max. 500000)
+ 756 words of extra memory for PDF output out of 10000 (max. 10000000)
 

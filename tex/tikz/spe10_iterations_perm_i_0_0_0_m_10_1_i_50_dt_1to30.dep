@@ -1,0 +1,6 @@
+tikz/spe10_iterations_perm_i_0_0_0_m_10_1_i_50_dt_1to30.pdf: datafiles/spe10-iterations-s-r-T-400-m-1-10-dim-10-10-60-220-perm-i-0-0-0-i-50.data
+tikz/spe10_iterations_perm_i_0_0_0_m_10_1_i_50_dt_1to30.pdf: datafiles/spe10-iterations-s-r-T-400-m-10-1-dim-10-10-60-220-perm-i-0-0-0-i-50.data
+tikz/spe10_iterations_perm_i_0_0_0_m_10_1_i_50_dt_1to30.pdf: datafiles/spe10-iterations-s-t-T-400-m-10-1-dim-10-10-60-220-perm-i-0-0-0-i-50.data
+tikz/spe10_iterations_perm_i_0_0_0_m_10_1_i_50_dt_1to30.pdf: datafiles/spe10-iterations-s-a-T-400-m-10-1-dim-10-10-60-220-perm-i-0-0-0-i-50.data
+tikz/spe10_iterations_perm_i_0_0_0_m_10_1_i_50_dt_1to30.pdf: datafiles/spe10-iterations-s-b-T-400-m-10-1-dim-10-10-60-220-perm-i-0-0-0-i-50.data
+tikz/spe10_iterations_perm_i_0_0_0_m_10_1_i_50_dt_1to30.pdf: datafiles/spe10-iterations-s-i-T-400-m-10-1-dim-10-10-60-220-perm-i-0-0-0-i-50.data

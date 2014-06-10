@@ -1,0 +1,32 @@
+\tikzsetnextfilename{caseA_iterations_t_50}
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.45\textwidth,
+    ybar,
+    enlargelimits=0.3,
+    legend style={at={(0.5,-0.15)},
+      anchor=north,legend columns=-1},
+    ylabel={\#iterations},
+    symbolic x coords={M=0.1,M=1,M=10},
+    xtick=data,
+    nodes near coords,
+    every node near coord/.append style={
+    	font=\scriptsize,
+	/pgf/number format/precision=3},
+    point meta=y *10^-4
+    ]
+\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-b-T-300-t-50.data};
+\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-r-T-300-t-50.data};
+\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-i-T-300-t-50.data};
+\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-a-T-300-t-50.data};
+%\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-g-T-300-t-50.data};
+\addplot table[col sep=comma,trim cells=true,x index=0,y index=1] {datafiles/q5-iterations-s-t-T-300-t-50.data};
+\legend{B,RF,R,JTR*,JTR}
+\end{axis}
+\end{tikzpicture}
+\caption{Number of iterations spent when solving Case B, see Section \ref{section:caseA}, with viscosity ratio $M = \frac{\mu_w}{\mu_o}$ and the different root finders with time step $\Delta t = \unit[50]{d}$.}
+\label{fig:caseA_iterations_t_50}
+\end{figure}

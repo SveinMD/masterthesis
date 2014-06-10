@@ -1,4 +1,4 @@
-\begin{tikzpicture}%
+\begin{tikzpicture}[scale=0.8]%
      \draw [step=2.0,very thick] (0,0) grid (2,6);
      \node at (1,3) (V) {V};
      \node at (1,1) (L) {L} edge[->,bend right] (V.south east) edge[<-,bend left] (V.south west);
@@ -10,8 +10,11 @@
       \draw [thick, ->] (2.3,2.3) -- (2.3,1.7);
       \node [right] at (2.3,2) {$F_{s_b}^g < 0$};
       
-      \node at (0.3,2.3) {$w$};
-      \node at (1.7,1.7) {$o$};
-      \node at (0.3,4.3) {$w$};
-      \node at (1.7,3.7) {$o$};
+      \node at (0.26,2.33) {$w$};
+      \node at (0.26,4.33) {$w$};
+      \node at (1.72,1.69) {$o$};
+      \node at (1.72,3.69) {$o$};
+      
+       \draw [thick, ->] (-0.4,3.3) -- (-0.4,2.7);
+       \node [left] at (-0.4,3) {$\vec{g}$};
 \end{tikzpicture}%

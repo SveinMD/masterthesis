@@ -1,0 +1,5 @@
+tikz/caseA_iterations_t_50.pdf: datafiles/q5-iterations-s-b-T-300-t-50.data
+tikz/caseA_iterations_t_50.pdf: datafiles/q5-iterations-s-r-T-300-t-50.data
+tikz/caseA_iterations_t_50.pdf: datafiles/q5-iterations-s-i-T-300-t-50.data
+tikz/caseA_iterations_t_50.pdf: datafiles/q5-iterations-s-a-T-300-t-50.data
+tikz/caseA_iterations_t_50.pdf: datafiles/q5-iterations-s-t-T-300-t-50.data

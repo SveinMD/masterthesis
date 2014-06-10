@@ -1,0 +1,28 @@
+\tikzsetnextfilename{q5_root_saturations_i_4}
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+            width=0.97\textwidth,
+            height=0.26\textheight,
+            xmin=0,
+            xmax=2400,
+            xlabel={},
+            ylabel={S},
+            grid=major,
+            xticklabels={,,},
+            legend pos=north west,
+            ]
+        \addplot table[mark=none,header=false,x expr=\coordindex+1,y index=0] {datafiles/q5-sr-T-300-t-50-m-1-10-dim-10-10-10-20-20-1-perm-h-10-i-4.data};
+        \addplot table[mark=none,header=false,x expr=\coordindex+1,y index=0] {datafiles/q5-sr-T-300-t-50-m-1-1-dim-10-10-10-20-20-1-perm-h-10-i-4.data};
+        \addplot table[mark=none,header=false,x expr=\coordindex+1,y index=0] {datafiles/q5-sr-T-300-t-50-m-10-1-dim-10-10-10-20-20-1-perm-h-10-i-4.data};
+        
+        \addplot [blue, mark = *, nodes near coords=$\mu_{S_r}$,every node near coord/.style={anchor=100}] coordinates{(1180,0.3765)};
+        \addplot [red, mark = *, nodes near coords=$\mu_{S_r}$,every node near coord/.style={anchor=100}] coordinates{(960,0.5234)};
+        \addplot [brown, mark = *, nodes near coords=$\mu_{S_r}$,every node near coord/.style={anchor=300}] coordinates{(905,0.5849)};
+        \legend{M=0.1,M=1,M=10}
+    \end{axis}
+\end{tikzpicture}%
+\caption{Sorted cell saturations, 2400 in total, from all time steps for the solution of the Q5 problem in Section \ref{section:caseA} with $\Delta t = \unit[50]{d}$. Values for viscosity ratios $M=0.1$, $M=1$, and $M=10$ are reported with corresponding mean values $\mu_{S_r}$ at $0.3765$, $0.5234$, and $0.5849$, respectively.}
+\label{fig:q5_root_saturations_t_50_i_4}
+\end{figure}%

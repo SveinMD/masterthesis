@@ -2,5 +2,4 @@ tikz/caseA_iterations.pdf: datafiles/q5-iterations-s-b-T-300-t-5.data
 tikz/caseA_iterations.pdf: datafiles/q5-iterations-s-r-T-300-t-5.data
 tikz/caseA_iterations.pdf: datafiles/q5-iterations-s-i-T-300-t-5.data
 tikz/caseA_iterations.pdf: datafiles/q5-iterations-s-a-T-300-t-5.data
-tikz/caseA_iterations.pdf: datafiles/q5-iterations-s-g-T-300-t-5.data
 tikz/caseA_iterations.pdf: datafiles/q5-iterations-s-t-T-300-t-5.data

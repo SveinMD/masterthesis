@@ -1,0 +1,3 @@
+tikz/q5_initial_guess_errors_i_4.pdf: datafiles/q5-s0error-T-300-t-50-m-1-10-dim-10-10-10-20-20-1-perm-h-10-i-4.data
+tikz/q5_initial_guess_errors_i_4.pdf: datafiles/q5-s0error-T-300-t-50-m-1-1-dim-10-10-10-20-20-1-perm-h-10-i-4.data
+tikz/q5_initial_guess_errors_i_4.pdf: datafiles/q5-s0error-T-300-t-50-m-10-1-dim-10-10-10-20-20-1-perm-h-10-i-4.data

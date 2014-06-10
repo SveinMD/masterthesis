@@ -5,22 +5,23 @@ A level-1 auxiliary file: introduction.aux
 A level-1 auxiliary file: mathematical_model.aux
 A level-1 auxiliary file: numerical_methods.aux
 A level-1 auxiliary file: numerical_results.aux
+A level-1 auxiliary file: Discussion.aux
 A level-1 auxiliary file: appendixA.aux
 The style file: plainnat.bst
 Database file #1: master_thesis.bib.bib
 Warning--entry type for "saigup_2003" isn't style-file defined
 --line 12 of file master_thesis.bib.bib
 Warning--entry type for "spe10_2000" isn't style-file defined
---line 33 of file master_thesis.bib.bib
+--line 34 of file master_thesis.bib.bib
 Warning--entry type for "opm_2014" isn't style-file defined
---line 52 of file master_thesis.bib.bib
+--line 54 of file master_thesis.bib.bib
 Warning--can't use both author and editor fields in eymard_finite_2000
 Warning--empty booktitle in lie_fast_2013
 Warning--empty booktitle in molenaar_multigrid_1995
 Warning--empty booktitle in natvig_fast_2006
 You've used 38 entries,
             2773 wiz_defined-function locations,
-            848 strings with 11304 characters,
+            849 strings with 11320 characters,
 and the built_in function-call counts, 15550 in all, are:
 = -- 1404
 > -- 707

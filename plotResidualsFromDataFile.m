@@ -14,18 +14,25 @@ r = @(s,s0,qo,qi,dtpv,muw,muo) s - s0 + h(s,qo,qi,dtpv,muw,muo);
 
 s=linspace(0,1,100);
 
-%'saturation_values-s-r-dt-4320000_000-m-0_010-0_001.dat'
-%'saturation_values-s-r-dt-4320000_000-m-0_001-0_010.dat'
+%'saturation_values-s-r-dt-50_000-m-10-1.dat'
+%'saturation_values-s-r-dt-50_000-m-1-10.dat'
 
 %str = strcat('flux_values.dat');
 
-str = strcat('flux_values-s-r-dt-4320000_000-m-0_001-0_010.dat');
+str = strcat('flux_values-s-r-dt-50-m-1-10-i-4.dat');
 v = [1,10];
+iters = [iterm01sr(:,2),iterm01st(:,2),iterm01sa(:,2),iterm01sb(:,2),iterm01si(:,2)];
 
-%str = strcat('flux_values-s-r-dt-4320000_000-m-0_010-0_001.dat');
+%str = strcat('flux_values-s-r-dt-50-m-1-1-i-4.dat');
+%v = [1,1];
+%iters = [iterm1sa(:,1),iterm1sa(:,2),iterm1sr(:,2),iterm1sb(:,2),iterm1si(:,2),iterm1st];
+
+%str = strcat('flux_values-s-r-dt-50-m-10-1-i-4.dat');
 %v = [10,1];
+%iters = [iterm10sr(:,2),iterm10st(:,2),iterm10sa(:,2),iterm10sb(:,2),iterm10si(:,2)];
 
 data = importdata(str);
+
 n = length(data);
 
 % v = [1, 1000;...
@@ -51,11 +58,12 @@ for i = istart:n
     s0 = data(i,5);
     s0_mod_cpp = data(i,6);
     rq = abs(qo/qi);
-    fprintf('i = %d, cell = %d, rq = %2.5g, qo = %2.5g, qi = %2.5g, dtpv = %2.3g\n',i,cell,rq,qo,qi,dtpv)
+    fprintf('i=%d, cell=%d, rq=%2.5g, qo=%2.5g, qi=%2.5g, dtpv=%2.3g\n',i,cell,rq,qo,qi,dtpv)
+    fprintf('r: %d, tr: %d, tr*: %d, b: %d, i: %d\n',iters(i,1),iters(i,2),iters(i,3),iters(i,4),iters(i,5))
     plotWRTViscosity(s,s0,qo,qi,dtpv,v,r);
     hold on;
-    plot(s0,0,'b*');
-    plot(s0_mod_cpp,0,'kx');
+    plot(s0,0,'bo');
+    plot(s0_mod_cpp,0,'k+');
     %plot(scale(muw/muo,qo/qi),0,'g*');
     pause;
 end

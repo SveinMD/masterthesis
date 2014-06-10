@@ -32,15 +32,15 @@ Having treated the zero flux cases we now assume $q_o,q_i \neq 0$. Dividing the 
 \begin{equation*}
 \frac{S^{n+1}}{q_i} - \frac{S^n}{q_i} + \tau \frac{q_o}{q_i} f_w(S^{n+1}) + \tau = 0.
 \end{equation*}
-Since saturations are in the range $[0,1]$ the two first terms become very small. In addition the scaled time step $\tau$ is usually orders of magnitude larger than unity, implying that the first two terms can be removed. \todoinline{Give some kind of substance for the $\tau$ claim.} The resulting equation becomes
+Since saturations are in the range $[0,1]$ the two first terms become very small. In addition the scaled time step $\tau$ is usually orders of magnitude larger than unity, implying that the first two terms can be removed. \textbf{What about the case when $f_w$ is small over a larger range, i.e. with $M > 1$? For the right combination of fluxes the outward flux term might become small even with $\tau \gg 1$.} \todoinline{Give some kind of substance for the $\tau$ claim.} The resulting equation becomes
 \begin{equation} \label{eq:flux_dominated_residual}
 \frac{q_o}{q_i} f_w(S^{n+1}) + 1 \approx 0,
 \end{equation}
-a second order equation in $S^{n+1}$ when assuming quadratic relative permeabilities $k_{rl}$. At this point ann important fact is revealed, namely that the absolute value of the incoming flux $q_i$ must be close to $q_o$, i.e. the ratio $r_q$, defined by
+a second order equation in $S^{n+1}$ when assuming quadratic relative permeabilities $k_{rl}$. At this point an important fact is revealed, namely that the absolute value of the incoming flux $q_i$ must be close to $q_o$. That is, the ratio $r_q$ defined by
 \begin{equation*}
 r_q \coloneqq \frac{q_o}{q_i},
 \end{equation*}
-must be close to or much greater than unity. The mathematical reasoning is that $\lvert r_q \rvert \ll 1$ would lead to the contradiction $1 \approx 0$. With $\lvert r_q \rvert \gg 1$ the fractional flow term dominates, bringing the solution $S^{n+1}$ close to zero. Finally we arrive at the case where $\lvert r_q \rvert \approx 1$. Now the flux dominated residual in Equation (\ref{eq:flux_dominated_residual}) is a second order equation in $S^{n+1}$,
+must be close to or much greater than unity since $\lvert r_q \rvert \ll 1$ in Equation (\ref{eq:flux_dominated_residual}) would lead to the contradiction $1 \approx 0$. With $\lvert r_q \rvert \gg 1$ the fractional flow term dominates, bringing the solution $S^{n+1}$ close to zero. Finally we arrive at the case where $\lvert r_q \rvert \approx 1$. Now the flux dominated residual in Equation (\ref{eq:flux_dominated_residual}) is a second order equation in $S^{n+1}$,
 \begin{equation*}
 r_q S^2 +  S^2 + M(1-S)^2 = (1+M+r_q)S^2 - 2MS + M = 0
 \end{equation*}
@@ -70,10 +70,8 @@ The case $\alpha = 1$ still gives $S = 1/2$. With $0 < \alpha \neq 1$ we get $0 
 \item $q_o = 0$: $q_i$ must be $\approx 1$ for a solution to exist. $S^n$ is important, at least.
 \item $\vert q_i \vert \gg 1$: $q_o$ must balance, solve quadratic equation.
 \item $\vert q_o \vert \gg 1$: The transport flux term dominates. Need $q_i \approx q_o$ or much lower. Solve quadratic.
-
 \end{itemize}
 
-\clearpage
 It is of interest to know \emph{a priori} under which circumstances the old saturation value is a good starting guess for the root finders. We investigate this by assuming $q_o, q_i \gg 1$. Then, dividing Equation (\ref{eq:residual_two_phase_transport_simple}) by $q_o$ we obtain
 \begin{equation*}
 \frac{S^{n+1}}{q_o} - \frac{S^n}{q_o} + \tau f_w(S^{n+1}) + \tau \frac{q_i}{q_o} = 0.
