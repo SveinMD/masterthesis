@@ -34,20 +34,16 @@
 \contentsline {section}{\numberline {3.2}Test Cases}{51}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Test Procedure}{51}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Case A: Quarter Five Spot}{51}{subsection.3.2.2}
-\contentsline {subsubsection}{\numberline {3.2.2.1}120 m by 120 m comments}{52}{subsubsection.3.2.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2.1}120 m by 120 m comments}{51}{subsubsection.3.2.2.1}
 \contentsline {paragraph}{Discussion}{52}{section*.46}
-\contentsline {subsubsection}{\numberline {3.2.2.2}10 m by 10 m comments}{58}{subsubsection.3.2.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Case B: Tarbert 2D}{63}{subsection.3.2.3}
-\contentsline {subsubsection}{\numberline {3.2.3.1}60 m by 60 m comments}{63}{subsubsection.3.2.3.1}
-\contentsline {subsubsection}{\numberline {3.2.3.2}10 m by 10 m comments}{65}{subsubsection.3.2.3.2}
-\contentsline {subsection}{\numberline {3.2.4}Case C: Upper Ness 2D}{67}{subsection.3.2.4}
-\contentsline {subsubsection}{\numberline {3.2.4.1}60 m by 60 m comments}{67}{subsubsection.3.2.4.1}
-\contentsline {subsubsection}{\numberline {3.2.4.2}10 m by 10 m comments}{70}{subsubsection.3.2.4.2}
-\contentsline {subsection}{\numberline {3.2.5}Case D: Tarbert 3D}{72}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}Case E: Upper Ness 3D}{73}{subsection.3.2.6}
-\contentsline {section}{\numberline {3.3}Convergence Tests}{74}{section.3.3}
+\contentsline {subsubsection}{\numberline {3.2.2.2}10 m by 10 m comments}{59}{subsubsection.3.2.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Case B: Tarbert 2D}{64}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Case C: Upper Ness 2D}{69}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Case D: Tarbert 3D}{73}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}Case E: Upper Ness 3D}{74}{subsection.3.2.6}
+\contentsline {section}{\numberline {3.3}Convergence Tests}{75}{section.3.3}
 \contentsline {chapter}{\numberline {4}Discussion}{79}{chapter.4}
 \contentsline {section}{\numberline {4.1}Convergence tests}{79}{section.4.1}
-\contentsline {chapter}{Conclusion}{85}{chapter*.76}
-\contentsline {chapter}{Appendices}{87}{section*.77}
+\contentsline {chapter}{Conclusion}{85}{chapter*.81}
+\contentsline {chapter}{Appendices}{87}{section*.82}
 \contentsline {chapter}{\numberline {A}Test Drivers}{89}{Appendix.a.A}

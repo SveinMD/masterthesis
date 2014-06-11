@@ -5,15 +5,18 @@
 \contentsline {todo}{Explain how the inflection point is found for the trust region scheme}{41}{section*.30}
 \contentsline {todo}{Run tests with lower tolerance. Might favor Newton/JTR}{49}{section*.39}
 \contentsline {todo}{Fix the over/underfull lines}{49}{section*.40}
-\contentsline {todo}{Error plot against reference solver for hom. Q5}{51}{section*.43}
-\contentsline {todo}{Comment the results from Tarbert 2D}{63}{section*.55}
-\contentsline {todo}{Comment the results from Upper Ness 2D}{67}{section*.59}
-\contentsline {todo}{show the effects of large local perm. gradients on the residual.}{67}{section*.60}
-\contentsline {todo}{Permeability/saturation plot for Tarbert 3D}{72}{section*.65}
-\contentsline {todo}{Run Tarbert 3D with gravity - cputime}{72}{section*.66}
-\contentsline {todo}{Run Tarbert 3D with gravity - iterations}{72}{section*.67}
-\contentsline {todo}{Permeability/saturation plot for Upper Ness 3D}{73}{section*.68}
-\contentsline {todo}{Run Upper Ness 3D with gravity - cputime}{73}{section*.69}
-\contentsline {todo}{Run Upper Ness 3D with gravity - iterations}{73}{section*.70}
-\contentsline {todo}{Comment briefly on the properties of the viscosity residual when it is introduced.}{74}{section*.71}
-\contentsline {todo}{Give some kind of substance for the $\tau $ claim.}{80}{section*.75}
+\contentsline {todo}{Error plot against reference solver for hom. Q5}{51}{section*.42}
+\contentsline {todo}{Comment the results from the transport timing run on the Q5 problem!}{55}{section*.47}
+\contentsline {todo}{Comment the initial guess errors}{57}{section*.51}
+\contentsline {todo}{Note the actual trends!}{59}{section*.54}
+\contentsline {todo}{Comment the results from Tarbert 2D}{64}{section*.59}
+\contentsline {todo}{Comment the results from Upper Ness 2D}{69}{section*.64}
+\contentsline {todo}{show the effects of large local perm. gradients on the residual.}{69}{section*.65}
+\contentsline {todo}{Permeability/saturation plot for Tarbert 3D}{73}{section*.70}
+\contentsline {todo}{Run Tarbert 3D with gravity - cputime}{73}{section*.71}
+\contentsline {todo}{Run Tarbert 3D with gravity - iterations}{73}{section*.72}
+\contentsline {todo}{Permeability/saturation plot for Upper Ness 3D}{74}{section*.73}
+\contentsline {todo}{Run Upper Ness 3D with gravity - cputime}{74}{section*.74}
+\contentsline {todo}{Run Upper Ness 3D with gravity - iterations}{74}{section*.75}
+\contentsline {todo}{Comment briefly on the properties of the viscosity residual when it is introduced.}{75}{section*.76}
+\contentsline {todo}{Give some kind of substance for the $\tau $ claim.}{80}{section*.80}

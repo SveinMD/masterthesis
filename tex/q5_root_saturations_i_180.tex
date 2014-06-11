@@ -9,7 +9,7 @@
             xmax=2400,
             xlabel={},
             ylabel={S},
-            grid=major,
+            grid=both,
             xticklabels={,,},
             legend pos=north west,
             ]
@@ -23,6 +23,6 @@
         \legend{M=0.1,M=1,M=10}
     \end{axis}
 \end{tikzpicture}%
-\caption{Sorted cell saturations, 2400 in total, from all time steps for the solution of the Q5 problem in Section \ref{section:caseA} with $\Delta t = \unit[50]{d}$. Values for viscosity ratios $M=0.1$, $M=1$, and $M=10$ are reported with corresponding mean values $\mu_{S_r}$ at $0.3549$, $0.4815$, and $0.5224$, respectively.}
+\caption{Distribution of all converged $S^{n+1}$ for the Q5 problem, Section \ref{section:caseA}, with $\Delta t = \unit[50]{d}$ and varying $M$. Mean values $\mu_{S}$ from Table \ref{table:q5_saturations_statisitcs_t_50_i_180} are shown. Note that $\unit[120]{m} \times \unit[120]{m}$ cells are used here.}
 \label{fig:q5_root_saturations_t_50_i_180}
 \end{figure}%

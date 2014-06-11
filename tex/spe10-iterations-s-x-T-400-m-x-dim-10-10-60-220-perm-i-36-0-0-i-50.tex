@@ -10,9 +10,9 @@
             height=0.26\textheight,
             ymin=300000,
             ymax=15600000,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={\#iterations},
-            grid=major,
+            grid=both,
             skip coords between index={\yini}{\yfin}
             ]
         \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-r-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
@@ -37,9 +37,9 @@
             height=0.26\textheight,
             ymin=70000,
             ymax=1000000,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={\#iterations},
-            grid=major,
+            grid=both,
             skip coords between index={\yini}{\yfin}
             ]
         \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-r-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
@@ -64,9 +64,9 @@
             height=0.26\textheight,
             ymin=190000,
             ymax=11500000,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={\#iterations},
-            grid=major,
+            grid=both,
             skip coords between index={\yini}{\yfin}
             ]
          \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-r-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
@@ -91,9 +91,9 @@
             height=0.26\textheight,
             ymin=60000,
             ymax=1000000,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={\#iterations},
-            grid=major,
+            grid=both,
             skip coords between index={\yini}{\yfin}
             ]
          \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-r-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
@@ -118,9 +118,9 @@
             height=0.26\textheight,
             ymin=200000,
             ymax=10000000,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={\#iterations},
-            grid=major,
+            grid=both,
             skip coords between index={\yini}{\yfin}
             ]
          \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-r-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
@@ -145,9 +145,9 @@
             height=0.26\textheight,
             ymin=64000,
             ymax=1000000,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={\#iterations},
-            grid=major,
+            grid=both,
             skip coords between index={\yini}{\yfin}
             ]
          \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-r-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
@@ -160,7 +160,7 @@
 \end{tikzpicture}%
 \caption{$M =10$} \label{fig:spe10_iterations_perm_i_36_0_0_m_10_1_i_50_dt_40to150}
 \end{subfigure}%
-\caption{\#iterations used to solve case B, Section \ref{section:caseB}, for varying root finders, time steps and viscosity ratios.}
+\caption{\#iterations used to solve case C, Section \ref{section:caseC}, for varying root finders, time steps and viscosity ratios.}
 \label{fig:spe10_iterations_perm_i_36_0_0_i_50}
 \end{figure}%
 %
@@ -177,9 +177,9 @@
 %            height=0.26\textheight,
 %            ymin=40000,
 %            ymax=30000000,
-%            xlabel={dt~[days]},
+%            xlabel={dt~[d]},
 %            ylabel={\#iterations},
-%            grid=major,
+%            grid=both,
 %            ]
 %        \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-r-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
 %        \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-t-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
@@ -202,9 +202,9 @@
 %            height=0.26\textheight,
 %            ymin=40000,
 %            ymax=30000000,
-%            xlabel={dt~[days]},
+%            xlabel={dt~[d]},
 %            ylabel={\#iterations},
-%            grid=major,
+%            grid=both,
 %            ]
 %         \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-r-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
 %        \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-t-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
@@ -227,9 +227,9 @@
 %            height=0.26\textheight,
 %            ymin=40000,
 %            ymax=30000000,
-%            xlabel={dt~[days]},
+%            xlabel={dt~[d]},
 %            ylabel={\#iterations},
-%            grid=major,
+%            grid=both,
 %            ]
 %         \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-r-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
 %        \addplot table[col sep=comma, trim cells=true,x=dt, y=iterations] {datafiles/spe10-iterations-s-t-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};

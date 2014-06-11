@@ -6,7 +6,7 @@
             height=0.26\textheight,
             xlabel={$S_V^{n+1}$},
             ylabel={$R(S_V^{n+1})$},
-            grid=major,
+            grid=both,
             ]
         \addplot [black] table[mark=none,col sep=comma, trim cells=true,x=s, y=Rs] {datafiles/wang_tchelepi_residual.data};
         \addplot [black, mark = *, nodes near coords=$S_{F_w=1}$,every node near coord/.style={anchor=300}] coordinates{(0.4,0.98)};

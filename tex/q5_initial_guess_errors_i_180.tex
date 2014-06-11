@@ -9,7 +9,7 @@
             xmax=2400,
             xlabel={},
             ylabel={error},
-            grid=major,
+            grid=both,
             xticklabels={,,},
             legend pos=north west,
             ]
@@ -19,6 +19,6 @@
         \legend{M=0.1,M=1,M=10}
     \end{axis}
 \end{tikzpicture}%
-\caption{The initial root guess error $\lvert S_r - S^{n} \rvert,~S_r\colon R(S_r) = 0$ for each single cell problem, 2400 in total, for all time steps for the solution of the Q5 problem in Section \ref{section:caseA} with $\Delta t = \unit[50]{d}$. Values for viscosity ratios $M=0.1$, $M=1$, and $M=10$ are reported.}
+\caption{The initial root guess error $\lvert S_r - S^{n} \rvert,~S_r\colon R(S_r) = 0$ for each single cell problem, 2400 in total, for all time steps for the solution of the Q5 problem in Section \ref{section:caseA} with $\Delta t = \unit[50]{d}$. Values for viscosity ratios $M=0.1$, $M=1$, and $M=10$ are reported. Note that $\unit[120]{m} \times \unit[120]{m}$ cells are used here.}
 \label{fig:q5_initial_guess_errors_t_50_i_180}
 \end{figure}%

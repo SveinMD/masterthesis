@@ -6,16 +6,15 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.26\textheight,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={CPU time~[s]},
-            grid=major,
+            grid=both,
             ]
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-r-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-t-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-a-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-b-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-i-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-                %\addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-g-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-r-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-t-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-a-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-b-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-i-T-400-m-1-10-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
         \legend{RF,TR,TR*,B,R}
     \end{semilogyaxis}
 \end{tikzpicture}%
@@ -29,16 +28,15 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.26\textheight,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={CPU time~[s]},
-            grid=major,
+            grid=both,
             ]
-         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-r-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-t-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-a-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-b-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-i-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-                %\addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-g-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-r-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-t-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-a-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-b-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-i-T-400-m-1-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
         \legend{RF,TR,TR*,B,R}
     \end{semilogyaxis}
 \end{tikzpicture}%
@@ -52,16 +50,15 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.26\textheight,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={CPU time~[s]},
-            grid=major,
+            grid=both,
             ]
-         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-r-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-t-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-a-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-b-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-i-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
-                %\addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-g-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-0-i-50.data};
+         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-r-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-t-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-a-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-b-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
+        \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/spe10-cputvsdt-s-i-T-400-m-10-1-dim-10-10-60-220-perm-i-36-0-0-i-50.data};
         \legend{RF,TR,TR*,B,R}
     \end{semilogyaxis}
 \end{tikzpicture}%

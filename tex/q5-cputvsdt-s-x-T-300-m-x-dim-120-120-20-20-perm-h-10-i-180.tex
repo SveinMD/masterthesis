@@ -6,9 +6,9 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.26\textheight,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={CPU time~[s]},
-            grid=major,
+            grid=both,
             ]
         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/q5-cputvsdt-s-r-T-300-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/q5-cputvsdt-s-t-T-300-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
@@ -29,9 +29,9 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.26\textheight,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={CPU time~[s]},
-            grid=major,
+            grid=both,
             ]
          \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/q5-cputvsdt-s-r-T-300-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/q5-cputvsdt-s-t-T-300-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
@@ -52,9 +52,9 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.26\textheight,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={CPU time~[s]},
-            grid=major,
+            grid=both,
             ]
          \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/q5-cputvsdt-s-r-T-300-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
         \addplot table[col sep=comma, trim cells=true,x=dt, y=cputime] {datafiles/q5-cputvsdt-s-t-T-300-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
@@ -67,6 +67,6 @@
 \end{tikzpicture}%
 \caption{$M =10$} \label{fig:q5_cputime_perm_h_10_m_10_1_i_180}
 \end{subfigure}%
-\caption{CPU time used to solve the Q5 problem, Section \ref{section:caseA}, for varying root finders, time steps and viscosity ratios.}
+\caption{CPU time used to solve the Q5 problem, Section \ref{section:caseA}, for varying root finders, time steps and viscosity ratios. Note that $\unit[120]{m} \times \unit[120]{m}$ cells are used here.}
 \label{fig:q5_cputime_perm_h_10_i_180}
 \end{figure}

@@ -6,9 +6,9 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.26\textheight,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={CPU time~[s]},
-            grid=major,
+            grid=both,
             ]
         \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-r-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
         \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-t-T-3000-m-1-10-dim-120-120-20-20-perm-h-10-i-180.data};
@@ -30,9 +30,9 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.26\textheight,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={CPU time~[s]},
-            grid=major,
+            grid=both,
             ]
          \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-r-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
         \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-t-T-3000-m-1-1-dim-120-120-20-20-perm-h-10-i-180.data};
@@ -54,9 +54,9 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.26\textheight,
-            xlabel={dt~[days]},
+            xlabel={dt~[d]},
             ylabel={CPU time~[s]},
-            grid=major,
+            grid=both,
             ]
          \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-r-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};
         \addplot table[col sep=comma, trim cells=true,x=dt, y expr= \thisrow{cputime}*20*20] {datafiles/q5-cputvsdt-s-t-T-3000-m-10-1-dim-120-120-20-20-perm-h-10-i-180.data};

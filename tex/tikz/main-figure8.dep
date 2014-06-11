@@ -1,6 +1,6 @@
-tikz/main-figure8.pdf: datafilestestcase/convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
-tikz/main-figure8.pdf: datafilestestcase/convergence2-s-t-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
-tikz/main-figure8.pdf: datafilestestcase/convergence2-s-a-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
-tikz/main-figure8.pdf: datafilestestcase/convergence2-s-b-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
-tikz/main-figure8.pdf: datafilestestcase/convergence2-s-i-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
-tikz/main-figure8.pdf: datafilestestcase/convergence2-s-g-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
+tikz/main-figure8.pdf: testcasedatafiles/convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
+tikz/main-figure8.pdf: testcasedatafiles/convergence2-s-t-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
+tikz/main-figure8.pdf: testcasedatafiles/convergence2-s-a-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
+tikz/main-figure8.pdf: testcasedatafiles/convergence2-s-b-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
+tikz/main-figure8.pdf: testcasedatafiles/convergence2-s-i-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data
+tikz/main-figure8.pdf: testcasedatafiles/convergence2-s-g-M-1_000000-dtpv-6_000000-in--0_350000-out-0_350000-s0-0_500000.data

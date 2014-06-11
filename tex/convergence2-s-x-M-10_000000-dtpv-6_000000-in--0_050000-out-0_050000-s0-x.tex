@@ -5,17 +5,17 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.3\textheight,
-            xlabel={step~[days]},
+            xlabel={step~[d]},
             ylabel={error~[s]},
-            grid=major,
+            grid=both,
             legend pos=south west
             ]
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-t-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-a-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-b-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-i-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-g-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-t-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-a-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-b-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-i-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-g-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
         \legend{RF,TR,TR*,B,R,GN}
     \end{semilogyaxis}
 \end{tikzpicture}%
@@ -29,11 +29,11 @@
             height=0.3\textheight,
             xlabel={S},
             ylabel={$R(S)$},
-            grid=major,
+            grid=both,
             legend pos=north west,
             ]
-        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=Rs] {datafilestestcase/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
-        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=dRs] {datafilestestcase/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=Rs] {testcasedatafiles/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=dRs] {testcasedatafiles/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_100000.data};
             \legend{$R(S)$,$\partial R_S$}
     \end{axis}
 \end{tikzpicture}%
@@ -46,17 +46,17 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.3\textheight,
-            xlabel={step~[days]},
+            xlabel={step~[d]},
             ylabel={error~[s]},
-            grid=major,
+            grid=both,
             legend pos=south west
             ]
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-t-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-a-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-b-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-i-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-g-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-t-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-a-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-b-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-i-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-g-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
         \legend{RF,TR,TR*,B,R,GN}
     \end{semilogyaxis}
 \end{tikzpicture}%
@@ -70,11 +70,11 @@
             height=0.3\textheight,
             xlabel={S},
             ylabel={$R(S)$},
-            grid=major,
+            grid=both,
             legend pos=north west,
             ]
-        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=Rs] {datafilestestcase/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
-        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=dRs] {datafilestestcase/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=Rs] {testcasedatafiles/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=dRs] {testcasedatafiles/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_500000.data};
             \legend{$R(S)$,$\partial R_S$}
     \end{axis}
 \end{tikzpicture}%
@@ -87,17 +87,17 @@
     \begin{semilogyaxis}[
             width=0.97\textwidth,
             height=0.3\textheight,
-            xlabel={step~[days]},
+            xlabel={step~[d]},
             ylabel={error~[s]},
-            grid=major,
+            grid=both,
             legend pos=south west
             ]
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-t-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-a-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-b-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-i-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
-        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {datafilestestcase/convergence2-s-g-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-t-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-a-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-b-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-i-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[col sep=comma, trim cells=true,x=iter, y=y] {testcasedatafiles/convergence2-s-g-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
         \legend{RF,TR,TR*,B,R,GN}
     \end{semilogyaxis}
 \end{tikzpicture}%
@@ -111,11 +111,11 @@
             height=0.3\textheight,
             xlabel={S},
             ylabel={$R(S)$},
-            grid=major,
+            grid=both,
             legend pos=north west,
             ]
-        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=Rs] {datafilestestcase/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
-        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=dRs] {datafilestestcase/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=Rs] {testcasedatafiles/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
+        \addplot table[mark=none, col sep=comma, trim cells=true,x=s, y=dRs] {testcasedatafiles/residual-convergence2-s-r-M-10_000000-dtpv-6_000000-in--0_050000-out-0_050000-s0-0_900000.data};
             \legend{$R(S)$,$\partial R_S$}
     \end{axis}
 \end{tikzpicture}%

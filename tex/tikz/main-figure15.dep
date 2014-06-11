@@ -1,2 +1,2 @@
-tikz/main-figure15.pdf: datafilestestcase/residual-convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data
-tikz/main-figure15.pdf: datafilestestcase/residual-convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data
+tikz/main-figure15.pdf: testcasedatafiles/residual-convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data
+tikz/main-figure15.pdf: testcasedatafiles/residual-convergence2-s-r-M-1_000000-dtpv-6_000000-in--0_500000-out-0_800000-s0-0_500000.data
